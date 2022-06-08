@@ -1,0 +1,7 @@
+AppBar
+- 
+
+Side Launcher
+- translucent
+- centered with padding and margin
+- 
