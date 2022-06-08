@@ -58,6 +58,19 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   double conversionValue = 1;
   // ignore: prefer_typing_uninitialized_variables
   var latestForexRates;
+  var controller = TextEditingController();
+
+  void nullify(String choice) => setState(() {
+        if (choice == "whole") {
+          fromCurrency = nullCurrency;
+          toCurrency = nullCurrency;
+          latestForexRates = null;
+          conversionValue = 1;
+        }
+        fromCurrencyValue = 0;
+        toCurrencyValue = 0;
+        controller.clear();
+      });
 
   void genParticularForexRate() async {
     final frankfurter = convert.Frankfurter();
@@ -75,12 +88,18 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         await frankfurter.latest(from: convert.Currency(fromCurrency.code));
   }
 
-  void swapCurr() => setState(() {
-        pick.Currency temp = toCurrency;
-        toCurrency = fromCurrency;
-        fromCurrency = temp;
-        conversionValue = 1 / conversionValue;
-      });
+  void swapCurr() {
+    setState(() {
+      pick.Currency temp = toCurrency;
+      toCurrency = fromCurrency;
+      fromCurrency = temp;
+      conversionValue = 1 / conversionValue;
+      double tempValue = toCurrencyValue;
+      toCurrencyValue = fromCurrencyValue;
+      fromCurrencyValue = tempValue;
+      controller.clear();
+    });
+  }
 
   Widget updateCurr(String choice) {
     return ElevatedButton(
@@ -127,6 +146,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           width: MediaQuery.of(context).size.width / 4,
           child: choice == "source"
               ? TextField(
+                  controller: controller,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   onChanged: (number) {
@@ -209,10 +229,35 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           const SizedBox(
             height: 10,
           ),
-          IconButton(
-            onPressed: swapCurr,
-            tooltip: "Swap Currencies",
-            icon: const Icon(Icons.swap_calls_outlined, size: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () => nullify("values"),
+                tooltip: "Reset values only",
+                icon: const Icon(
+                  Icons.clear_rounded,
+                  size: 25,
+                ),
+              ),
+              IconButton(
+                onPressed: swapCurr,
+                tooltip: "Swap Currencies",
+                icon: const Icon(
+                  Icons.swap_calls_outlined,
+                  size: 25,
+                ),
+              ),
+              IconButton(
+                onPressed: () => nullify("whole"),
+                tooltip: "Reset completly",
+                icon: const Icon(
+                  Icons.delete_outline_rounded,
+                  size: 25,
+                  color: Colors.red,
+                ),
+              ),
+            ],
           ),
           currentCurrencyRow("destination"),
         ],
