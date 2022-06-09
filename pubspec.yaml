@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   frankfurter: ^2.0.0
   currency_picker: ^2.0.11
+  loading_animation_widget: ^1.2.0+2
 
 dev_dependencies:
   flutter_test:

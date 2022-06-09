@@ -2,7 +2,7 @@
     package="com.example.candle_in_dark">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="candle_in_dark"
+        android:label="Candle in Dark"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

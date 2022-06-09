@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //Pages
 import '../widgets/appBar.dart';
+import '../widgets/loading.dart';
 
 class DummyPage extends StatelessWidget {
   const DummyPage({Key? key}) : super(key: key);
@@ -21,9 +22,14 @@ class DummyPage extends StatelessWidget {
                   "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
             ),
           ],
-          body: const Center(
-            child: Text("Hi !"),
+          body: Container(
+            child: const LoaderPage(),
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 2,
           ),
+          // body: const Center(
+          //   child: Text("Hi !"),
+          // ),
         ),
       ),
     );

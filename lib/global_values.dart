@@ -19,14 +19,14 @@ var pages = const <Map<String, dynamic>>[
     'icon': Icon(Icons.texture_sharp),
   },
   {
+    'class': DummyPage(),
+    'labelName': "World Clock",
+    'icon': Icon(Icons.timer),
+  },
+  {
     'class': CurrencyConvertorPage(),
     'labelName': "Forex",
     'icon': Icon(Icons.attach_money_sharp),
-  },
-  {
-    'class': DummyPage(),
-    'labelName': "Dummy",
-    'icon': Icon(Icons.texture_sharp),
   },
   {
     'class': DummyPage(),

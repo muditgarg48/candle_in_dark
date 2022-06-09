@@ -1,3 +1,4 @@
+import 'package:candle_in_dark/widgets/loading.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
@@ -320,7 +321,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 ),
                 child: IconButton(
                   onPressed: () => warningDialogue(
-                    "Clear values and currency selection ?",
+                    "Clear values and selections ?",
                     "whole",
                   ),
                   tooltip: "Reset completely",
