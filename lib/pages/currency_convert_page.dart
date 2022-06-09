@@ -7,7 +7,7 @@ import '../widgets/appBar.dart';
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",
   name: "Select a currency",
-  symbol: "(_)",
+  symbol: "¤",
   flag: null,
   decimalDigits: 2,
   number: 137,
@@ -105,7 +105,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   Widget updateCurr(String choice) {
     return ElevatedButton(
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all(30),
+        elevation: MaterialStateProperty.all(15),
       ),
       onPressed: () {
         pick.showCurrencyPicker(
@@ -266,43 +266,75 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         children: [
           currentCurrencyRow("source"),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () => warningDialogue(
-                  "Clear values ?",
-                  "values",
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                  ),
                 ),
-                tooltip: "Reset values only",
-                icon: const Icon(
-                  Icons.clear_rounded,
-                  size: 25,
+                child: IconButton(
+                  onPressed: () => warningDialogue(
+                    "Clear values ?",
+                    "values",
+                  ),
+                  tooltip: "Reset values only",
+                  icon: const Icon(
+                    Icons.clear_rounded,
+                    size: 25,
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: swapCurr,
-                tooltip: "Swap Currencies",
-                icon: const Icon(
-                  Icons.swap_calls_outlined,
-                  size: 25,
+              const SizedBox(width: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.grey,
+                  ),
+                ),
+                child: IconButton(
+                  onPressed: swapCurr,
+                  tooltip: "Swap Currencies",
+                  icon: const Icon(
+                    Icons.swap_calls_outlined,
+                    size: 25,
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () => warningDialogue(
-                  "Clear values and currency selection ?",
-                  "whole",
+              const SizedBox(width: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.red,
+                  ),
                 ),
-                tooltip: "Reset completely",
-                icon: const Icon(
-                  Icons.delete_outline_rounded,
-                  size: 25,
-                  color: Colors.red,
+                child: IconButton(
+                  onPressed: () => warningDialogue(
+                    "Clear values and currency selection ?",
+                    "whole",
+                  ),
+                  tooltip: "Reset completely",
+                  icon: const Icon(
+                    Icons.delete_outline_rounded,
+                    size: 25,
+                    color: Colors.red,
+                  ),
                 ),
               ),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           currentCurrencyRow("destination"),
         ],
@@ -429,22 +461,19 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
             ),
           ],
-          body: Padding(
-            padding: const EdgeInsets.all(3),
-            child: ListView(
-              children: [
-                myCard(
-                  contents: inputCardContents(),
-                  deviceHeight: MediaQuery.of(context).size.height,
-                  deviceWidth: MediaQuery.of(context).size.width,
-                ),
-                myCard(
-                  contents: moreDetailsCardContents(),
-                  deviceHeight: MediaQuery.of(context).size.height / 2,
-                  deviceWidth: MediaQuery.of(context).size.width,
-                ),
-              ],
-            ),
+          body: ListView(
+            children: [
+              myCard(
+                contents: inputCardContents(),
+                deviceHeight: MediaQuery.of(context).size.height,
+                deviceWidth: MediaQuery.of(context).size.width,
+              ),
+              myCard(
+                contents: moreDetailsCardContents(),
+                deviceHeight: MediaQuery.of(context).size.height / 2,
+                deviceWidth: MediaQuery.of(context).size.width,
+              ),
+            ],
           ),
         ),
       ),
