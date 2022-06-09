@@ -1,4 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
+var appBarDecor = const BoxDecoration(
+  borderRadius: BorderRadius.only(
+    bottomLeft: Radius.circular(200),
+    bottomRight: Radius.circular(200),
+  ),
+);
 
 // ignore: camel_case_types
 class customSliver extends StatelessWidget {
@@ -15,6 +24,7 @@ class customSliver extends StatelessWidget {
       pinned: true,
       floating: true,
       snap: false,
+      elevation: 30,
       expandedHeight: 250,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
@@ -24,6 +34,8 @@ class customSliver extends StatelessWidget {
             letterSpacing: 1.5,
           ),
         ),
+        centerTitle: true,
+        collapseMode: CollapseMode.parallax,
         background: Image.network(
           appBarBG,
           fit: BoxFit.fitWidth,

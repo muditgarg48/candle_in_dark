@@ -25,8 +25,8 @@ Widget myCard({
 }) {
   return Container(
     height: deviceHeight / 3,
-    padding: const EdgeInsets.all(20),
-    margin: const EdgeInsets.all(20),
+    padding: const EdgeInsets.all(17),
+    margin: const EdgeInsets.all(7),
     width: deviceWidth,
     decoration: BoxDecoration(
       color: Colors.white,
@@ -51,6 +51,7 @@ class CurrencyConvertorPage extends StatefulWidget {
 }
 
 class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
+  //Variables
   pick.Currency fromCurrency = nullCurrency;
   pick.Currency toCurrency = nullCurrency;
   double fromCurrencyValue = 0;
@@ -95,9 +96,9 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       fromCurrency = temp;
       conversionValue = 1 / conversionValue;
       double tempValue = toCurrencyValue;
+      controller.text = toCurrencyValue.toString();
       toCurrencyValue = fromCurrencyValue;
       fromCurrencyValue = tempValue;
-      controller.clear();
     });
   }
 
@@ -198,9 +199,19 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       children: [
         displayFlag(currentCurr),
         const SizedBox(width: 10),
-        Text(currentCurr.code),
+        Text(
+          "${currentCurr.code}: ",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(width: 10),
-        Text(currentCurr.name),
+        Text(
+          currentCurr.name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
@@ -283,81 +294,127 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   }
 
   Widget forexRateSheet() {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-            ),
-            child: Text(
-              "Current Forex Rate Sheet of ${fromCurrency.code}",
-              style: Theme.of(context).textTheme.headline6,
-              softWrap: true,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const Divider(
-            color: Colors.grey,
-            height: 2,
-            indent: 15,
-            endIndent: 15,
-          ),
-          for (convert.Rate r in latestForexRates)
-            Container(
-              padding: const EdgeInsets.all(3),
-              child: Column(
-                children: [
-                  Text(
-                    "1 ${r.from} = ${r.rate} ${r.to}",
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                ],
+    if (latestForexRates == null) {
+      return Container(
+        padding: const EdgeInsets.only(
+          top: 20,
+          left: 20,
+        ),
+        child: ListView(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: Text(
+                "Forex List is not ready!\nHappens for two reasons - \n1.Base Currency was not chosen.\n2.The Forex Sheet was not given time to be fetched\nTry to relaunch this section!",
+                softWrap: true,
+                textAlign: TextAlign.justify,
               ),
             ),
-          TextButton(
-            child: const Text('Close Forex Rate Sheet'),
-            onPressed: () => Navigator.pop(context),
-          )
-        ],
-      ),
-    );
+            const Divider(
+              color: Colors.grey,
+              height: 2,
+              indent: 15,
+              endIndent: 15,
+            ),
+            TextButton(
+              child: const Text(
+                'Close Forex Rate Sheet',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+              ),
+              child: Text(
+                "Current Forex Rate Sheet of ${fromCurrency.code}",
+                style: Theme.of(context).textTheme.headline6,
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const Divider(
+              color: Colors.grey,
+              height: 2,
+              indent: 15,
+              endIndent: 15,
+            ),
+            for (convert.Rate r in latestForexRates)
+              Container(
+                padding: const EdgeInsets.all(3),
+                child: Column(
+                  children: [
+                    Text(
+                      "1 ${r.from} = ${r.rate} ${r.to}",
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            TextButton(
+              child: const Text(
+                'Close Forex Rate Sheet',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const customSliver(
-            appBarTitle: "CURRENCY CONVERTOR",
-            appBarBG:
-                "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
-          ),
-        ],
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: ListView(
-            children: [
-              myCard(
-                contents: inputCardContents(),
-                deviceHeight: MediaQuery.of(context).size.height,
-                deviceWidth: MediaQuery.of(context).size.width,
-              ),
-              myCard(
-                contents: moreDetailsCardContents(),
-                deviceHeight: MediaQuery.of(context).size.height / 2,
-                deviceWidth: MediaQuery.of(context).size.width,
-              ),
-            ],
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            const customSliver(
+              appBarTitle: "CURRENCY CONVERTOR",
+              appBarBG:
+                  "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
+            ),
+          ],
+          body: Padding(
+            padding: const EdgeInsets.all(3),
+            child: ListView(
+              children: [
+                myCard(
+                  contents: inputCardContents(),
+                  deviceHeight: MediaQuery.of(context).size.height,
+                  deviceWidth: MediaQuery.of(context).size.width,
+                ),
+                myCard(
+                  contents: moreDetailsCardContents(),
+                  deviceHeight: MediaQuery.of(context).size.height / 2,
+                  deviceWidth: MediaQuery.of(context).size.width,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-      bottomNavigationBar: ElevatedButton(
+      bottomNavigationBar: TextButton(
         child: const Text("View all Forex Rates"),
         onPressed: () {
           showModalBottomSheet(
@@ -365,7 +422,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
             builder: (BuildContext context) {
               return Container(
                 height: MediaQuery.of(context).size.height / 1.5,
-                color: Colors.amber,
+                color: Theme.of(context).backgroundColor,
                 child: forexRateSheet(),
               );
             },
