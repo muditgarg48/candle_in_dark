@@ -231,6 +231,34 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
     );
   }
 
+  Future warningDialogue(String confirmationMsg, String choice) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: Text(confirmationMsg),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.clear,
+              size: 25,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              nullify(choice);
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.check,
+              size: 25,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget inputCardContents() {
     return SingleChildScrollView(
       child: Column(
@@ -244,7 +272,10 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: () => nullify("values"),
+                onPressed: () => warningDialogue(
+                  "Clear values ?",
+                  "values",
+                ),
                 tooltip: "Reset values only",
                 icon: const Icon(
                   Icons.clear_rounded,
@@ -260,8 +291,11 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 ),
               ),
               IconButton(
-                onPressed: () => nullify("whole"),
-                tooltip: "Reset completly",
+                onPressed: () => warningDialogue(
+                  "Clear values and currency selection ?",
+                  "whole",
+                ),
+                tooltip: "Reset completely",
                 icon: const Icon(
                   Icons.delete_outline_rounded,
                   size: 25,
