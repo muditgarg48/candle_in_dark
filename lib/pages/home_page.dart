@@ -20,7 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: pages[currentPageIndex]["class"],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0x44aaaaff),

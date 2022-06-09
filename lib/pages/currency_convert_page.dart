@@ -2,6 +2,7 @@ import 'package:candle_in_dark/widgets/loading.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../widgets/appBar.dart';
 
@@ -378,6 +379,18 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 softWrap: true,
                 textAlign: TextAlign.justify,
               ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 9,
+            ),
+            Center(
+              child: LoadingAnimationWidget.staggeredDotsWave(
+                color: Colors.white,
+                size: 100,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 9,
             ),
             const Divider(
               color: Colors.grey,
