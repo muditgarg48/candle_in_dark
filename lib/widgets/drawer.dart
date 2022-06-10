@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 
-Widget myDrawer() {
+import '../global_values.dart';
+
+Widget myDrawer(BuildContext context) {
   return CurvedDrawer(
-    color: Colors.white,
-    isEndDrawer: true,
-    labelColor: Colors.black54,
-    width: 75.0,
-    items: const [
-      DrawerItem(icon: Icon(Icons.people), label: "person"),
-      //Optional Label Text
-      DrawerItem(icon: Icon(Icons.message), label: "Messages")
+    color: Theme.of(context).backgroundColor,
+    isEndDrawer: false,
+    labelColor: isDark ? kToDark.shade900 : kToLight.shade900,
+    width: 55,
+    buttonBackgroundColor: Theme.of(context).backgroundColor,
+    backgroundColor: Colors.transparent,
+    items: [
+      for (var page in pages)
+        DrawerItem(
+          label: page["labelName"],
+          icon: page["icon"],
+        ),
     ],
     onTap: (index) {
       //Handle button tap

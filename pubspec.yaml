@@ -39,6 +39,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+2
   quds_ui_kit: ^0.0.7+8
   curved_drawer_fork: ^0.0.1+1
+  provider: 
 
 dev_dependencies:
   flutter_test:

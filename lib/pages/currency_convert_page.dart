@@ -1,4 +1,5 @@
-import 'package:candle_in_dark/widgets/loading.dart';
+// import 'package:candle_in_dark/widgets/drawer.dart';
+import 'package:candle_in_dark/widgets/confirmation_dialogue.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
@@ -162,6 +163,16 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           width: MediaQuery.of(context).size.width / 4,
           child: choice == "source"
               ? TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: isDark ? kToLight.shade900 : kToDark.shade900),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: isDark ? kToLight.shade900 : kToDark.shade900),
+                    ),
+                  ),
                   controller: controller,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
@@ -169,8 +180,6 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                     setState(() {
                       fromCurrencyValue = double.parse(number);
                       toCurrencyValue = fromCurrencyValue * conversionValue;
-                      // print("FROM : $fromCurrencyValue");
-                      // print("TO : $toCurrencyValue");
                     });
                   },
                 )
@@ -252,39 +261,13 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   }
 
   Future warningDialogue(String confirmationMsg, String choice) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: Text(confirmationMsg),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.clear,
-              size: 25,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              nullify(choice);
-              toast(
-                context: context,
-                msg: choice == "values"
-                    ? "Values cleared!"
-                    : "Selections cleared!",
-                startI: Icons.delete,
-                endI: Icons.check,
-              );
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.check,
-              size: 25,
-            ),
-          ),
-        ],
-      ),
+    var warning = WarningDialogue(
+      confirmationMsg: confirmationMsg,
+      choice: choice,
+      jobDone: Icons.delete,
+      action: nullify,
     );
+    return warning.clearBoard(context);
   }
 
   Widget inputCardContents() {
@@ -378,28 +361,38 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "${fromCurrency.name} (${fromCurrency.code})",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: isDark ? kToLight.shade900 : kToDark.shade900,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: isDark ? kToDark.shade900 : kToLight.shade900,
+                onPrimary: Theme.of(context).primaryColor,
+                elevation: 15,
+              ),
+              onPressed: () {
+                genAllForexRate();
+                genParticularForexRate();
+                toast(
+                  context: context,
+                  msg: "Refreshing data",
+                  startI: Icons.refresh_outlined,
+                );
+              },
+              child: Text(
+                "LIVE",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? kToLight.shade900 : kToDark.shade900,
+                ),
               ),
             ),
-            Icon(
-              Icons.arrow_drop_down_rounded,
-              color: isDark ? kToLight.shade900 : kToDark.shade900,
+            const SizedBox(
+              height: 20,
             ),
             Text(
-              "${toCurrency.name} (${fromCurrency.code})",
+              "${fromCurrency.symbol}1 = ${toCurrency.symbol}$conversionValue",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: isDark ? kToLight.shade900 : kToDark.shade900,
-              ),
-            ),
-            Text(
-              "LIVE Forex is: ${fromCurrency.symbol}1 = ${toCurrency.symbol}$conversionValue",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                fontSize: MediaQuery.of(context).size.height / 30,
                 color: isDark ? kToLight.shade900 : kToDark.shade900,
               ),
             ),
@@ -444,9 +437,9 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               height: MediaQuery.of(context).size.height / 9,
             ),
             const Divider(
-              color: Colors.grey,
+              color: Colors.black,
               height: 2,
-              indent: 15,
+              indent: 10,
               endIndent: 15,
             ),
             TextButton(
@@ -516,6 +509,8 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      // drawer: myDrawer(context),
       body: Container(
         color: isDark ? kToDark.shade600 : kToLight.shade600,
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //Pages
 import '../widgets/appBar.dart';
+// import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
 
 class DummyPage extends StatelessWidget {
@@ -11,8 +12,10 @@ class DummyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      // drawer: myDrawer(context),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+        // padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [

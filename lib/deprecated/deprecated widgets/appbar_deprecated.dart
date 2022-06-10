@@ -24,6 +24,7 @@ var customAppBar1 = AppBar(
 );
 
 //Sliver App Bar
+// ignore: camel_case_types
 class customAppBar2 extends StatelessWidget {
   final String pageTitle;
   const customAppBar2({Key? key, required this.pageTitle}) : super(key: key);
