@@ -1,5 +1,6 @@
 //Packages
 import 'package:candle_in_dark/widgets/drawer.dart';
+import 'package:candle_in_dark/widgets/toasts.dart';
 import "package:flutter/material.dart";
 
 //Variables
@@ -13,6 +14,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var currentPageIndex = 0;
+
+  void switchTheme() {
+    setState(() {
+      if (themeMode == ThemeMode.light) {
+        themeMode = ThemeMode.dark;
+        themeIcon = Icons.dark_mode;
+        isDark = true;
+      } else if (themeMode == ThemeMode.dark) {
+        themeMode = ThemeMode.light;
+        themeIcon = Icons.sunny;
+        isDark = false;
+      }
+    });
+    displayTheme();
+    toast(context: context, msg: "Theme Toggled", startI: themeIcon);
+  }
+
+  void displayTheme() {
+    print(themeMode);
+  }
 
   void setPageIndex(int index) {
     setState(() => currentPageIndex = index);
@@ -42,6 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
               label: page["labelName"],
             ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => switchTheme(),
+        tooltip: "Choose theme",
+        child: Icon(themeIcon),
       ),
     );
   }

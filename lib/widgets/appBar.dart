@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:candle_in_dark/global_values.dart';
+
 var appBarDecor = const BoxDecoration(
   borderRadius: BorderRadius.only(
     bottomLeft: Radius.circular(200),
@@ -33,9 +35,10 @@ class customSliver extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           appBarTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             letterSpacing: 1.5,
+            color: isDark ? kToDark.shade900 : kToLight.shade900,
           ),
         ),
         centerTitle: true,

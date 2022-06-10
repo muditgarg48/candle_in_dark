@@ -7,6 +7,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../widgets/appBar.dart';
 import '../widgets/toasts.dart';
 
+import 'package:candle_in_dark/global_values.dart';
+
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",
   name: "Select a currency",
@@ -32,7 +34,7 @@ Widget myCard({
     margin: const EdgeInsets.all(7),
     width: deviceWidth,
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: isDark ? kToDark.shade700 : kToLight.shade700,
       boxShadow: [
         BoxShadow(
           blurRadius: 15,
@@ -103,13 +105,19 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       toCurrencyValue = fromCurrencyValue;
       fromCurrencyValue = tempValue;
     });
-    toast(context, "Swapped", Icons.swap_calls, Icons.check);
+    toast(
+        context: context,
+        msg: "Swapped",
+        startI: Icons.swap_calls,
+        endI: Icons.check);
   }
 
   Widget updateCurr(String choice) {
     return ElevatedButton(
-      style: ButtonStyle(
-        elevation: MaterialStateProperty.all(15),
+      style: ElevatedButton.styleFrom(
+        primary: isDark ? kToDark.shade900 : kToLight.shade900,
+        onPrimary: Theme.of(context).primaryColor,
+        elevation: 15,
       ),
       onPressed: () {
         pick.showCurrencyPicker(
@@ -142,7 +150,10 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       children: [
         Text(
           choice == "source" ? fromCurrency.symbol : toCurrency.symbol,
-          style: Theme.of(context).textTheme.headline5,
+          style: TextStyle(
+            color: isDark ? kToLight.shade900 : kToDark.shade900,
+            fontSize: 30,
+          ),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width / 50,
@@ -165,7 +176,10 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 )
               : Text(
                   "$toCurrencyValue",
-                  style: Theme.of(context).textTheme.headline6,
+                  style: TextStyle(
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    fontSize: 25,
+                  ),
                 ),
         ),
       ],
@@ -205,15 +219,17 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         const SizedBox(width: 10),
         Text(
           "${currentCurr.code}: ",
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
+            color: isDark ? kToLight.shade900 : kToDark.shade900,
           ),
         ),
         const SizedBox(width: 10),
         Text(
           currentCurr.name,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
+            color: isDark ? kToLight.shade900 : kToDark.shade900,
           ),
         ),
       ],
@@ -252,10 +268,12 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
             onPressed: () {
               nullify(choice);
               toast(
-                context,
-                choice == "values" ? "Values cleared!" : "Selections cleared!",
-                Icons.delete,
-                Icons.check,
+                context: context,
+                msg: choice == "values"
+                    ? "Values cleared!"
+                    : "Selections cleared!",
+                startI: Icons.delete,
+                endI: Icons.check,
               );
               Navigator.pop(context);
             },
@@ -286,7 +304,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(
                     width: 2,
-                    color: Colors.black,
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
                   ),
                 ),
                 child: IconButton(
@@ -295,9 +313,10 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                     "values",
                   ),
                   tooltip: "Reset values only",
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.clear_rounded,
                     size: 25,
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
                   ),
                 ),
               ),
@@ -307,15 +326,16 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(
                     width: 2,
-                    color: Colors.grey,
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
                   ),
                 ),
                 child: IconButton(
                   onPressed: swapCurr,
                   tooltip: "Swap Currencies",
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.swap_calls_outlined,
                     size: 25,
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
                   ),
                 ),
               ),
@@ -358,11 +378,31 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("${fromCurrency.name} (${fromCurrency.code})"),
-            const Icon(Icons.arrow_drop_down_rounded),
-            Text("${toCurrency.name} (${fromCurrency.code})"),
             Text(
-                "LIVE Forex is: ${fromCurrency.symbol}1 = ${toCurrency.symbol}$conversionValue"),
+              "${fromCurrency.name} (${fromCurrency.code})",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isDark ? kToLight.shade900 : kToDark.shade900,
+              ),
+            ),
+            Icon(
+              Icons.arrow_drop_down_rounded,
+              color: isDark ? kToLight.shade900 : kToDark.shade900,
+            ),
+            Text(
+              "${toCurrency.name} (${fromCurrency.code})",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isDark ? kToLight.shade900 : kToDark.shade900,
+              ),
+            ),
+            Text(
+              "LIVE Forex is: ${fromCurrency.symbol}1 = ${toCurrency.symbol}$conversionValue",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isDark ? kToLight.shade900 : kToDark.shade900,
+              ),
+            ),
           ],
         ),
       ),
@@ -378,22 +418,25 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         ),
         child: ListView(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 bottom: 20,
               ),
               child: Text(
-                "Forex List is not ready!\nHappens for two reasons - \n1.Base Currency was not chosen.\n2.The Forex Sheet was not given time to be fetched\nTry to relaunch this section!",
-                softWrap: true,
-                textAlign: TextAlign.justify,
-              ),
+                  "Forex List is not ready!\nHappens for two reasons - \n1.Base Currency was not chosen.\n2.The Forex Sheet was not given time to be fetched\nTry to relaunch this section!",
+                  softWrap: true,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                  )),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 9,
             ),
             Center(
               child: LoadingAnimationWidget.staggeredDotsWave(
-                color: Colors.white,
+                color: isDark ? kToLight.shade900 : kToDark.shade900,
                 size: 100,
               ),
             ),
@@ -407,10 +450,10 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               endIndent: 15,
             ),
             TextButton(
-              child: const Text(
+              child: Text(
                 'Close Forex Rate Sheet',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDark ? kToLight.shade900 : kToDark.shade900,
                 ),
               ),
               onPressed: () => Navigator.pop(context),
@@ -474,6 +517,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: isDark ? kToDark.shade600 : kToLight.shade600,
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -495,24 +539,37 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 deviceHeight: MediaQuery.of(context).size.height / 2,
                 deviceWidth: MediaQuery.of(context).size.width,
               ),
+              myCard(
+                contents: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: isDark ? kToDark.shade900 : kToLight.shade900,
+                  ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height / 1.5,
+                          color: Theme.of(context).backgroundColor,
+                          child: forexRateSheet(),
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    "View all Forex Rates",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    ),
+                  ),
+                ),
+                deviceHeight: MediaQuery.of(context).size.height / 4,
+                deviceWidth: MediaQuery.of(context).size.width,
+              ),
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: TextButton(
-        child: const Text("View all Forex Rates"),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                height: MediaQuery.of(context).size.height / 1.5,
-                color: Theme.of(context).backgroundColor,
-                child: forexRateSheet(),
-              );
-            },
-          );
-        },
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> toast(
-        BuildContext context, String msg, IconData startI, IconData endI) =>
+        {required BuildContext context,required String msg,required IconData startI, IconData endI = Icons.check}) =>
     showQudsToast(
       context,
       content: Text(msg),
