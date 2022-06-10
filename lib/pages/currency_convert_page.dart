@@ -1,5 +1,5 @@
 // import 'package:candle_in_dark/widgets/drawer.dart';
-import 'package:candle_in_dark/widgets/confirmation_dialogue.dart';
+import '../widgets/confirmation_dialogue.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
@@ -8,7 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../widgets/appBar.dart';
 import '../widgets/toasts.dart';
 
-import 'package:candle_in_dark/global_values.dart';
+import '../global_values.dart';
 
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",

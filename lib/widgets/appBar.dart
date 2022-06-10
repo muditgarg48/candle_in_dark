@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:candle_in_dark/global_values.dart';
+import '../global_values.dart';
 
 var appBarDecor = const BoxDecoration(
   borderRadius: BorderRadius.only(
