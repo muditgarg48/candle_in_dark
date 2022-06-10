@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.11"
+  curved_drawer_fork:
+    dependency: "direct main"
+    description:
+      name: curved_drawer_fork
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   fake_async:
     dependency: transitive
     description:
@@ -151,6 +158,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
+  quds_ui_kit:
+    dependency: "direct main"
+    description:
+      name: quds_ui_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.7+8"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -5,6 +5,7 @@ import 'package:frankfurter/frankfurter.dart' as convert;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../widgets/appBar.dart';
+import '../widgets/toasts.dart';
 
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",
@@ -102,6 +103,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       toCurrencyValue = fromCurrencyValue;
       fromCurrencyValue = tempValue;
     });
+    toast(context, "Swapped", Icons.swap_calls, Icons.check);
   }
 
   Widget updateCurr(String choice) {
@@ -249,6 +251,12 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           IconButton(
             onPressed: () {
               nullify(choice);
+              toast(
+                context,
+                choice == "values" ? "Values cleared!" : "Selections cleared!",
+                Icons.delete,
+                Icons.check,
+              );
               Navigator.pop(context);
             },
             icon: const Icon(

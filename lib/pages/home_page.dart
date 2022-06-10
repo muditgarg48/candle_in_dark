@@ -1,4 +1,5 @@
 //Packages
+import 'package:candle_in_dark/widgets/drawer.dart';
 import "package:flutter/material.dart";
 
 //Variables
@@ -20,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: myDrawer(),
       body: pages[currentPageIndex]["class"],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0x44aaaaff),
