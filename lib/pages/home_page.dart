@@ -1,11 +1,12 @@
 //Packages
 // import 'package:candle_in_dark/widgets/drawer.dart';
+import 'package:candle_in_dark/widgets/theme_data.dart';
 import "package:flutter/material.dart";
 import 'package:quds_ui_kit/animations/quds_animations.dart';
 
 //Variables
 import "../global_values.dart";
-import '../widgets/confirmation_dialogue.dart';
+import '../widgets/warning_dialogue.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -29,8 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     (context as Element).reassemble();
-    displayTheme();
-    // toast(context: context, msg: "Theme Toggled", startI: themeIcon);
+    // displayTheme();
   }
 
   void displayTheme() {
@@ -49,14 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
       extendBodyBehindAppBar: true,
       body: pages[currentPageIndex]["class"],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: kToDark.shade300,
+        backgroundColor: themeBgColor(),
         // backgroundColor: isDark ? kToDark.shade800 : kToLight.shade800,
         currentIndex: currentPageIndex,
         type: BottomNavigationBarType.shifting,
         elevation: 15,
-        selectedItemColor: Colors.black,
+        selectedItemColor: themeTxtColor(),
         selectedIconTheme: const IconThemeData(opacity: 1),
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: themeTxtColor(),
         unselectedIconTheme: const IconThemeData(opacity: 0.3),
         onTap: setPageIndex,
         items: [
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: !isDark ? kToDark.shade700 : kToLight.shade700,
+        backgroundColor: invertedThemeTxtColor(),
         onPressed: () {
           var warning = WarningDialogue(
             confirmationMsg: "Toggle light/dark mode ?",

@@ -1,5 +1,7 @@
 // import 'package:candle_in_dark/widgets/drawer.dart';
-import '../widgets/confirmation_dialogue.dart';
+import 'package:candle_in_dark/widgets/theme_data.dart';
+
+import '../widgets/warning_dialogue.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
@@ -35,10 +37,10 @@ Widget myCard({
     margin: const EdgeInsets.all(7),
     width: deviceWidth,
     decoration: BoxDecoration(
-      color: isDark ? kToDark.shade700 : kToLight.shade700,
+      color: themeCardColor(),
       boxShadow: [
         BoxShadow(
-          blurRadius: 15,
+          blurRadius: 100,
           color: Colors.grey.withOpacity(0.5),
           spreadRadius: 5,
           blurStyle: BlurStyle.normal,
@@ -107,17 +109,18 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       fromCurrencyValue = tempValue;
     });
     toast(
-        context: context,
-        msg: "Swapped",
-        startI: Icons.swap_calls,
-        endI: Icons.check);
+      context: context,
+      msg: "Swapped",
+      startI: Icons.swap_calls,
+      endI: Icons.check,
+    );
   }
 
   Widget updateCurr(String choice) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: isDark ? kToDark.shade900 : kToLight.shade900,
-        onPrimary: Theme.of(context).primaryColor,
+        primary: themeButtonColor(),
+        onPrimary: themeButtonTxtColor(),
         elevation: 15,
       ),
       onPressed: () {
@@ -152,7 +155,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         Text(
           choice == "source" ? fromCurrency.symbol : toCurrency.symbol,
           style: TextStyle(
-            color: isDark ? kToLight.shade900 : kToDark.shade900,
+            color: themeTxtColor(),
             fontSize: 30,
           ),
         ),
@@ -166,11 +169,13 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: isDark ? kToLight.shade900 : kToDark.shade900),
+                        color: themeTxtColor(),
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                          color: isDark ? kToLight.shade900 : kToDark.shade900),
+                        color: themeTxtColor(),
+                      ),
                     ),
                   ),
                   controller: controller,
@@ -186,7 +191,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               : Text(
                   "$toCurrencyValue",
                   style: TextStyle(
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                     fontSize: 25,
                   ),
                 ),
@@ -230,7 +235,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           "${currentCurr.code}: ",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: isDark ? kToLight.shade900 : kToDark.shade900,
+            color: themeTxtColor(),
           ),
         ),
         const SizedBox(width: 10),
@@ -238,7 +243,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           currentCurr.name,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: isDark ? kToLight.shade900 : kToDark.shade900,
+            color: themeTxtColor(),
           ),
         ),
       ],
@@ -287,7 +292,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(
                     width: 2,
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                   ),
                 ),
                 child: IconButton(
@@ -295,11 +300,11 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                     "Clear values ?",
                     "values",
                   ),
-                  tooltip: "Reset values only",
+                  tooltip: "Reset values",
                   icon: Icon(
                     Icons.clear_rounded,
                     size: 25,
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                   ),
                 ),
               ),
@@ -309,7 +314,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   borderRadius: BorderRadius.circular(100),
                   border: Border.all(
                     width: 2,
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                   ),
                 ),
                 child: IconButton(
@@ -318,7 +323,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   icon: Icon(
                     Icons.swap_calls_outlined,
                     size: 25,
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                   ),
                 ),
               ),
@@ -363,8 +368,8 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: isDark ? kToDark.shade900 : kToLight.shade900,
-                onPrimary: Theme.of(context).primaryColor,
+                primary: themeButtonColor(),
+                onPrimary: themeButtonTxtColor(),
                 elevation: 15,
               ),
               onPressed: () {
@@ -380,7 +385,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 "LIVE",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: isDark ? kToLight.shade900 : kToDark.shade900,
+                  color: themeTxtColor(),
                 ),
               ),
             ),
@@ -393,7 +398,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
                 fontSize: MediaQuery.of(context).size.height / 30,
-                color: isDark ? kToLight.shade900 : kToDark.shade900,
+                color: themeTxtColor(),
               ),
             ),
           ],
@@ -421,7 +426,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: isDark ? kToLight.shade900 : kToDark.shade900,
+                    color: themeTxtColor(),
                   )),
             ),
             SizedBox(
@@ -429,7 +434,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
             ),
             Center(
               child: LoadingAnimationWidget.staggeredDotsWave(
-                color: isDark ? kToLight.shade900 : kToDark.shade900,
+                color: themeTxtColor(),
                 size: 100,
               ),
             ),
@@ -446,7 +451,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               child: Text(
                 'Close Forex Rate Sheet',
                 style: TextStyle(
-                  color: isDark ? kToLight.shade900 : kToDark.shade900,
+                  color: themeTxtColor(),
                 ),
               ),
               onPressed: () => Navigator.pop(context),
@@ -486,16 +491,19 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                     Text(
                       "1 ${r.from} = ${r.rate} ${r.to}",
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: themeTxtColor(),
+                      ),
                     ),
                     const SizedBox(height: 10),
                   ],
                 ),
               ),
             TextButton(
-              child: const Text(
+              child: Text(
                 'Close Forex Rate Sheet',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: themeTxtColor(),
                 ),
               ),
               onPressed: () => Navigator.pop(context),
@@ -512,7 +520,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       extendBodyBehindAppBar: true,
       // drawer: myDrawer(context),
       body: Container(
-        color: isDark ? kToDark.shade600 : kToLight.shade600,
+        color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -537,7 +545,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               myCard(
                 contents: TextButton(
                   style: TextButton.styleFrom(
-                    primary: isDark ? kToDark.shade900 : kToLight.shade900,
+                    primary: themeButtonTxtColor(),
                   ),
                   onPressed: () {
                     showModalBottomSheet(
@@ -555,7 +563,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                     "View all Forex Rates",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: isDark ? kToLight.shade900 : kToDark.shade900,
+                      color: themeTxtColor(),
                     ),
                   ),
                 ),

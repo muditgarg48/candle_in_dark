@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:candle_in_dark/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // ignore: depend_on_referenced_packages
@@ -124,40 +125,80 @@ class WorldClockState extends State<WorldClock> {
 
   Widget myAnalogClock(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: ListView(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: chooseLocationSheet,
+                icon: Icon(
+                  Icons.location_on,
+                  color: themeTxtColor(),
+                ),
+              ),
+              TextButton(
+                onPressed: chooseLocationSheet,
+                child: Text(
+                  "Choose Location",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Current Timezone: $chosenTimezone",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: MediaQuery.of(context).size.height / 50,
+              color: themeTxtColor(),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 40,
+          ),
           Text(
             DateFormat('EEE, MMM d').format(chosenTime),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: MediaQuery.of(context).size.height / 30,
+              color: themeTxtColor(),
             ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 40,
           ),
           AnalogClock(
             decoration: BoxDecoration(
               border: Border.all(
                 width: 0.0,
-                color: Colors.black,
+                color: themeTxtColor(),
               ),
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 15,
-                    spreadRadius: 2,
-                    blurStyle: BlurStyle.outer,
-                    color: Colors.black.withAlpha(80)),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                  blurStyle: BlurStyle.outer,
+                  color: themeBgColor(),
+                ),
               ],
-              color: Colors.white,
+              color: invertedThemeTxtColor(),
               shape: BoxShape.circle,
             ),
-            width: MediaQuery.of(context).size.width / 1.5,
-            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
+            height: MediaQuery.of(context).size.height / 3,
             isLive: true,
-            hourHandColor: Colors.black,
-            minuteHandColor: Colors.black,
+            hourHandColor: themeBgColor(),
+            minuteHandColor: themeBgColor(),
             showSecondHand: true,
-            numberColor: Colors.black87,
+            numberColor: themeBgColor(),
             showNumbers: true,
             showDigitalClock: false,
             textScaleFactor: 1.5,
@@ -171,60 +212,104 @@ class WorldClockState extends State<WorldClock> {
 
   Widget myDigitalClock(BuildContext context) {
     return Center(
-      child: Container(
-        color: Colors.transparent,
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        width: MediaQuery.of(context).size.width / 1.5,
-        height: MediaQuery.of(context).size.height / 2,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+      child: ListView(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 10,
+              IconButton(
+                onPressed: chooseLocationSheet,
+                icon: Icon(
+                  Icons.location_on,
+                  color: themeTxtColor(),
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    DateFormat('h:mm').format(chosenTime),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.height / 15,
-                    ),
+              TextButton(
+                onPressed: chooseLocationSheet,
+                child: Text(
+                  "Choose Location",
+                  style: TextStyle(
+                    color: themeTxtColor(),
                   ),
-                  Text(
-                    DateFormat('ss').format(chosenTime),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.height / 50,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    DateFormat('a').format(chosenTime),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.height / 32,
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                DateFormat('EEE, MMM d').format(chosenTime),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height / 50,
                 ),
               ),
             ],
           ),
-        ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Current Timezone: $chosenTimezone",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: MediaQuery.of(context).size.height / 50,
+              color: themeTxtColor(),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 40,
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            width: MediaQuery.of(context).size.width / 1.5,
+            height: MediaQuery.of(context).size.height / 2,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        DateFormat('h:mm').format(chosenTime),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height / 15,
+                          color: themeTxtColor(),
+                        ),
+                      ),
+                      Text(
+                        DateFormat('ss').format(chosenTime),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height / 50,
+                          color: themeTxtColor(),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        DateFormat('a').format(chosenTime),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height / 32,
+                          color: themeTxtColor(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    DateFormat('EEE, MMM d').format(chosenTime),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.height / 50,
+                      color: themeTxtColor(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -257,10 +342,7 @@ class WorldClockState extends State<WorldClock> {
 
   dynamic clockFormatSwitcher() {
     return ConcentricPageView(
-      colors: const [
-        Colors.white,
-        Colors.blue,
-      ],
+      colors: themeShades(),
       radius: MediaQuery.of(context).size.width,
       itemCount: null, // null = infinity
       physics: const AlwaysScrollableScrollPhysics(),
@@ -269,50 +351,10 @@ class WorldClockState extends State<WorldClock> {
         index %= 2;
         return Container(
           padding: const EdgeInsets.all(8),
-          child: ListView(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: chooseLocationSheet,
-                    icon: const Icon(
-                      Icons.location_on,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: chooseLocationSheet,
-                    child: const Text(
-                      "Choose Location",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Current Timezone: $chosenTimezone",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: MediaQuery.of(context).size.height / 50,
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 40,
-              ),
-              Container(
-                child: index % 2 == 0
-                    ? myAnalogClock(context)
-                    : myDigitalClock(context),
-              ),
-            ],
+          child: Container(
+            child: index % 2 == 0
+                ? myAnalogClock(context)
+                : myDigitalClock(context),
           ),
         );
       },
@@ -325,7 +367,7 @@ class WorldClockState extends State<WorldClock> {
       extendBodyBehindAppBar: true,
       // drawer: myDrawer(context),
       body: Container(
-        color: isDark ? kToDark.shade600 : kToLight.shade600,
+        color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [

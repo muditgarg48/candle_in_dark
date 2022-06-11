@@ -1,3 +1,4 @@
+import 'package:candle_in_dark/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
 import 'toasts.dart';
@@ -37,13 +38,29 @@ class WarningDialogue extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        content: Text(confirmationMsg),
+        title: Text(
+          "Warning!",
+          style: TextStyle(
+            color: themeTxtColor(),
+          ),
+        ),
+        backgroundColor: themeBgColor(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Text(
+          confirmationMsg,
+          style: TextStyle(
+            color: themeTxtColor(),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(
+            icon: Icon(
               Icons.clear,
               size: 25,
+              color: invertedThemeTxtColor(),
             ),
           ),
           IconButton(
@@ -57,9 +74,10 @@ class WarningDialogue extends StatelessWidget {
               );
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.check,
               size: 25,
+              color: invertedThemeTxtColor(),
             ),
           ),
         ],
