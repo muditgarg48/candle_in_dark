@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 
 //Pages
 import './pages/currency_convert_page.dart';
+import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
 
 //Pages and their Classes
@@ -18,7 +19,7 @@ var pages = const <Map<String, dynamic>>[
     'icon': Icon(Icons.texture_sharp),
   },
   {
-    'class': DummyPage(),
+    'class': WorldClock(),
     'labelName': "World Clock",
     'icon': Icon(Icons.timer),
   },

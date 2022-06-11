@@ -45,7 +45,7 @@ class customSliver extends StatelessWidget {
         collapseMode: CollapseMode.parallax,
         background: Image.network(
           appBarBG,
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
       ),
     );
