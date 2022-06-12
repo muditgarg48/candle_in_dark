@@ -458,59 +458,65 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         ),
       );
     } else {
-      return SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 10,
-                bottom: 10,
+      return Scaffold(
+        body: Container(
+          color: themeBgColor(),
+          padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+          child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              customSliver(
+                appBarTitle: "${fromCurrency.code} Forex rates",
+                appBarBG:
+                    "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
               ),
-              child: Text(
-                "Current Forex Rate Sheet of ${fromCurrency.code}",
-                style: Theme.of(context).textTheme.headline6,
-                softWrap: true,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Divider(
-              color: Colors.grey,
-              height: 2,
-              indent: 15,
-              endIndent: 15,
-            ),
-            Container(
-              width: double.infinity,
-              color: themeBgColor(),
+            ],
+            body: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (convert.Rate r in latestForexRates)
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        "1 ${r.from} = ${r.rate} ${r.to}",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: themeTxtColor(),
-                        ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: themeBgColor(),
+                    child: Column(
+                      children: [
+                        for (convert.Rate r in latestForexRates)
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              "1 ${r.from} = ${r.rate} ${r.to}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: themeTxtColor(),
+                              ),
+                            ),
+                          ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                    height: 2,
+                    indent: 15,
+                    endIndent: 15,
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Close Forex Rate Sheet',
+                      style: TextStyle(
+                        color: themeTxtColor(),
                       ),
                     ),
-                  const SizedBox(height: 10),
+                    onPressed: () => Navigator.pop(context),
+                  ),
                 ],
               ),
             ),
-            TextButton(
-              child: Text(
-                'Close Forex Rate Sheet',
-                style: TextStyle(
-                  color: themeTxtColor(),
-                ),
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
+          ),
         ),
       );
     }

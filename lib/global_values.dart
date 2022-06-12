@@ -11,27 +11,32 @@ var pages = const <Map<String, dynamic>>[
   {
     'class': DummyPage(),
     'labelName': "Dummy",
-    'icon': Icon(Icons.texture_sharp),
+    'active_icon': Icons.texture_sharp,
+    'icon': Icons.texture_outlined,
   },
   {
     'class': DummyPage(),
     'labelName': "Dummy",
-    'icon': Icon(Icons.texture_sharp),
+    'active_icon': Icons.texture_sharp,
+    'icon': Icons.texture_outlined,
   },
   {
     'class': WorldClock(),
     'labelName': "World Clock",
-    'icon': Icon(Icons.timer),
+    'active_icon': Icons.timer_sharp,
+    'icon': Icons.timer_outlined,
   },
   {
     'class': CurrencyConvertorPage(),
     'labelName': "Forex",
-    'icon': Icon(Icons.attach_money_sharp),
+    'active_icon': Icons.attach_money_sharp,
+    'icon': Icons.attach_money_outlined,
   },
   {
     'class': DummyPage(),
     'labelName': "Dummy",
-    'icon': Icon(Icons.texture_sharp),
+    'active_icon': Icons.texture_sharp,
+    'icon': Icons.texture_outlined,
   },
 ];
 

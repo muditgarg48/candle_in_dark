@@ -41,7 +41,7 @@ class customSliver extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             letterSpacing: 1.5,
-            color: isDark ? kToDark.shade900 : kToLight.shade900,
+            color: themeButtonColor(),
           ),
         ),
         centerTitle: true,

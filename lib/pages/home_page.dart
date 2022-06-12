@@ -1,5 +1,6 @@
 //Packages
 // import 'package:candle_in_dark/widgets/drawer.dart';
+import 'package:candle_in_dark/widgets/bottom_navbar.dart';
 import 'package:candle_in_dark/widgets/theme_data.dart';
 import "package:flutter/material.dart";
 import 'package:quds_ui_kit/animations/quds_animations.dart';
@@ -52,25 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
         index: currentPageIndex,
         children: <Widget>[...pages.map((page) => page["class"]).toList()],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: themeBgColor(),
-        currentIndex: currentPageIndex,
-        type: BottomNavigationBarType.shifting,
-        elevation: 15,
-        selectedItemColor: themeTxtColor(),
-        selectedIconTheme: const IconThemeData(opacity: 1),
-        unselectedItemColor: themeTxtColor(),
-        unselectedIconTheme: const IconThemeData(opacity: 0.3),
-        onTap: setPageIndex,
-        items: [
-          for (var page in pages)
-            BottomNavigationBarItem(
-              tooltip: page["labelName"],
-              backgroundColor: themeBgColor(),
-              icon: page["icon"],
-              label: page["labelName"],
-            ),
-        ],
+      bottomNavigationBar: MyBottomNavbar1(
+        pages: pages,
+        currentPageIndex: currentPageIndex,
+        setPageIndex: setPageIndex,
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: invertedThemeTxtColor(),
