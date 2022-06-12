@@ -66,6 +66,21 @@ class WorldClockState extends State<WorldClock> {
     // printDetails();
   }
 
+  void resetTimeZone() async {
+    response = await get(Uri.parse('http://worldtimeapi.org/api/ip'));
+    Map data = jsonDecode(response.body);
+    setState(() {
+      chosenTimezone = data["timezone"];
+      chosenTime = DateTime.parse(data["datetime"]);
+      offset = data["utc_offset"];
+      if (offset[0] == '+') {
+        chosenTime.add(Duration(seconds: data["raw_offset"]));
+      } else if (offset[0] == '-') {
+        chosenTime.subtract(Duration(seconds: data["raw_offset"]));
+      }
+    });
+  }
+
   List filterList(String searchTerm) {
     return availableTimezones
         .where((element) => element.toLowerCase().contains(searchTerm))
@@ -130,6 +145,7 @@ class WorldClockState extends State<WorldClock> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
+                tooltip: "Choose Location",
                 onPressed: chooseLocationSheet,
                 icon: Icon(
                   Icons.location_on,
@@ -379,6 +395,15 @@ class WorldClockState extends State<WorldClock> {
             ),
           ],
           body: clockFormatSwitcher(),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: IconButton(
+        onPressed: resetTimeZone,
+        tooltip: "Reset Timezone",
+        icon: const Icon(
+          Icons.my_location,
+          color: Colors.white,
         ),
       ),
     );
