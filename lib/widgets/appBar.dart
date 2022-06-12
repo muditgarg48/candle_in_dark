@@ -21,6 +21,30 @@ class customSliver extends StatelessWidget {
   final String appBarTitle;
   final String appBarBG;
 
+  Widget title() {
+    return Text(
+      appBarTitle,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.5,
+        color: themeButtonColor(),
+      ),
+    );
+  }
+
+  dynamic backgroundImage() {
+    return CachedNetworkImage(
+      placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
+        color: themeTxtColor(),
+        size: MediaQuery.of(context).size.height / 10,
+      ),
+      imageUrl: appBarBG,
+      fit: BoxFit.cover,
+      color: Colors.black.withOpacity(0.2),
+      colorBlendMode: isDark ? BlendMode.darken : BlendMode.dst,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -36,26 +60,10 @@ class customSliver extends StatelessWidget {
       elevation: 30,
       expandedHeight: 250,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          appBarTitle,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
-            color: themeButtonColor(),
-          ),
-        ),
+        title: title(),
         centerTitle: true,
         collapseMode: CollapseMode.parallax,
-        background: CachedNetworkImage(
-          placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
-            color: themeTxtColor(),
-            size: MediaQuery.of(context).size.height / 10,
-          ),
-          imageUrl: appBarBG,
-          fit: BoxFit.cover,
-          color: Colors.black.withOpacity(0.2),
-          colorBlendMode: isDark ? BlendMode.darken : BlendMode.dst,
-        ),
+        background: backgroundImage(),
       ),
     );
   }

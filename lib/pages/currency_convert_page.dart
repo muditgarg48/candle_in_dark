@@ -270,7 +270,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       jobDone: Icons.delete,
       action: nullify,
     );
-    return warning.clearBoard(context);
+    return warning.dialogueBox(context);
   }
 
   Widget inputCardContents() {

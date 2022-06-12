@@ -18,6 +18,53 @@ class WarningDialogue extends StatelessWidget {
   late Function action;
   late String doneMsg = "";
 
+  Widget titleHead = Text(
+    "Warning!",
+    style: TextStyle(
+      color: themeTxtColor(),
+    ),
+  );
+
+  Widget confirmation(String msg) {
+    return Text(
+      msg,
+      style: TextStyle(
+        color: themeTxtColor(),
+      ),
+    );
+  }
+
+  Widget noButton(BuildContext context) {
+    return IconButton(
+      onPressed: () => Navigator.pop(context),
+      icon: Icon(
+        Icons.clear,
+        size: 25,
+        color: invertedThemeTxtColor(),
+      ),
+    );
+  }
+
+  Widget yesButton(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        action(choice);
+        toast(
+          context: context,
+          msg: doneMsg,
+          startI: jobDone,
+          endI: Icons.check,
+        );
+        Navigator.pop(context);
+      },
+      icon: Icon(
+        Icons.check,
+        size: 25,
+        color: invertedThemeTxtColor(),
+      ),
+    );
+  }
+
   void jobDoneMsg() {
     if (choice == "values") {
       doneMsg = "Values cleared!";
@@ -33,53 +80,20 @@ class WarningDialogue extends StatelessWidget {
     return SizedBox();
   }
 
-  Future clearBoard(BuildContext context) {
+  Future dialogueBox(BuildContext context) {
     jobDoneMsg();
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          "Warning!",
-          style: TextStyle(
-            color: themeTxtColor(),
-          ),
-        ),
+        title: titleHead,
         backgroundColor: themeBgColor(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        content: Text(
-          confirmationMsg,
-          style: TextStyle(
-            color: themeTxtColor(),
-          ),
-        ),
+        content: confirmation(confirmationMsg),
         actions: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
-              Icons.clear,
-              size: 25,
-              color: invertedThemeTxtColor(),
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              action(choice);
-              toast(
-                context: context,
-                msg: doneMsg,
-                startI: jobDone,
-                endI: Icons.check,
-              );
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.check,
-              size: 25,
-              color: invertedThemeTxtColor(),
-            ),
-          ),
+          noButton(context),
+          yesButton(context),
         ],
       ),
     );

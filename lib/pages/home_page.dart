@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      extendBody: true,
       // body: pages[currentPageIndex]["class"],
       body: IndexedStack(
         index: currentPageIndex,
@@ -67,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             jobDone: Icons.toggle_on,
             action: switchTheme,
           );
-          warning.clearBoard(context);
+          warning.dialogueBox(context);
         },
         tooltip: "Choose theme",
         label: Row(
