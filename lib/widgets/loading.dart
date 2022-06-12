@@ -5,14 +5,14 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../global_values.dart';
 
-class Loading extends StatefulWidget {
-  const Loading({Key? key}) : super(key: key);
+class LoadingPage extends StatefulWidget {
+  const LoadingPage({Key? key}) : super(key: key);
 
   @override
-  State<Loading> createState() => LoadingState();
+  State<LoadingPage> createState() => LoadingPageState();
 }
 
-class LoadingState extends State<Loading> {
+class LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

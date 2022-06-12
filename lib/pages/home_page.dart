@@ -47,10 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: pages[currentPageIndex]["class"],
+      // body: pages[currentPageIndex]["class"],
+      body: IndexedStack(
+        index: currentPageIndex,
+        children: <Widget>[...pages.map((page) => page["class"]).toList()],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: themeBgColor(),
-        // backgroundColor: isDark ? kToDark.shade800 : kToLight.shade800,
         currentIndex: currentPageIndex,
         type: BottomNavigationBarType.shifting,
         elevation: 15,
@@ -63,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           for (var page in pages)
             BottomNavigationBarItem(
               tooltip: page["labelName"],
-              backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: themeBgColor(),
               icon: page["icon"],
               label: page["labelName"],
             ),

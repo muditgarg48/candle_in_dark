@@ -1,4 +1,7 @@
+import 'package:candle_in_dark/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../global_values.dart';
 
@@ -43,8 +46,12 @@ class customSliver extends StatelessWidget {
         ),
         centerTitle: true,
         collapseMode: CollapseMode.parallax,
-        background: Image.network(
-          appBarBG,
+        background: CachedNetworkImage(
+          placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
+            color: themeTxtColor(),
+            size: MediaQuery.of(context).size.height / 10,
+          ),
+          imageUrl: appBarBG,
           fit: BoxFit.cover,
         ),
       ),

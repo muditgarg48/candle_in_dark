@@ -28,7 +28,7 @@ class DummyPage extends StatelessWidget {
           body: SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width / 2,
-            child: const Loading(),
+            child: const LoadingPage(),
           ),
           // body: const Center(
           //   child: Text("Hi !"),
