@@ -22,7 +22,9 @@ Future<dynamic> toast({
       leadingActions: [
         QudsAutoAnimatedCombinedIcons(
           startIcon: startI,
+          startIconColor: themeTxtColor(),
           endIcon: endI,
+          endIconColor: themeTxtColor(),
           showStartIcon: true,
         ),
       ],
