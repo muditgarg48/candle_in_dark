@@ -10,8 +10,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../widgets/appBar.dart';
 import '../widgets/toasts.dart';
 
-import '../global_values.dart';
-
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",
   name: "Select a currency",
