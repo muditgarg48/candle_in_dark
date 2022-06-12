@@ -189,16 +189,16 @@ class WorldClockState extends State<WorldClock> {
                   color: themeBgColor(),
                 ),
               ],
-              color: invertedThemeTxtColor(),
+              color: themeBgColor(),
               shape: BoxShape.circle,
             ),
             width: MediaQuery.of(context).size.width / 3,
             height: MediaQuery.of(context).size.height / 3,
             isLive: true,
-            hourHandColor: themeBgColor(),
-            minuteHandColor: themeBgColor(),
+            hourHandColor: themeTxtColor(),
+            minuteHandColor: themeTxtColor(),
             showSecondHand: true,
-            numberColor: themeBgColor(),
+            numberColor: themeTxtColor(),
             showNumbers: true,
             showDigitalClock: false,
             textScaleFactor: 1.5,
@@ -364,6 +364,7 @@ class WorldClockState extends State<WorldClock> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey(themeBgColor()),
       extendBodyBehindAppBar: true,
       // drawer: myDrawer(context),
       body: Container(
