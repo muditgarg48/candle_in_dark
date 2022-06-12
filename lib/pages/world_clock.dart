@@ -125,6 +125,7 @@ class WorldClockState extends State<WorldClock> {
 
   Widget myAnalogClock(BuildContext context) {
     return Center(
+      key: ValueKey(chosenTime),
       child: ListView(
         children: [
           Row(
@@ -212,6 +213,7 @@ class WorldClockState extends State<WorldClock> {
 
   Widget myDigitalClock(BuildContext context) {
     return Center(
+      key: ValueKey(chosenTime),
       child: ListView(
         children: [
           Row(
