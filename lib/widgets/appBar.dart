@@ -53,6 +53,8 @@ class customSliver extends StatelessWidget {
           ),
           imageUrl: appBarBG,
           fit: BoxFit.cover,
+          color: Colors.black.withOpacity(0.2),
+          colorBlendMode: isDark ? BlendMode.darken : BlendMode.dst,
         ),
       ),
     );
