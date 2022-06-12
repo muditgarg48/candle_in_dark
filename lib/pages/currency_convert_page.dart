@@ -481,22 +481,26 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
               indent: 15,
               endIndent: 15,
             ),
-            for (convert.Rate r in latestForexRates)
-              Container(
-                padding: const EdgeInsets.all(3),
-                child: Column(
-                  children: [
-                    Text(
-                      "1 ${r.from} = ${r.rate} ${r.to}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: themeTxtColor(),
+            Container(
+              width: double.infinity,
+              color: themeBgColor(),
+              child: Column(
+                children: [
+                  for (convert.Rate r in latestForexRates)
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        "1 ${r.from} = ${r.rate} ${r.to}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: themeTxtColor(),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
+                  const SizedBox(height: 10),
+                ],
               ),
+            ),
             TextButton(
               child: Text(
                 'Close Forex Rate Sheet',

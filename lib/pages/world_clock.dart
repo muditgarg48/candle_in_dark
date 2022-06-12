@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:candle_in_dark/widgets/theme_data.dart';
+import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // ignore: depend_on_referenced_packages
@@ -79,6 +80,11 @@ class WorldClockState extends State<WorldClock> {
         chosenTime.subtract(Duration(seconds: data["raw_offset"]));
       }
     });
+    toast(
+      context: context,
+      msg: "Back to $chosenTimezone",
+      startI: Icons.location_on,
+    );
   }
 
   List filterList(String searchTerm) {
