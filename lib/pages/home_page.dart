@@ -34,6 +34,37 @@ class _MyHomePageState extends State<MyHomePage> {
     // displayTheme();
   }
 
+  FloatingActionButton themeButton() {
+    return FloatingActionButton.extended(
+      backgroundColor: invertedThemeTxtColor(),
+      onPressed: () {
+        var warning = WarningDialogue(
+          confirmationMsg: "Toggle light/dark mode ?",
+          choice: "theme_change",
+          jobDone: Icons.toggle_on,
+          action: switchTheme,
+        );
+        warning.dialogueBox(context);
+      },
+      tooltip: "Choose theme",
+      label: Row(
+        children: [
+          Icon(
+            themeIcon,
+            color: themeBgColor(),
+          ),
+          const SizedBox(width: 5),
+          QudsAnimatedText(
+            !isDark ? "DARK" : "LIGHT",
+            style: TextStyle(
+              color: themeBgColor(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   void displayTheme() {
     print(themeMode);
     print(isDark);
@@ -59,34 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentPageIndex: currentPageIndex,
         setPageIndex: setPageIndex,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: invertedThemeTxtColor(),
-        onPressed: () {
-          var warning = WarningDialogue(
-            confirmationMsg: "Toggle light/dark mode ?",
-            choice: "theme_change",
-            jobDone: Icons.toggle_on,
-            action: switchTheme,
-          );
-          warning.dialogueBox(context);
-        },
-        tooltip: "Choose theme",
-        label: Row(
-          children: [
-            Icon(
-              themeIcon,
-              color: !isDark ? kToLight.shade900 : kToDark.shade900,
-            ),
-            const SizedBox(width: 5),
-            QudsAnimatedText(
-              !isDark ? "DARK" : "LIGHT",
-              style: TextStyle(
-                color: !isDark ? kToLight.shade900 : kToDark.shade900,
-              ),
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton: themeButton(),
     );
   }
 }
