@@ -116,13 +116,19 @@ class WorldClockState extends State<WorldClock> {
                   ),
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: themeTxtColor(),
+                    ),
                     hintText: "Search",
                     hintStyle: TextStyle(
                       color: themeTxtColor(),
                     ),
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
+                      icon: Icon(
+                        Icons.clear,
+                        color: themeTxtColor(),
+                      ),
                       onPressed: () {
                         if (searchController.text == '') {
                           Navigator.pop(context);
