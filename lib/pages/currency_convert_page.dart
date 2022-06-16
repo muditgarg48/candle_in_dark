@@ -1,4 +1,5 @@
 // import 'package:candle_in_dark/widgets/drawer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:candle_in_dark/widgets/theme_data.dart';
 
 import '../widgets/warning_dialogue.dart';
@@ -202,8 +203,13 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
     return currentCurr.flag == null
         ? ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              "https://media.istockphoto.com/vectors/white-flag-isolated-symbol-of-defeat-vector-illustration-vector-id854509618?k=20&m=854509618&s=612x612&w=0&h=wmdFuuQY-J48FG8m5f57t1M0HTb3HzX5qeig4DTSRTI=",
+            child: CachedNetworkImage(
+              placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
+                color: themeTxtColor(),
+                size: 30,
+              ),
+              imageUrl:
+                  "https://media.istockphoto.com/vectors/white-flag-isolated-symbol-of-defeat-vector-illustration-vector-id854509618?k=20&m=854509618&s=612x612&w=0&h=wmdFuuQY-J48FG8m5f57t1M0HTb3HzX5qeig4DTSRTI=",
               height: 30,
               width: 30,
               fit: BoxFit.contain,

@@ -16,7 +16,7 @@ Widget myDrawer(BuildContext context) {
       for (var page in pages)
         DrawerItem(
           label: page["labelName"],
-          icon: page["icon"],
+          icon: Icon(page["icon"]),
         ),
     ],
     onTap: (index) {

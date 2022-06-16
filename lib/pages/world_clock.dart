@@ -110,7 +110,6 @@ class WorldClockState extends State<WorldClock> {
                 margin: const EdgeInsets.all(8.0),
                 child: TextField(
                   cursorColor: themeTxtColor(),
-                  autofocus: true,
                   controller: searchController,
                   style: TextStyle(
                     color: themeTxtColor(),
@@ -129,12 +128,20 @@ class WorldClockState extends State<WorldClock> {
                           Navigator.pop(context);
                         } else {
                           searchController.text = '';
+                          currentList = availableTimezones;
                         }
                       },
                     ),
                   ),
-                  onChanged: (input) =>
-                      setState(() => currentList = filterList(input)),
+                  onChanged: (input) {
+                    if (input == '') {
+                      setState(() {
+                        currentList = availableTimezones;
+                      });
+                    }
+                    setState(() => currentList = filterList(input));
+                    (context as Element).reassemble();
+                  },
                   showCursor: true,
                 ),
               )
