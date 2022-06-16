@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         setPageIndex: setPageIndex,
       ),
       floatingActionButton: themeButton(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

@@ -408,6 +408,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   Widget forexRateSheet() {
     if (latestForexRates == null) {
       return Container(
+        color: themeBgColor(),
         padding: const EdgeInsets.only(
           top: 20,
           left: 20,

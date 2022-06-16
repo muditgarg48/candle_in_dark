@@ -27,12 +27,10 @@ class WorldClockState extends State<WorldClock> {
   String offset = '';
   List currentList = [];
 
-  var response;
-  var data;
-
   @override
   void initState() {
     initTimeZones();
+    initCurrentTimezone();
     Timer.periodic(
       const Duration(
         seconds: 1,
@@ -47,12 +45,17 @@ class WorldClockState extends State<WorldClock> {
   void initTimeZones() async {
     Response response =
         await get(Uri.parse('http://worldtimeapi.org/api/timezone'));
+    List data = jsonDecode(response.body);
     if (!mounted) return;
     setState(() {
-      availableTimezones = jsonDecode(response.body);
+      availableTimezones = data;
       availableTimezones.sort();
     });
-    response = await get(Uri.parse('http://worldtimeapi.org/api/ip'));
+    // printDetails();
+  }
+
+  void initCurrentTimezone() async {
+    Response response = await get(Uri.parse('http://worldtimeapi.org/api/ip'));
     Map data = jsonDecode(response.body);
     setState(() {
       chosenTimezone = data["timezone"];
@@ -68,7 +71,7 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void resetTimeZone() async {
-    response = await get(Uri.parse('http://worldtimeapi.org/api/ip'));
+    Response response = await get(Uri.parse('http://worldtimeapi.org/api/ip'));
     Map data = jsonDecode(response.body);
     setState(() {
       chosenTimezone = data["timezone"];
@@ -97,21 +100,37 @@ class WorldClockState extends State<WorldClock> {
     var searchController = TextEditingController();
     currentList = availableTimezones;
     return showBarModalBottomSheet(
+      backgroundColor: themeBgColor(),
       context: context,
       builder: (c) => ListView.builder(
         itemCount: currentList.length + 1,
         itemBuilder: (context, index) => index == 0
             ? Container(
+                color: themeBgColor(),
                 margin: const EdgeInsets.all(8.0),
                 child: TextField(
+                  cursorColor: themeTxtColor(),
+                  autofocus: true,
                   controller: searchController,
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
                     hintText: "Search",
+                    hintStyle: TextStyle(
+                      color: themeTxtColor(),
+                    ),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.clear),
-                      onPressed: searchController.clear,
+                      onPressed: () {
+                        if (searchController.text == '') {
+                          Navigator.pop(context);
+                        } else {
+                          searchController.text = '';
+                        }
+                      },
                     ),
                   ),
                   onChanged: (input) =>
@@ -120,10 +139,12 @@ class WorldClockState extends State<WorldClock> {
                 ),
               )
             : Card(
+                color: themeBgColor(),
                 child: ListTile(
                   title: Text(
                     currentList[index - 1],
                     style: TextStyle(
+                      color: invertedThemeTxtColor(),
                       fontWeight: chosenTimezone == currentList[index - 1]
                           ? FontWeight.bold
                           : FontWeight.normal,
@@ -337,9 +358,9 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void timeCalcByLocation(String location) async {
-    response =
+    Response response =
         await get(Uri.parse('http://worldtimeapi.org/api/timezone/$location'));
-    data = jsonDecode(response.body);
+    Map data = jsonDecode(response.body);
     if (!mounted) return;
     setState(() {
       chosenTimezone = data["timezone"];
