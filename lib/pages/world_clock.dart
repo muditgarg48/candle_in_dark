@@ -116,12 +116,12 @@ class WorldClockState extends State<WorldClock> {
                   ),
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
+                    labelText: "Search",
+                    labelStyle: TextStyle(
                       color: themeTxtColor(),
                     ),
-                    hintText: "Search",
-                    hintStyle: TextStyle(
+                    prefixIcon: Icon(
+                      Icons.search,
                       color: themeTxtColor(),
                     ),
                     suffixIcon: IconButton(
