@@ -36,7 +36,7 @@ class _MyDrawerState extends State<MyDrawer> {
         setState(() {
           currentI = index;
         });
-        MyHomePageState().setPageIndex(index, context);
+        MyHomePageState().setPageIndex(index);
       },
     );
   }

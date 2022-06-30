@@ -32,7 +32,7 @@ Widget myCard({
 }) {
   return Container(
     height: deviceHeight / 3,
-    padding: const EdgeInsets.all(17),
+    padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.all(7),
     width: deviceWidth,
     decoration: BoxDecoration(
