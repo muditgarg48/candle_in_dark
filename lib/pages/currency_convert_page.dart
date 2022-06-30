@@ -2,6 +2,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:candle_in_dark/widgets/theme_data.dart';
 
+import '../global_values.dart';
+import '../widgets/drawer.dart';
 import '../widgets/warning_dialogue.dart';
 import "package:flutter/material.dart";
 import 'package:currency_picker/currency_picker.dart' as pick;
@@ -533,7 +535,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      // drawer: myDrawer(context),
+      drawer: MyDrawer(currentPage: pages[3],),
       body: Container(
         color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),

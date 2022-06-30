@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:candle_in_dark/widgets/theme_data.dart';
-import 'package:candle_in_dark/widgets/toasts.dart';
+
+import '../widgets/theme_data.dart';
+import '../widgets/toasts.dart';
+import '../widgets/appBar.dart';
+import '../widgets/drawer.dart';
+import '../global_values.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // ignore: depend_on_referenced_packages
@@ -9,8 +14,6 @@ import 'package:http/http.dart';
 import 'package:analog_clock/analog_clock.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-import '../widgets/appBar.dart';
 
 class WorldClock extends StatefulWidget {
   const WorldClock({Key? key}) : super(key: key);
@@ -422,7 +425,7 @@ class WorldClockState extends State<WorldClock> {
     return Scaffold(
       key: ValueKey(themeBgColor()),
       extendBodyBehindAppBar: true,
-      // drawer: myDrawer(context),
+      drawer: MyDrawer(currentPage: pages[2]),
       body: Container(
         color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),

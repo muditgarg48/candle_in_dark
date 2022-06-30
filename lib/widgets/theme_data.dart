@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:candle_in_dark/global_values.dart';
+import '../global_values.dart';
 
 Color themeBgColor() {
   return isDark ? kToDark.shade600 : kToLight.shade600;
@@ -30,4 +30,17 @@ List<Color> themeShades() {
   return isDark
       ? [kToDark.shade400, kToDark.shade900]
       : [kToLight.shade50, kToLight.shade900];
+}
+
+void switchThemeMode(String choice) {
+  if (themeMode == ThemeMode.light) {
+    themeMode = ThemeMode.dark;
+    themeIcon = Icons.sunny;
+    isDark = true;
+  } else if (themeMode == ThemeMode.dark) {
+    themeMode = ThemeMode.light;
+    themeIcon = Icons.dark_mode;
+    isDark = false;
+  }
+  // displayTheme();
 }

@@ -1,9 +1,12 @@
 //Packages
 import 'package:flutter/material.dart';
 
+import '../global_values.dart';
+
 //Pages
 import '../widgets/appBar.dart';
 // import '../widgets/drawer.dart';
+import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
 
 class DummyPage extends StatelessWidget {
@@ -13,7 +16,9 @@ class DummyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      // drawer: myDrawer(context),
+      drawer: MyDrawer(
+        currentPage: pages[1],
+      ),
       body: Container(
         // padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         decoration: appBarDecor,
@@ -30,9 +35,6 @@ class DummyPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2,
             child: const LoadingPage(),
           ),
-          // body: const Center(
-          //   child: Text("Hi !"),
-          // ),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'theme_data.dart';
+import '../../widgets/theme_data.dart';
 
 class MyBottomNavbar1 extends StatelessWidget {
   const MyBottomNavbar1({
