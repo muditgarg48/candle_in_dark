@@ -1,5 +1,6 @@
 //Packages
 import "package:flutter/material.dart";
+import 'package:frankfurter/frankfurter.dart';
 
 //Pages
 import './pages/currency_convert_page.dart';
@@ -7,32 +8,42 @@ import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
 
 //Pages and their Classes
-var pages = const <Map<String, dynamic>>[
+var pages = <Map<String, dynamic>>[
   {
+    'route_name': 'dummy',
+    'route': (context) => DummyPage(),
     'class': DummyPage(),
     'labelName': "Dummy",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
   },
   {
+    'route_name': 'dummy',
+    'route': (context) => DummyPage(),
     'class': DummyPage(),
     'labelName': "Dummy",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
   },
   {
+    'route_name': 'world_clock',
+    'route': (context) => WorldClock(),
     'class': WorldClock(),
     'labelName': "World Clock",
     'active_icon': Icons.timer_sharp,
     'icon': Icons.timer_outlined,
   },
   {
+    'route_name': 'forex',
+    'route': (context) => CurrencyConvertorPage(),
     'class': CurrencyConvertorPage(),
     'labelName': "Forex",
     'active_icon': Icons.attach_money_sharp,
     'icon': Icons.attach_money_outlined,
   },
   {
+    'route': (context) => DummyPage(),
+    'route_name': 'dummy',
     'class': DummyPage(),
     'labelName': "Dummy",
     'active_icon': Icons.texture_sharp,

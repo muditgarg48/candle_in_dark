@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'index',
       routes: {
         'index': (context) => const MyHomePage(),
+        for (var page in pages) page['route_name']: page['route'],
       },
     );
   }
