@@ -49,7 +49,7 @@ class _MyDrawerState extends State<MyDrawer> {
           switchThemeMode("theme_change");
           // setState(() {});
           Navigator.pop(context);
-          Navigator.pushNamed(context, widget.currentPage["route_name"]);
+          Navigator.popAndPushNamed(context, widget.currentPage["route_name"]);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
