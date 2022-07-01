@@ -1,7 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../global_values.dart';
 import 'theme_data.dart';
@@ -91,7 +93,10 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget aboutMe() {
     return Center(
       child: TextButton(
-        onPressed: () {},
+        onPressed: () async {
+          const url = 'https://muditgarg48.github.io';
+          await launchUrlString(url, mode: LaunchMode.externalApplication);
+        },
         child: Text("Made by Mudit Garg",
             style: TextStyle(color: themeTxtColor())),
       ),
@@ -125,7 +130,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 title: Text(page["labelName"]),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, page["route_name"]);
+                  Navigator.popAndPushNamed(context, page["route_name"]);
                 },
               ),
             sectionDivider(),
