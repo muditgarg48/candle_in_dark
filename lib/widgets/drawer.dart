@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
