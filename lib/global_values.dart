@@ -1,58 +1,58 @@
 //Packages
 import "package:flutter/material.dart";
-import 'package:frankfurter/frankfurter.dart';
 
 //Pages
 import './pages/currency_convert_page.dart';
 import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
+import 'pages/about.dart';
 
 //Pages and their Classes
 var pages = <Map<String, dynamic>>[
   {
-    'route_name': 'dummy',
-    'route': (context) => DummyPage(),
-    'class': DummyPage(),
-    'labelName': "Dummy Page",
-    'active_icon': Icons.texture_sharp,
-    'icon': Icons.texture_outlined,
+    'route_name': 'about',
+    'route': (context) => const AboutPage(),
+    'class': const AboutPage(),
+    'labelName': "About Page",
+    'active_icon': Icons.info,
+    'icon': Icons.info_outlined,
   },
   {
     'route_name': 'dummy',
-    'route': (context) => DummyPage(),
-    'class': DummyPage(),
+    'route': (context) => const DummyPage(),
+    'class': const DummyPage(),
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
   },
   {
     'route_name': 'world_clock',
-    'route': (context) => WorldClock(),
-    'class': WorldClock(),
+    'route': (context) => const WorldClock(),
+    'class': const WorldClock(),
     'labelName': "World Clock",
     'active_icon': Icons.timer_sharp,
     'icon': Icons.timer_outlined,
   },
   {
     'route_name': 'forex',
-    'route': (context) => CurrencyConvertorPage(),
-    'class': CurrencyConvertorPage(),
+    'route': (context) => const CurrencyConvertorPage(),
+    'class': const CurrencyConvertorPage(),
     'labelName': "Currency Convertor",
     'active_icon': Icons.attach_money_sharp,
     'icon': Icons.attach_money_outlined,
   },
   {
     'route_name': 'dummy',
-    'route': (context) => DummyPage(),
-    'class': DummyPage(),
+    'route': (context) => const DummyPage(),
+    'class': const DummyPage(),
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
   },
   {
     'route_name': 'dummy',
-    'route': (context) => DummyPage(),
-    'class': DummyPage(),
+    'route': (context) => const DummyPage(),
+    'class': const DummyPage(),
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,

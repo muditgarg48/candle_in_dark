@@ -149,6 +149,7 @@ class WorldClockState extends State<WorldClock> {
                       });
                     }
                     setState(() => currentList = filterList(input));
+                    // ignore: invalid_use_of_protected_member
                     (context as Element).reassemble();
                   },
                   showCursor: true,
@@ -391,13 +392,13 @@ class WorldClockState extends State<WorldClock> {
     // printDetails();
   }
 
-  void printDetails() {
-    print("DIGITAL CLOCK: $isDigital");
-    print("TIME: $chosenTime");
-    print("TIMEZONE: $chosenTimezone");
-    print("OFFSET: $offset");
-    print("====================");
-  }
+  // void printDetails() {
+  //   print("DIGITAL CLOCK: $isDigital");
+  //   print("TIME: $chosenTime");
+  //   print("TIMEZONE: $chosenTimezone");
+  //   print("OFFSET: $offset");
+  //   print("====================");
+  // }
 
   dynamic clockFormatSwitcher() {
     return ConcentricPageView(

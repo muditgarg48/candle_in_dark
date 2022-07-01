@@ -1,4 +1,5 @@
-import 'package:candle_in_dark/pages/home_page.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 
@@ -6,8 +7,9 @@ import '../global_values.dart';
 import 'theme_data.dart';
 
 class MyDrawer extends StatefulWidget {
-  MyDrawer({required this.currentPage});
+  MyDrawer({Key? key, required this.currentPage}) : super(key: key);
 
+  // ignore: prefer_typing_uninitialized_variables
   var currentPage;
 
   @override

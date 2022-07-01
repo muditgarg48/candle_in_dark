@@ -1,13 +1,8 @@
 //Packages
-// import 'package:candle_in_dark/widgets/drawer.dart';
-import 'package:candle_in_dark/deprecated/deprecated%20widgets/bottom_navbar_deprecated.dart';
-import 'package:candle_in_dark/widgets/theme_data.dart';
 import "package:flutter/material.dart";
-import 'package:quds_ui_kit/animations/quds_animations.dart';
 
 //Variables
 import "../global_values.dart";
-import '../widgets/warning_dialogue.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

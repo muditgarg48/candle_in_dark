@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'toasts.dart';
 
+// ignore: must_be_immutable
 class WarningDialogue extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
   WarningDialogue({
@@ -77,7 +78,7 @@ class WarningDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
   }
 
   Future dialogueBox(BuildContext context) {
