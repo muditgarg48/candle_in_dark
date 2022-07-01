@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../global_values.dart';
+
 var appBarDecor = const BoxDecoration(
   borderRadius: BorderRadius.only(
     bottomLeft: Radius.circular(200),
@@ -23,10 +25,31 @@ class customSliver extends StatelessWidget {
     return Text(
       appBarTitle,
       style: TextStyle(
-        fontWeight: FontWeight.bold,
-        letterSpacing: 1.5,
-        color: themeButtonColor(),
-      ),
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.5,
+          color: themeButtonColor(),
+          shadows: [
+            Shadow(
+              // bottomLeft
+              offset: const Offset(-1.2, -1.2),
+              color: isDark ? Colors.grey : Colors.black,
+            ),
+            Shadow(
+              // bottomLeft
+              offset: const Offset(-1.2, -1.2),
+              color: isDark ? Colors.grey : Colors.black,
+            ),
+            Shadow(
+              // bottomLeft
+              offset: const Offset(-1.2, -1.2),
+              color: isDark ? Colors.grey : Colors.black,
+            ),
+            Shadow(
+              // bottomLeft
+              offset: const Offset(-1.2, -1.2),
+              color: isDark ? Colors.grey : Colors.black,
+            ),
+          ]),
     );
   }
 
