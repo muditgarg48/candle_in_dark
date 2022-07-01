@@ -40,7 +40,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
   Widget themeButton() {
     return Container(
-      margin: EdgeInsets.only(left: 30, right: 30),
+      margin: const EdgeInsets.only(left: 40, right: 40),
       child: ElevatedButton(
         onPressed: () {
           switchThemeMode("theme_change");
