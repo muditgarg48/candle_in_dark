@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:candle_in_dark/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,30 @@ class LoadingPage extends StatefulWidget {
 }
 
 class LoadingPageState extends State<LoadingPage> {
+  Widget fetchRandomLoadingAnimation({var color, var size}) {
+    var loadingAnimations = [
+      LoadingAnimationWidget.beat(color: color, size: size),
+      LoadingAnimationWidget.bouncingBall(color: color, size: size),
+      LoadingAnimationWidget.discreteCircle(color: color, size: size),
+      LoadingAnimationWidget.dotsTriangle(color: color, size: size),
+      LoadingAnimationWidget.fallingDot(color: color, size: size),
+      LoadingAnimationWidget.fourRotatingDots(color: color, size: size),
+      LoadingAnimationWidget.halfTriangleDot(color: color, size: size),
+      LoadingAnimationWidget.hexagonDots(color: color, size: size),
+      LoadingAnimationWidget.horizontalRotatingDots(color: color, size: size),
+      LoadingAnimationWidget.inkDrop(color: color, size: size),
+      LoadingAnimationWidget.newtonCradle(color: color, size: size),
+      LoadingAnimationWidget.prograssiveDots(color: color, size: size),
+      LoadingAnimationWidget.staggeredDotsWave(color: color, size: size),
+      LoadingAnimationWidget.stretchedDots(color: color, size: size),
+      LoadingAnimationWidget.threeArchedCircle(color: color, size: size),
+      LoadingAnimationWidget.threeRotatingDots(color: color, size: size),
+      LoadingAnimationWidget.twoRotatingArc(color: color, size: size),
+      LoadingAnimationWidget.waveDots(color: color, size: size),
+    ];
+    return loadingAnimations[Random().nextInt(loadingAnimations.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +47,7 @@ class LoadingPageState extends State<LoadingPage> {
         child: Container(
           padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
           child: Center(
-            child: LoadingAnimationWidget.fallingDot(
+            child: fetchRandomLoadingAnimation(
               color: themeTxtColor(),
               size: MediaQuery.of(context).size.height / 3,
             ),
