@@ -16,7 +16,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  int currentPageIndex = pages.length ~/ 2;
+  int currentPageIndex = 0;
 
   // void switchTheme(String choice) {
   //   setState(() {
