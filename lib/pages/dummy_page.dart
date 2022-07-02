@@ -1,13 +1,11 @@
 //Packages
 import 'package:flutter/material.dart';
 
-import '../global_values.dart';
-
-//Pages
 import '../widgets/appBar.dart';
-// import '../widgets/drawer.dart';
 import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
+
+import '../global_values.dart';
 
 class DummyPage extends StatelessWidget {
   const DummyPage({Key? key}) : super(key: key);

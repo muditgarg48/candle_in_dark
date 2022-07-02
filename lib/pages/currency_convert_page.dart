@@ -1,17 +1,17 @@
-// import 'package:candle_in_dark/widgets/drawer.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:candle_in_dark/tools/theme.dart';
-
-import '../global_values.dart';
-import '../widgets/drawer.dart';
-import '../widgets/warning_dialogue.dart';
 import "package:flutter/material.dart";
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:currency_picker/currency_picker.dart' as pick;
 import 'package:frankfurter/frankfurter.dart' as convert;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../tools/theme.dart';
+
+import '../widgets/drawer.dart';
+import '../widgets/warning_dialogue.dart';
 import '../widgets/appBar.dart';
 import '../widgets/toasts.dart';
+
+import '../global_values.dart';
 
 pick.Currency nullCurrency = pick.Currency(
   code: "XXX",

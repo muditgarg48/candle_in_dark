@@ -1,8 +1,10 @@
-import 'package:candle_in_dark/tools/fetch_json.dart';
 import 'package:flutter/material.dart';
 
 import '../global_values.dart';
+
+import '../tools/fetch_json.dart';
 import '../tools/launch_url.dart';
+
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
 
@@ -21,6 +23,16 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
     setState(() {
       impLinksJSON = retrievedData;
     });
+  }
+
+  Widget eachSection() {
+    return const Center(
+      child: Text(""),
+    );
+  }
+
+  Widget printSections() {
+    
   }
 
   Widget printThings() {
@@ -73,7 +85,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
           body: SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width / 2,
-            child: printThings(),
+            child: eachSection(),
           ),
         ),
       ),

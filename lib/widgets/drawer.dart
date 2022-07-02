@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../global_values.dart';
 import '../tools/theme.dart';
+
+import '../global_values.dart';
 
 class MyDrawer extends StatefulWidget {
   MyDrawer({Key? key, required this.currentPage}) : super(key: key);

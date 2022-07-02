@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:candle_in_dark/tools/theme.dart';
 import 'package:flutter/material.dart';
-
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../tools/theme.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);

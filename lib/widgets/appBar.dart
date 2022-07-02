@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-import '../global_values.dart';
-
 import '../tools/cache_items.dart';
 import '../tools/theme.dart';
+
+import '../global_values.dart';
 
 var appBarDecor = const BoxDecoration(
   borderRadius: BorderRadius.only(

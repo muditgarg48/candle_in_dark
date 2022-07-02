@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import './pages/home_page.dart';
 
 //Variables
-import 'global_values.dart';
+import './global_values.dart';
 
 //Widgets
 

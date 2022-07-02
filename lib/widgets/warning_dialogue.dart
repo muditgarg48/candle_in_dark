@@ -1,7 +1,8 @@
-import 'package:candle_in_dark/tools/theme.dart';
 import 'package:flutter/material.dart';
 
-import 'toasts.dart';
+import '../tools/theme.dart';
+
+import './toasts.dart';
 
 // ignore: must_be_immutable
 class WarningDialogue extends StatelessWidget {

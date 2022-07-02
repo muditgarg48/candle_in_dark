@@ -1,13 +1,10 @@
-//Packages
 import 'package:flutter/material.dart';
 
-import '../global_values.dart';
-
-//Pages
 import '../widgets/appBar.dart';
-// import '../widgets/drawer.dart';
 import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
+
+import '../global_values.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
