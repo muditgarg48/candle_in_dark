@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'theme_data.dart';
+import '../tools/theme.dart';
 import '../global_values.dart';
 
 var appBarDecor = const BoxDecoration(

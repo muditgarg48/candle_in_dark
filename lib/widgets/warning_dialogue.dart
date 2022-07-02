@@ -1,4 +1,4 @@
-import 'package:candle_in_dark/widgets/theme_data.dart';
+import 'package:candle_in_dark/tools/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'toasts.dart';

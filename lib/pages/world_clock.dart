@@ -1,16 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 
-import '../widgets/theme_data.dart';
+import '../global_values.dart';
+
+import '../tools/fetch_json.dart';
+import '../tools/theme.dart';
+import '../tools/filter_list.dart';
+
 import '../widgets/toasts.dart';
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
-import '../global_values.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// ignore: depend_on_referenced_packages
-import 'package:http/http.dart';
 import 'package:analog_clock/analog_clock.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -25,7 +26,7 @@ class WorldClock extends StatefulWidget {
 class WorldClockState extends State<WorldClock> {
   bool isDigital = true;
   DateTime chosenTime = DateTime.now();
-  String chosenTimezone = '';
+  String chosenTimezone = 'Loading ...';
   List availableTimezones = [];
   String offset = '';
   List currentList = [];
@@ -46,9 +47,7 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void initTimeZones() async {
-    Response response =
-        await get(Uri.parse('https://worldtimeapi.org/api/timezone'));
-    List data = jsonDecode(response.body);
+    List data = await fetchFromJSON('https://worldtimeapi.org/api/timezone');
     if (!mounted) return;
     setState(() {
       availableTimezones = data;
@@ -58,34 +57,38 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void initCurrentTimezone() async {
-    Response response = await get(Uri.parse('https://worldtimeapi.org/api/ip'));
-    Map data = jsonDecode(response.body);
-    setState(() {
-      chosenTimezone = data["timezone"];
-      chosenTime = DateTime.parse(data["datetime"]);
-      offset = data["utc_offset"];
-      if (offset[0] == '+') {
-        chosenTime.add(Duration(seconds: data["raw_offset"]));
-      } else if (offset[0] == '-') {
-        chosenTime.subtract(Duration(seconds: data["raw_offset"]));
-      }
-    });
+    Map data = await fetchFromJSON('https://worldtimeapi.org/api/ip');
+    // Response response = await get(Uri.parse('https://worldtimeapi.org/api/ip'));
+    // Map data = jsonDecode(response.body);
+    setTimeZone(
+      timeZone: data["timezone"],
+      dateTime: DateTime.parse(data["datetime"]),
+      offSet: data["utc_offset"],
+      offsetSeconds: data["raw_offset"],
+    );
     // printDetails();
   }
 
-  void resetTimeZone() async {
-    Response response = await get(Uri.parse('https://worldtimeapi.org/api/ip'));
-    Map data = jsonDecode(response.body);
+  void setTimeZone({
+    required String timeZone,
+    required DateTime dateTime,
+    required String offSet,
+    required int offsetSeconds,
+  }) {
     setState(() {
-      chosenTimezone = data["timezone"];
-      chosenTime = DateTime.parse(data["datetime"]);
-      offset = data["utc_offset"];
+      chosenTimezone = timeZone;
+      chosenTime = dateTime;
+      offset = offSet;
       if (offset[0] == '+') {
-        chosenTime.add(Duration(seconds: data["raw_offset"]));
+        chosenTime = chosenTime.add(Duration(seconds: offsetSeconds));
       } else if (offset[0] == '-') {
-        chosenTime.subtract(Duration(seconds: data["raw_offset"]));
+        chosenTime = chosenTime.subtract(Duration(seconds: offsetSeconds));
       }
     });
+  }
+
+  void resetTimeZone() async {
+    initCurrentTimezone();
     toast(
       context: context,
       msg: "Back to $chosenTimezone",
@@ -93,10 +96,17 @@ class WorldClockState extends State<WorldClock> {
     );
   }
 
-  List filterList(String searchTerm) {
-    return availableTimezones
-        .where((element) => element.toLowerCase().contains(searchTerm))
-        .toList();
+  void timeCalcByLocation(String location) async {
+    Map data =
+        await fetchFromJSON('https://worldtimeapi.org/api/timezone/$location');
+    if (!mounted) return;
+    setTimeZone(
+      timeZone: data["timezone"],
+      dateTime: DateTime.parse(data["datetime"]),
+      offSet: data["utc_offset"],
+      offsetSeconds: data["raw_offset"],
+    );
+    // printDetails();
   }
 
   Future chooseLocationSheet() {
@@ -148,7 +158,8 @@ class WorldClockState extends State<WorldClock> {
                         currentList = availableTimezones;
                       });
                     }
-                    setState(() => currentList = filterList(input));
+                    setState(() =>
+                        currentList = filterList(availableTimezones, input));
                     // ignore: invalid_use_of_protected_member
                     (context as Element).reassemble();
                   },
@@ -372,24 +383,6 @@ class WorldClockState extends State<WorldClock> {
         ],
       ),
     );
-  }
-
-  void timeCalcByLocation(String location) async {
-    Response response =
-        await get(Uri.parse('https://worldtimeapi.org/api/timezone/$location'));
-    Map data = jsonDecode(response.body);
-    if (!mounted) return;
-    setState(() {
-      chosenTimezone = data["timezone"];
-      chosenTime = DateTime.parse(data["datetime"]);
-      offset = data["utc_offset"];
-      if (offset[0] == '+') {
-        chosenTime = chosenTime.add(Duration(seconds: data["raw_offset"]));
-      } else if (offset[0] == '-') {
-        chosenTime = chosenTime.subtract(Duration(seconds: data["raw_offset"]));
-      }
-    });
-    // printDetails();
   }
 
   // void printDetails() {
