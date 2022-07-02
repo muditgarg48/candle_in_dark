@@ -5,11 +5,13 @@ import "package:flutter/material.dart";
 import './pages/currency_convert_page.dart';
 import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
-import 'pages/about.dart';
+import './pages/about.dart';
+import './pages/imp_links.dart';
 
 //Pages and their Classes
 var pages = <Map<String, dynamic>>[
   {
+    //0
     'route_name': 'about',
     'route': (context) => const AboutPage(),
     'class': const AboutPage(),
@@ -18,6 +20,7 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.info_outlined,
   },
   {
+    //1
     'route_name': 'dummy',
     'route': (context) => const DummyPage(),
     'class': const DummyPage(),
@@ -26,6 +29,7 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.texture_outlined,
   },
   {
+    //2
     'route_name': 'world_clock',
     'route': (context) => const WorldClock(),
     'class': const WorldClock(),
@@ -34,6 +38,7 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.timer_outlined,
   },
   {
+    //3
     'route_name': 'forex',
     'route': (context) => const CurrencyConvertorPage(),
     'class': const CurrencyConvertorPage(),
@@ -42,14 +47,16 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.attach_money_outlined,
   },
   {
+    //4
     'route_name': 'imp_links',
-    'route': (context) => const DummyPage(),
-    'class': const DummyPage(),
+    'route': (context) => const ImpLinksPage(),
+    'class': const ImpLinksPage(),
     'labelName': "Important Links",
     'active_icon': Icons.alternate_email,
     'icon': Icons.alternate_email_sharp,
   },
   {
+    //5
     'route_name': 'dummy',
     'route': (context) => const DummyPage(),
     'class': const DummyPage(),
