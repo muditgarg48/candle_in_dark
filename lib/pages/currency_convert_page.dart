@@ -6,6 +6,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../tools/theme.dart';
 
+import '../widgets/button.dart';
 import '../widgets/drawer.dart';
 import '../widgets/warning_dialogue.dart';
 import '../widgets/appBar.dart';
@@ -118,14 +119,8 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   }
 
   Widget updateCurr(String choice) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        primary: themeButtonColor(),
-        onPrimary: themeButtonTxtColor(),
-        elevation: 15,
-      ),
-      onPressed: () {
+    return myButton(
+      action: () {
         pick.showCurrencyPicker(
           context: context,
           showFlag: true,
@@ -146,7 +141,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           favorite: ['INR', 'EUR', 'USD', 'GBP'],
         );
       },
-      child: const Text("Choose"),
+      content: const Text("Choose"),
     );
   }
 
@@ -373,14 +368,8 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                primary: themeButtonColor(),
-                onPrimary: themeButtonTxtColor(),
-                elevation: 15,
-              ),
-              onPressed: () {
+            myButton(
+              action: () {
                 genAllForexRate();
                 genParticularForexRate();
                 toast(
@@ -389,7 +378,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
                   startI: Icons.refresh_outlined,
                 );
               },
-              child: Text(
+              content: Text(
                 "LIVE",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
