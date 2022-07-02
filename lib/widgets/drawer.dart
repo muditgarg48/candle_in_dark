@@ -102,6 +102,18 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
+  Widget version() {
+    return Center(
+      child: TextButton(
+        onPressed: () async {
+          const url = 'https://muditgarg48.github.io/candle_in_dark_web';
+          await launchUrlString(url, mode: LaunchMode.externalApplication);
+        },
+        child: Text("Version 1.0.0", style: TextStyle(color: themeTxtColor())),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -137,6 +149,10 @@ class _MyDrawerState extends State<MyDrawer> {
             themeButton(),
             sectionDivider(),
             aboutMe(),
+            const SizedBox(
+              height: 10,
+            ),
+            version(),
           ],
         ),
       ),

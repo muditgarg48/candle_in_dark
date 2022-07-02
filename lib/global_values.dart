@@ -42,12 +42,12 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.attach_money_outlined,
   },
   {
-    'route_name': 'dummy',
+    'route_name': 'imp_links',
     'route': (context) => const DummyPage(),
     'class': const DummyPage(),
-    'labelName': "Dummy Page",
-    'active_icon': Icons.texture_sharp,
-    'icon': Icons.texture_outlined,
+    'labelName': "Important Links",
+    'active_icon': Icons.alternate_email,
+    'icon': Icons.alternate_email_sharp,
   },
   {
     'route_name': 'dummy',

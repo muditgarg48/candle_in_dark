@@ -47,7 +47,7 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void initTimeZones() async {
-    List data = await fetchFromJSON('https://worldtimeapi.org/api/timezone');
+    List data = await fetchFromJSON_Online('https://worldtimeapi.org/api/timezone');
     if (!mounted) return;
     setState(() {
       availableTimezones = data;
@@ -57,7 +57,7 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void initCurrentTimezone() async {
-    Map data = await fetchFromJSON('https://worldtimeapi.org/api/ip');
+    Map data = await fetchFromJSON_Online('https://worldtimeapi.org/api/ip');
     // Response response = await get(Uri.parse('https://worldtimeapi.org/api/ip'));
     // Map data = jsonDecode(response.body);
     setTimeZone(
@@ -98,7 +98,7 @@ class WorldClockState extends State<WorldClock> {
 
   void timeCalcByLocation(String location) async {
     Map data =
-        await fetchFromJSON('https://worldtimeapi.org/api/timezone/$location');
+        await fetchFromJSON_Online('https://worldtimeapi.org/api/timezone/$location');
     if (!mounted) return;
     setTimeZone(
       timeZone: data["timezone"],
