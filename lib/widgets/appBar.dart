@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../tools/theme.dart';
 import '../global_values.dart';
+
+import '../tools/cache_items.dart';
+import '../tools/theme.dart';
 
 var appBarDecor = const BoxDecoration(
   borderRadius: BorderRadius.only(
@@ -55,14 +55,7 @@ class customSliver extends StatelessWidget {
   }
 
   dynamic backgroundImage() {
-    return CachedNetworkImage(
-      placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
-        color: themeTxtColor(),
-        size: MediaQuery.of(context).size.height / 10,
-      ),
-      imageUrl: appBarBG,
-      fit: BoxFit.cover,
-    );
+    return cacheImage(appBarBG);
   }
 
   @override
