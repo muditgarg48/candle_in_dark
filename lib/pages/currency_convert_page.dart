@@ -61,6 +61,7 @@ class CurrencyConvertorPage extends StatefulWidget {
 }
 
 class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
+
   //Variables
   pick.Currency fromCurrency = nullCurrency;
   pick.Currency toCurrency = nullCurrency;
@@ -534,10 +535,9 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const customSliver(
-              appBarTitle: "CURRENCY CONVERTOR",
-              appBarBG:
-                  "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
+            customSliver(
+              appBarTitle: features[1]["appBarTitle"],
+              appBarBG: features[1]["appBarBG"],
             ),
           ],
           body: ListView(

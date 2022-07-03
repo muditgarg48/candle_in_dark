@@ -21,10 +21,9 @@ class AboutPage extends StatelessWidget {
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const customSliver(
-              appBarTitle: "ABOUT",
-              appBarBG:
-                  "https://images.unsplash.com/photo-1565246075196-94d3995a0b37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+            customSliver(
+              appBarTitle: pages[0]["appBarTitle"],
+              appBarBG: pages[0]["appBarBG"],
             ),
           ],
           body: SizedBox(

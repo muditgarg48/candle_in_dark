@@ -20,6 +20,8 @@ var pages = <Map<String, dynamic>>[
     'labelName': "About Page",
     'active_icon': Icons.info,
     'icon': Icons.info_outlined,
+    'appBarTitle': "ABOUT",
+    'appBarBG': "https://images.unsplash.com/photo-1565246075196-94d3995a0b37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
   },
   {
     //1
@@ -29,6 +31,8 @@ var pages = <Map<String, dynamic>>[
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
+    'appBarTitle': "PLACEHOLDER PAGE",
+    'appBarBG': "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
   },
   {
     //2
@@ -38,6 +42,8 @@ var pages = <Map<String, dynamic>>[
     'labelName': "Important Links",
     'active_icon': Icons.alternate_email,
     'icon': Icons.alternate_email_sharp,
+    'appBarTitle': "IMPORTANT LINKS",
+    'appBarBG': "https://cdn.hswstatic.com/gif/web-addresses-english-orig.jpg",
   },
   {
     //3
@@ -47,6 +53,8 @@ var pages = <Map<String, dynamic>>[
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
+    'appBarTitle': "PLACEHOLDER PAGE",
+    'appBarBG': "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
   },
 ];
 
@@ -59,6 +67,8 @@ var features = <Map<String, dynamic>>[
     'labelName': "World Clock",
     'active_icon': Icons.timer_sharp,
     'icon': Icons.timer_outlined,
+    'appBarTitle': "WORLD CLOCK",
+    'appBarBG': "https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1167&q=80",
   },
   {
     //1
@@ -68,6 +78,8 @@ var features = <Map<String, dynamic>>[
     'labelName': "Currency Convertor",
     'active_icon': Icons.attach_money_sharp,
     'icon': Icons.attach_money_outlined,
+    'appBarTitle': "CURRENCY CONVERTOR",
+    'appBarBG': "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
   },
 ];
 

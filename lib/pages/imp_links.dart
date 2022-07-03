@@ -261,10 +261,9 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
         color: themeBgColor(),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const customSliver(
-              appBarTitle: "IMPORTANT LINKS",
-              appBarBG:
-                  "https://cdn.hswstatic.com/gif/web-addresses-english-orig.jpg",
+            customSliver(
+              appBarTitle: pages[2]["appBarTitle"],
+              appBarBG: pages[2]["appBarBG"],
             ),
           ],
           body: SizedBox(

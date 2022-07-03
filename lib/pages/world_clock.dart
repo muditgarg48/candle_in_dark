@@ -420,16 +420,17 @@ class WorldClockState extends State<WorldClock> {
     return Scaffold(
       key: ValueKey(themeBgColor()),
       extendBodyBehindAppBar: true,
-      drawer: MyDrawer(currentPage: features[0]),
+      drawer: MyDrawer(
+        currentPage: features[0],
+      ),
       body: Container(
         color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const customSliver(
-              appBarTitle: "WORLD CLOCK",
-              appBarBG:
-                  "https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1167&q=80",
+            customSliver(
+              appBarTitle: features[0]["appBarTitle"],
+              appBarBG: features[0]["appBarBG"],
             ),
           ],
           body: clockFormatSwitcher(),

@@ -22,10 +22,10 @@ class DummyPage extends StatelessWidget {
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const customSliver(
-              appBarTitle: "DUMMY PAGE",
+            customSliver(
+              appBarTitle: pages[1]["appBarTitle"],
               appBarBG:
-                  "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
+                  pages[1]["appBarBG"],
             ),
           ],
           body: const SizedBox.shrink(
