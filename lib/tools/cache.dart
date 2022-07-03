@@ -14,3 +14,9 @@ dynamic cacheImage(String imageLink) {
     fit: BoxFit.cover,
   );
 }
+
+// void clearImageCache() {
+//   for(int page in pages) {
+//   CachedNetworkImage.evictFromCache(page[""])
+//   }
+// }
