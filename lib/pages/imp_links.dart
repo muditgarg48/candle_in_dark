@@ -27,93 +27,44 @@ class ImpLinksPage extends StatefulWidget {
 class _ImpLinksPageState extends State<ImpLinksPage> {
   List impLinksJSON = [];
 
+  String singleSectionLinks = '';
+
   // ignore: non_constant_identifier_names
   void getJSON_Local() async {
     var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");
-    setState(() {
-      impLinksJSON = retrievedData;
-    });
+    setState(() => impLinksJSON = retrievedData);
   }
 
-  Widget singleSection(
-    String sectionHead,
-    List links,
-    List linkNames,
-    String imageURL,
-  ) {
-    return Card(
-      elevation: 20,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        bottomRight: Radius.circular(40),
-        bottomLeft: Radius.circular(40),
-      )),
-      margin: const EdgeInsets.all(5),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          cacheImage(imageURL),
-          ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(40)),
-                ),
-                padding: const EdgeInsets.all(2),
-                margin: const EdgeInsets.all(5),
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 1.1,
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(7),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 100,
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurStyle: BlurStyle.normal,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: ListView(
-                    children: [
-                      Text(
-                        sectionHead,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: themeTxtColor(),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height / 30),
-                      for (int i = 0; i < linkNames.length; i++)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            singleLink(linkNames[i], links[i]),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 30),
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+  void constructIntoTxt(String sectionHead, List links, List linkNames) {
+    String data = '';
+    data += sectionHead;
+    data += "\n======================================";
+    for (int i = 0; i < linkNames.length; i++) {
+      data += "\n${i + 1} => ${linkNames[i]}: ${links[i]}";
+    }
+    setState(() => singleSectionLinks = data);
+    Clipboard.setData(ClipboardData(text: singleSectionLinks));
+    toast(
+      context: context,
+      msg: "Section data copied!",
+      startI: Icons.copy,
     );
   }
 
-  // Widget printSections() {}
+  Widget copySectionData(String sectionHead, List links, List linkNames) {
+    return myButton(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: const [
+          Icon(Icons.assignment),
+          SizedBox(width: 5),
+          Text('Copy all Links'),
+        ],
+      ),
+      action: () => constructIntoTxt(sectionHead, links, linkNames),
+    );
+  }
+
   Widget singleOption({
     required String url,
     required VoidCallback action,
@@ -134,53 +85,140 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   }
 
   Widget singleLink(String name, String url) {
+    var options = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(width: 10),
+        singleOption(
+          url: url,
+          action: () => launchURL(url),
+          actionName: "Launch URL",
+          actionIcon: Icons.launch,
+        ),
+        SizedBox(width: MediaQuery.of(context).size.width / 50),
+        singleOption(
+          url: url,
+          action: () {
+            Clipboard.setData(ClipboardData(text: url));
+            toast(
+              context: context,
+              msg: "Link Copied",
+              startI: Icons.copy,
+            );
+          },
+          actionName: "Copy Link",
+          actionIcon: Icons.copy,
+        ),
+        SizedBox(width: MediaQuery.of(context).size.width / 50),
+      ],
+    );
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            name,
-            style: TextStyle(
-              color: themeTxtColor(),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          ExpandChild(
-            arrowColor: themeTxtColor(),
-            expandDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: 10),
-                singleOption(
-                  url: url,
-                  action: () => launchURL(url),
-                  actionName: "Launch URL",
-                  actionIcon: Icons.launch,
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width / 50),
-                singleOption(
-                  url: url,
-                  action: () {
-                    Clipboard.setData(ClipboardData(text: url));
-                    toast(
-                      context: context,
-                      msg: "Link Copied",
-                      startI: Icons.copy,
-                    );
-                  },
-                  actionName: "Copy Link",
-                  actionIcon: Icons.copy,
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width / 50),
-              ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 1.1,
+            height: MediaQuery.of(context).size.height / 15,
+            child: ListTile(
+              iconColor: themeTxtColor(),
+              enabled: url == '' ? false : true,
+              title: Text(name),
+              leading: const Icon(Icons.link),
+              textColor: themeTxtColor(),
+              trailing: url != ''
+                  ? ExpandChild(
+                      arrowColor: themeTxtColor(),
+                      expandDirection: Axis.horizontal,
+                      child: options,
+                    )
+                  : IconButton(
+                      color: themeTxtColor(),
+                      onPressed: () => toast(
+                          context: context,
+                          msg: "URL Missing!",
+                          startI: Icons.warning),
+                      icon: const Icon(Icons.warning_sharp),
+                    ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget singleSection(
+    String sectionHead,
+    List links,
+    List linkNames,
+    String imageURL,
+  ) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        cacheImage(imageURL),
+        ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              height: MediaQuery.of(context).size.height / 1.1,
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.all(3),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 100,
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurStyle: BlurStyle.normal,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: ListView(
+                children: [
+                  Text(
+                    sectionHead,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      // decoration: TextDecoration.underline,
+                      color: themeTxtColor(),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  for (int i = 0; i < linkNames.length; i++)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Divider(
+                          color: themeTxtColor(),
+                          endIndent: MediaQuery.of(context).size.width / 15,
+                          indent: MediaQuery.of(context).size.width / 15,
+                        ),
+                        singleLink(linkNames[i], links[i]),
+                      ],
+                    ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 20,
+                      left: MediaQuery.of(context).size.width / 4,
+                      right: MediaQuery.of(context).size.width / 4,
+                      bottom: 20,
+                    ),
+                    child: copySectionData(sectionHead, links, linkNames),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -193,7 +231,6 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
       // width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       initialPage: 0,
-      viewportFraction: 0.95,
       indicatorBottom: false,
       customizedBanners: [
         for (int sectionNum = 0; sectionNum < impLinksJSON.length; sectionNum++)
@@ -235,3 +272,55 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
     );
   }
 }
+
+  // Widget singleLink1(String name, String url) {
+  //   return SingleChildScrollView(
+  //     scrollDirection: Axis.horizontal,
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           name,
+  //           style: TextStyle(
+  //             color: themeTxtColor(),
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 17,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 10),
+  //         ExpandChild(
+  //           arrowColor: themeTxtColor(),
+  //           expandDirection: Axis.horizontal,
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               const SizedBox(width: 10),
+  //               singleOption(
+  //                 url: url,
+  //                 action: () => launchURL(url),
+  //                 actionName: "Launch URL",
+  //                 actionIcon: Icons.launch,
+  //               ),
+  //               SizedBox(width: MediaQuery.of(context).size.width / 50),
+  //               singleOption(
+  //                 url: url,
+  //                 action: () {
+  //                   Clipboard.setData(ClipboardData(text: url));
+  //                   toast(
+  //                     context: context,
+  //                     msg: "Link Copied",
+  //                     startI: Icons.copy,
+  //                   );
+  //                 },
+  //                 actionName: "Copy Link",
+  //                 actionIcon: Icons.copy,
+  //               ),
+  //               SizedBox(width: MediaQuery.of(context).size.width / 50),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
