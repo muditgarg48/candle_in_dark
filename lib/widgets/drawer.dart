@@ -31,7 +31,11 @@ class _MyDrawerState extends State<MyDrawer> {
           icon: Icon(Icons.home, color: themeTxtColor()),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+            if (widget.currentPage["route_name"] == "settings") return;
+            Navigator.pushNamed(context, 'settings');
+          },
           icon: Icon(Icons.settings, color: themeTxtColor()),
         ),
         IconButton(
@@ -48,7 +52,6 @@ class _MyDrawerState extends State<MyDrawer> {
       child: ElevatedButton(
         onPressed: () {
           switchThemeMode("theme_change");
-          // setState(() {});
           Navigator.pop(context);
           Navigator.popAndPushNamed(context, widget.currentPage["route_name"]);
         },
@@ -155,7 +158,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             sectionDivider(),
             options(),
-            themeButton(),
+            systemBasedTheme ? const SizedBox.shrink() : themeButton(),
             sectionDivider(),
             sectionText(
               txt: "Made by Mudit Garg",
