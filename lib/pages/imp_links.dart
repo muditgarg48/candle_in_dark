@@ -61,7 +61,12 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
           Text('Copy all Links'),
         ],
       ),
-      action: () => constructIntoTxt(sectionHead, links, linkNames),
+      // action: () => constructIntoTxt(sectionHead, links, linkNames),
+      action: () => toast(
+        context: context,
+        msg: "Coming Soon!",
+        startI: Icons.timer,
+      ),
     );
   }
 
