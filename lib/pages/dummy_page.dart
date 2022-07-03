@@ -28,10 +28,8 @@ class DummyPage extends StatelessWidget {
                   "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
             ),
           ],
-          body: SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 2,
-            child: const LoadingPage(),
+          body: const SizedBox.shrink(
+            child: LoadingPage(),
           ),
         ),
       ),

@@ -44,14 +44,23 @@ class LoadingPageState extends State<LoadingPage> {
         color: themeBgColor(),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Container(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
-          child: Center(
-            child: fetchRandomLoadingAnimation(
-              color: themeTxtColor(),
-              size: MediaQuery.of(context).size.height / 3,
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
+              child: Center(
+                child: fetchRandomLoadingAnimation(
+                  color: themeTxtColor(),
+                  size: MediaQuery.of(context).size.height / 3,
+                ),
+              ),
             ),
-          ),
+            const Center(
+                child: Text(
+              "Coming Soon ...",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )),
+          ],
         ),
       ),
     );
