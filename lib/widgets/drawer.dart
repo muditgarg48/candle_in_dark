@@ -93,7 +93,8 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
-  Widget sectionText({required String txt, required String link}) {
+  Widget sectionText(
+      {required String txt, required String link, double size = 14}) {
     return Center(
       child: TextButton(
         onPressed: () async {
@@ -103,7 +104,11 @@ class _MyDrawerState extends State<MyDrawer> {
             return;
           }
         },
-        child: Text(txt, style: TextStyle(color: themeTxtColor())),
+        child: Text(txt,
+            style: TextStyle(
+              color: themeTxtColor(),
+              fontSize: size,
+            )),
       ),
     );
   }
@@ -123,7 +128,7 @@ class _MyDrawerState extends State<MyDrawer> {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             picture(),
-            sectionText(txt: "Pages", link: ""),
+            sectionText(txt: "Pages", link: "", size: 17),
             for (var page in pages)
               ListTile(
                 enabled: page["labelName"] == widget.currentPage["labelName"]
@@ -140,7 +145,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 },
               ),
             sectionDivider(),
-            sectionText(txt: "Features", link: ""),
+            sectionText(txt: "Features", link: "", size: 17),
             for (var feature in features)
               ListTile(
                 enabled: feature["labelName"] == widget.currentPage["labelName"]

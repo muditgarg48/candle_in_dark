@@ -16,7 +16,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  
   SnackBar decisionDisplay(String txt) {
     return SnackBar(
       content: Text(txt, style: TextStyle(color: themeTxtColor())),
@@ -45,8 +44,64 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  Widget userDataRelated() {
+    return Container(
+      padding: const EdgeInsets.only(top: 13),
+      height: MediaQuery.of(context).size.height / 3.5,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: themeCardColor(),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 100,
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurStyle: BlurStyle.normal,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: ListView(
+        children: [
+          sectionHeading("Your Data Related"),
+          sectionDivider(),
+          const SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 6,
+              right: MediaQuery.of(context).size.width / 6,
+            ),
+            child: myButton(
+              content: const Text(
+                "Show your data gathered",
+                textAlign: TextAlign.center,
+              ),
+              action: () {},
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
   Widget appRelated() {
-    return Card(
+    return Container(
+      padding: const EdgeInsets.only(top: 13),
+      height: MediaQuery.of(context).size.height / 3,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: themeCardColor(),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 100,
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurStyle: BlurStyle.normal,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(30),
+      ),
       child: ListView(
         children: [
           sectionHeading("App Related"),
@@ -60,24 +115,26 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(color: themeTxtColor())),
                 const SizedBox(width: 10),
                 systemBasedTheme
-                    ? const Icon(Icons.brightness_auto)
-                    : const Icon(Icons.brightness_medium),
+                    ? Icon(Icons.brightness_auto, color: themeTxtColor())
+                    : Icon(Icons.brightness_medium, color: themeTxtColor()),
               ],
             ),
             trailing: Switch(
               activeColor: invertedThemeTxtColor(),
-              onChanged: (value) => setState(() {
-                systemBasedTheme = value;
-                SnackBar decision;
-                if (value == true) {
-                  decision =
-                      decisionDisplay("System based theme modes implemented");
-                } else {
-                  decision =
-                      decisionDisplay("App based theme modes implemented");
-                }
-                ScaffoldMessenger.of(context).showSnackBar(decision);
-              }),
+              onChanged: (value) => setState(
+                () {
+                  systemBasedTheme = value;
+                  SnackBar decision;
+                  if (value == true) {
+                    decision =
+                        decisionDisplay("System based theme modes implemented");
+                  } else {
+                    decision =
+                        decisionDisplay("App based theme modes implemented");
+                  }
+                  ScaffoldMessenger.of(context).showSnackBar(decision);
+                },
+              ),
               value: systemBasedTheme,
             ),
           ),
@@ -96,11 +153,12 @@ class _SettingsPageState extends State<SettingsPage> {
               right: MediaQuery.of(context).size.width / 2.5,
             ),
             child: myButton(
-                content: const Text(
-                  "Check for updates",
-                  textAlign: TextAlign.center,
-                ),
-                action: () {}),
+              content: const Text(
+                "Check for updates",
+                textAlign: TextAlign.center,
+              ),
+              action: () {},
+            ),
           ),
           const SizedBox(height: 10),
           Padding(
@@ -137,7 +195,19 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ],
           // body: const Center(child: Text("Hello!")),
-          body: appRelated(),
+          body: Container(
+            padding: const EdgeInsets.all(15),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: themeBgColor(),
+            child: ListView(
+              children: [
+                userDataRelated(),
+                const SizedBox(height: 20),
+                appRelated(),
+              ],
+            ),
+          ),
         ),
       ),
     );
