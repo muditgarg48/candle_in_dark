@@ -16,6 +16,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  
   SnackBar decisionDisplay(String txt) {
     return SnackBar(
       content: Text(txt, style: TextStyle(color: themeTxtColor())),
@@ -51,29 +52,6 @@ class _SettingsPageState extends State<SettingsPage> {
           sectionHeading("App Related"),
           sectionDivider(),
           const SizedBox(height: 10),
-          SingleChildScrollView(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                myButton(content: const Text("Clear cache"), action: () {}),
-                myButton(content: const Text("Clear your data"), action: () {}),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 6,
-              right: MediaQuery.of(context).size.width / 6,
-            ),
-            child: myButton(
-                content: const Text(
-                  "Check for updates",
-                  textAlign: TextAlign.center,
-                ),
-                action: () {}),
-          ),
-          const SizedBox(height: 20),
           ListTile(
             enabled: false,
             title: Row(
@@ -102,6 +80,40 @@ class _SettingsPageState extends State<SettingsPage> {
               }),
               value: systemBasedTheme,
             ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              myButton(content: const Text("Clear cache"), action: () {}),
+              myButton(content: const Text("Clear your data"), action: () {}),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 6,
+              right: MediaQuery.of(context).size.width / 2.5,
+            ),
+            child: myButton(
+                content: const Text(
+                  "Check for updates",
+                  textAlign: TextAlign.center,
+                ),
+                action: () {}),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 2.5,
+              right: MediaQuery.of(context).size.width / 6,
+            ),
+            child: myButton(
+                content: const Text(
+                  "Report a bug",
+                  textAlign: TextAlign.center,
+                ),
+                action: () {}),
           ),
         ],
       ),
