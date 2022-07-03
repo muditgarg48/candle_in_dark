@@ -32,10 +32,10 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
 
   String singleSectionLinks = '';
 
-  void getJSON_Local() async {
-    var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");
-    setState(() => impLinksJSON = retrievedData);
-  }
+  // void getJSON_Local() async {
+  //   var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");
+  //   setState(() => impLinksJSON = retrievedData);
+  // }
 
   void setJSON_FireBase() async {
     var temp = await getJSON(linkFromRoot: "json/imp_links.json");
