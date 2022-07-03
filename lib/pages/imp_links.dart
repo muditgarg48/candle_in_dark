@@ -158,7 +158,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        cacheImage(imageURL),
+        isDark ? const SizedBox.shrink() : cacheImage(imageURL),
         ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
