@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "735354648960",
+    "project_id": "candle-in-dark",
+    "storage_bucket": "candle-in-dark.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735354648960:android:d57bcad629db272651a965",
+        "android_client_info": {
+          "package_name": "com.example.candle_in_dark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735354648960-i3u9pcodf16kin9fdgpb2itlog408b76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0-JMEAjed-SEuvg4eS0OpRBzCClnDy6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735354648960-i3u9pcodf16kin9fdgpb2itlog408b76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

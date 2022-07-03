@@ -1,5 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ui';
 
+import 'package:candle_in_dark/firebase/firebase_access.dart';
 import 'package:flutter/material.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:banner_carousel/banner_carousel.dart';
@@ -29,10 +32,14 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
 
   String singleSectionLinks = '';
 
-  // ignore: non_constant_identifier_names
   void getJSON_Local() async {
     var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");
     setState(() => impLinksJSON = retrievedData);
+  }
+
+  void setJSON_FireBase() async {
+    var temp = await getJSON(linkFromRoot: "json/imp_links.json");
+    setState(() => impLinksJSON = temp);
   }
 
   void constructIntoTxt(String sectionHead, List links, List linkNames) {
@@ -228,7 +235,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   }
 
   Widget differentSections() {
-    getJSON_Local();
+    setJSON_FireBase();
     return BannerCarousel.fullScreen(
       animation: true,
       activeColor: themeBgColor(),
