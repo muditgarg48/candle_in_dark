@@ -172,10 +172,10 @@ class _MyDrawerState extends State<MyDrawer> {
             const SizedBox(
               height: 10,
             ),
-            sectionText(
-              txt: "Version $versionNumber",
-              link: 'https://muditgarg48.github.io/candle_in_dark_web',
-            ),
+            // sectionText(
+            //   txt: "Version $versionNumber",
+            //   link: 'https://muditgarg48.github.io/candle_in_dark_web',
+            // ),
           ],
         ),
       ),

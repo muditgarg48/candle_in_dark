@@ -205,6 +205,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 userDataRelated(),
                 const SizedBox(height: 20),
                 appRelated(),
+                const SizedBox(height: 20),
+                Text("v$versionNumber", textAlign: TextAlign.center),
               ],
             ),
           ),
