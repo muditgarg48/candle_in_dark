@@ -8,6 +8,8 @@ import './pages/dummy_page.dart';
 import './pages/about.dart';
 import './pages/imp_links.dart';
 
+String versionNumber = "1.0.0";
+
 //Pages and their Classes
 var pages = <Map<String, dynamic>>[
   {
@@ -30,24 +32,6 @@ var pages = <Map<String, dynamic>>[
   },
   {
     //2
-    'route_name': 'world_clock',
-    'route': (context) => const WorldClock(),
-    'class': const WorldClock(),
-    'labelName': "World Clock",
-    'active_icon': Icons.timer_sharp,
-    'icon': Icons.timer_outlined,
-  },
-  {
-    //3
-    'route_name': 'forex',
-    'route': (context) => const CurrencyConvertorPage(),
-    'class': const CurrencyConvertorPage(),
-    'labelName': "Currency Convertor",
-    'active_icon': Icons.attach_money_sharp,
-    'icon': Icons.attach_money_outlined,
-  },
-  {
-    //4
     'route_name': 'imp_links',
     'route': (context) => const ImpLinksPage(),
     'class': const ImpLinksPage(),
@@ -56,13 +40,34 @@ var pages = <Map<String, dynamic>>[
     'icon': Icons.alternate_email_sharp,
   },
   {
-    //5
+    //3
     'route_name': 'dummy',
     'route': (context) => const DummyPage(),
     'class': const DummyPage(),
     'labelName': "Dummy Page",
     'active_icon': Icons.texture_sharp,
     'icon': Icons.texture_outlined,
+  },
+];
+
+var features = <Map<String, dynamic>>[
+  {
+    //0
+    'route_name': 'world_clock',
+    'route': (context) => const WorldClock(),
+    'class': const WorldClock(),
+    'labelName': "World Clock",
+    'active_icon': Icons.timer_sharp,
+    'icon': Icons.timer_outlined,
+  },
+  {
+    //1
+    'route_name': 'forex',
+    'route': (context) => const CurrencyConvertorPage(),
+    'class': const CurrencyConvertorPage(),
+    'labelName': "Currency Convertor",
+    'active_icon': Icons.attach_money_sharp,
+    'icon': Icons.attach_money_outlined,
   },
 ];
 

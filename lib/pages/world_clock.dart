@@ -47,7 +47,8 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void initTimeZones() async {
-    List data = await fetchFromJSON_Online('https://worldtimeapi.org/api/timezone');
+    List data =
+        await fetchFromJSON_Online('https://worldtimeapi.org/api/timezone');
     if (!mounted) return;
     setState(() {
       availableTimezones = data;
@@ -97,8 +98,8 @@ class WorldClockState extends State<WorldClock> {
   }
 
   void timeCalcByLocation(String location) async {
-    Map data =
-        await fetchFromJSON_Online('https://worldtimeapi.org/api/timezone/$location');
+    Map data = await fetchFromJSON_Online(
+        'https://worldtimeapi.org/api/timezone/$location');
     if (!mounted) return;
     setTimeZone(
       timeZone: data["timezone"],
@@ -419,7 +420,7 @@ class WorldClockState extends State<WorldClock> {
     return Scaffold(
       key: ValueKey(themeBgColor()),
       extendBodyBehindAppBar: true,
-      drawer: MyDrawer(currentPage: pages[2]),
+      drawer: MyDrawer(currentPage: features[0]),
       body: Container(
         color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),

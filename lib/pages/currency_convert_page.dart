@@ -527,7 +527,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
-        currentPage: pages[3],
+        currentPage: features[1],
       ),
       body: Container(
         color: themeBgColor(),

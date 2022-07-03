@@ -85,32 +85,22 @@ class _MyDrawerState extends State<MyDrawer> {
       borderRadius: const BorderRadius.only(topRight: Radius.circular(40)),
       child: Image.asset(
         "assets/imgs/trinity.jpg",
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }
 
-  Widget aboutMe() {
+  Widget sectionText({required String txt, required String link}) {
     return Center(
       child: TextButton(
         onPressed: () async {
-          const url = 'https://muditgarg48.github.io';
-          await launchUrlString(url, mode: LaunchMode.externalApplication);
+          if (link != '') {
+            await launchUrlString(link, mode: LaunchMode.externalApplication);
+          } else {
+            return;
+          }
         },
-        child: Text("Made by Mudit Garg",
-            style: TextStyle(color: themeTxtColor())),
-      ),
-    );
-  }
-
-  Widget version() {
-    return Center(
-      child: TextButton(
-        onPressed: () async {
-          const url = 'https://muditgarg48.github.io/candle_in_dark_web';
-          await launchUrlString(url, mode: LaunchMode.externalApplication);
-        },
-        child: Text("Version 1.0.0", style: TextStyle(color: themeTxtColor())),
+        child: Text(txt, style: TextStyle(color: themeTxtColor())),
       ),
     );
   }
@@ -130,6 +120,7 @@ class _MyDrawerState extends State<MyDrawer> {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             picture(),
+            sectionText(txt: "Pages", link: ""),
             for (var page in pages)
               ListTile(
                 enabled: page["labelName"] == widget.currentPage["labelName"]
@@ -146,14 +137,37 @@ class _MyDrawerState extends State<MyDrawer> {
                 },
               ),
             sectionDivider(),
+            sectionText(txt: "Features", link: ""),
+            for (var feature in features)
+              ListTile(
+                enabled: feature["labelName"] == widget.currentPage["labelName"]
+                    ? false
+                    : true,
+                tileColor: themeBgColor(),
+                iconColor: themeTxtColor(),
+                textColor: themeTxtColor(),
+                leading: Icon(feature["icon"]),
+                title: Text(feature["labelName"]),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.popAndPushNamed(context, feature["route_name"]);
+                },
+              ),
+            sectionDivider(),
             options(),
             themeButton(),
             sectionDivider(),
-            aboutMe(),
+            sectionText(
+              txt: "Made by Mudit Garg",
+              link: 'https://muditgarg48.github.io',
+            ),
             const SizedBox(
               height: 10,
             ),
-            version(),
+            sectionText(
+              txt: "Version $versionNumber",
+              link: 'https://muditgarg48.github.io/candle_in_dark_web',
+            ),
           ],
         ),
       ),
