@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import './pages/home_page.dart';
+import 'package:flutter/services.dart';
 
 import './global_values.dart';
 
@@ -14,27 +13,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
+  void setDeviceOrientation() => SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
 
   @override
   Widget build(BuildContext context) {
+    setDeviceOrientation();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Candle in Dark',
-      theme: ThemeData(
-        primarySwatch: kToLight,
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: kToDark,
-      ),
+      theme: ThemeData(primarySwatch: kToLight),
+      darkTheme: ThemeData(primarySwatch: kToDark),
       themeMode: themeMode,
       initialRoute: 'index',
-      routes: {
-        'index': (context) => const MyHomePage(),
-        for (var page in pages) page['route_name']: page['route'],
-        for (var feature in features) feature['route_name']: feature['route'],
-        settings["route_name"]: settings['route'],
-      },
+      routes: appRoutes,
     );
   }
 }
