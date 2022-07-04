@@ -113,8 +113,39 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
+  Widget sectionBuilder({required dynamic section, required String name}) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          sectionDivider(),
+          sectionText(txt: name, link: "", size: 17),
+          for (var sectionItem in section)
+            ListTile(
+              enabled:
+                  sectionItem["labelName"] == widget.currentPage["labelName"]
+                      ? false
+                      : true,
+              tileColor: themeBgColor(),
+              iconColor: themeTxtColor(),
+              textColor: themeTxtColor(),
+              leading: Icon(sectionItem["icon"]),
+              title: Text(sectionItem["labelName"]),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, sectionItem["route_name"]);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    double drawerWidth = MediaQuery.of(context).size.width / 1.1;
+    if ((MediaQuery.of(context).size.width / 1.1) > 500) {
+      drawerWidth = 500;
+    }
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topRight: Radius.circular(40),
@@ -123,44 +154,13 @@ class _MyDrawerState extends State<MyDrawer> {
       child: Drawer(
         backgroundColor: themeBgColor(),
         elevation: 20,
-        width: MediaQuery.of(context).size.width / 1.1,
+        width: drawerWidth,
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             picture(),
-            sectionText(txt: "Pages", link: "", size: 17),
-            for (var page in pages)
-              ListTile(
-                enabled: page["labelName"] == widget.currentPage["labelName"]
-                    ? false
-                    : true,
-                tileColor: themeBgColor(),
-                iconColor: themeTxtColor(),
-                textColor: themeTxtColor(),
-                leading: Icon(page["icon"]),
-                title: Text(page["labelName"]),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.popAndPushNamed(context, page["route_name"]);
-                },
-              ),
-            sectionDivider(),
-            sectionText(txt: "Features", link: "", size: 17),
-            for (var feature in features)
-              ListTile(
-                enabled: feature["labelName"] == widget.currentPage["labelName"]
-                    ? false
-                    : true,
-                tileColor: themeBgColor(),
-                iconColor: themeTxtColor(),
-                textColor: themeTxtColor(),
-                leading: Icon(feature["icon"]),
-                title: Text(feature["labelName"]),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.popAndPushNamed(context, feature["route_name"]);
-                },
-              ),
+            sectionBuilder(section: pages, name: "Pages"),
+            sectionBuilder(section: features, name: "Features"),
             sectionDivider(),
             options(),
             systemBasedTheme ? const SizedBox.shrink() : themeButton(),
@@ -169,13 +169,6 @@ class _MyDrawerState extends State<MyDrawer> {
               txt: "Made by Mudit Garg",
               link: 'https://muditgarg48.github.io',
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            // sectionText(
-            //   txt: "Version $versionNumber",
-            //   link: 'https://muditgarg48.github.io/candle_in_dark_web',
-            // ),
           ],
         ),
       ),
