@@ -24,12 +24,11 @@ class DummyPage extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             customSliver(
               appBarTitle: pages[1]["appBarTitle"],
-              appBarBG:
-                  pages[1]["appBarBG"],
+              appBarBG: pages[1]["appBarBG"],
             ),
           ],
           body: const SizedBox.shrink(
-            child: LoadingPage(),
+            child: LoadingPage(display: "Coming Soon ..."),
           ),
         ),
       ),

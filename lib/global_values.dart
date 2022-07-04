@@ -7,6 +7,7 @@ import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
 import './pages/about.dart';
 import './pages/imp_links.dart';
+import 'pages/home_page.dart';
 import 'pages/settings.dart';
 
 String versionNumber = "1.0.0";
@@ -103,6 +104,13 @@ var settings = <String, dynamic>{
   'appBarBG':
       "https://clipart.world/wp-content/uploads/2020/08/gears-setting-icon-png-transparent.png",
 };
+
+var appRoutes = <String, Widget Function(BuildContext)>{
+    'index': (context) => const MyHomePage(),
+    for (var page in pages) page['route_name']: page['route'],
+    for (var feature in features) feature['route_name']: feature['route'],
+    settings["route_name"]: settings['route'],
+  };
 
 //Theme Variables
 ThemeMode themeMode = ThemeMode.light;

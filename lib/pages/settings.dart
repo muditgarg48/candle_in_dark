@@ -18,10 +18,19 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   SnackBar decisionDisplay(String txt) {
     return SnackBar(
-      content: Text(txt, style: TextStyle(color: themeTxtColor())),
+      content: Text(
+        txt,
+        style: TextStyle(color: themeTxtColor()),
+        textAlign: TextAlign.center,
+      ),
       backgroundColor: themeBgColor(),
       duration: const Duration(seconds: 1, milliseconds: 50),
     );
+  }
+
+  void showComingSoonSnackBar() {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(decisionDisplay("Coming Soon ..."));
   }
 
   Widget sectionHeading(String heading) {
@@ -46,6 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget userDataRelated() {
     return Container(
+      margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.only(top: 13),
       height: MediaQuery.of(context).size.height / 3.5,
       width: MediaQuery.of(context).size.width,
@@ -73,10 +83,10 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             child: myButton(
               content: const Text(
-                "Show your data gathered",
+                "Show your data accumulated!",
                 textAlign: TextAlign.center,
               ),
-              action: () {},
+              action: () => showComingSoonSnackBar(),
             ),
           ),
           const SizedBox(height: 10),
@@ -87,6 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget appRelated() {
     return Container(
+      margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.only(top: 13),
       height: MediaQuery.of(context).size.height / 3,
       width: MediaQuery.of(context).size.width,
@@ -126,8 +137,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   systemBasedTheme = value;
                   SnackBar decision;
                   if (value == true) {
-                    decision =
-                        decisionDisplay("System based theme modes implemented");
+                    decision = decisionDisplay(
+                        "System based theme modes implementation: Coming soon ...");
                   } else {
                     decision =
                         decisionDisplay("App based theme modes implemented");
@@ -142,8 +153,12 @@ class _SettingsPageState extends State<SettingsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              myButton(content: const Text("Clear cache"), action: () {}),
-              myButton(content: const Text("Clear your data"), action: () {}),
+              myButton(
+                  content: const Text("Clear cache"),
+                  action: () => showComingSoonSnackBar()),
+              myButton(
+                  content: const Text("Clear your data"),
+                  action: () => showComingSoonSnackBar()),
             ],
           ),
           const SizedBox(height: 10),
@@ -157,7 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 "Check for updates",
                 textAlign: TextAlign.center,
               ),
-              action: () {},
+              action: () => showComingSoonSnackBar(),
             ),
           ),
           const SizedBox(height: 10),
@@ -171,7 +186,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   "Report a bug",
                   textAlign: TextAlign.center,
                 ),
-                action: () {}),
+                action: () => showComingSoonSnackBar()),
           ),
         ],
       ),
@@ -196,7 +211,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
           // body: const Center(child: Text("Hello!")),
           body: Container(
-            padding: const EdgeInsets.all(15),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             color: themeBgColor(),
@@ -206,7 +220,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(height: 20),
                 appRelated(),
                 const SizedBox(height: 20),
-                Text("v$versionNumber", textAlign: TextAlign.center),
+                Text(
+                  "v$versionNumber",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: themeTxtColor()),
+                ),
               ],
             ),
           ),

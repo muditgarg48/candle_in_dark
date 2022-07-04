@@ -6,7 +6,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../tools/theme.dart';
 
 class LoadingPage extends StatefulWidget {
-  const LoadingPage({Key? key}) : super(key: key);
+  const LoadingPage({Key? key, required this.display}) : super(key: key);
+
+  final String display;
 
   @override
   State<LoadingPage> createState() => LoadingPageState();
@@ -55,10 +57,10 @@ class LoadingPageState extends State<LoadingPage> {
                 ),
               ),
             ),
-            const Center(
+            Center(
                 child: Text(
-              "Coming Soon ...",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              widget.display,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )),
           ],
         ),
