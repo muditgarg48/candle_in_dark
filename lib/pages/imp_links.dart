@@ -2,11 +2,13 @@
 
 import 'dart:ui';
 
-import 'package:candle_in_dark/firebase/firebase_access.dart';
+import 'package:candle_in_dark/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:banner_carousel/banner_carousel.dart';
-import 'package:flutter/services.dart';
+
+import '../firebase/firebase_access.dart';
 
 import '../global_values.dart';
 
@@ -30,6 +32,12 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   List impLinksJSON = [];
 
   String singleSectionLinks = '';
+
+  @override
+  void initState() {
+    initialiseFirebase();
+    super.initState();
+  }
 
   // void getJSON_Local() async {
   //   var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");
@@ -235,24 +243,28 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
 
   Widget differentSections() {
     setJSON_FireBase();
-    return BannerCarousel.fullScreen(
-      animation: true,
-      activeColor: themeBgColor(),
-      disableColor: invertedThemeTxtColor(),
-      // width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      initialPage: 0,
-      indicatorBottom: false,
-      customizedBanners: [
-        for (int sectionNum = 0; sectionNum < impLinksJSON.length; sectionNum++)
-          singleSection(
-            impLinksJSON[sectionNum]["name"],
-            impLinksJSON[sectionNum]["links"],
-            impLinksJSON[sectionNum]["link_names"],
-            impLinksJSON[sectionNum]["photo_link"],
-          ),
-      ],
-    );
+    return impLinksJSON.isEmpty
+        ? const LoadingPage()
+        : BannerCarousel.fullScreen(
+            animation: true,
+            activeColor: themeBgColor(),
+            disableColor: invertedThemeTxtColor(),
+            // width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            initialPage: 0,
+            indicatorBottom: false,
+            customizedBanners: [
+              for (int sectionNum = 0;
+                  sectionNum < impLinksJSON.length;
+                  sectionNum++)
+                singleSection(
+                  impLinksJSON[sectionNum]["name"],
+                  impLinksJSON[sectionNum]["links"],
+                  impLinksJSON[sectionNum]["link_names"],
+                  impLinksJSON[sectionNum]["photo_link"],
+                ),
+            ],
+          );
   }
 
   @override

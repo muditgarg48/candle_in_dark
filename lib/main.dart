@@ -1,8 +1,4 @@
-//Packages
 import 'package:flutter/material.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase/firebase_options.dart';
 
 import './pages/home_page.dart';
 
@@ -18,15 +14,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void initialiseFirebase() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    ).whenComplete(() => print("FireBase Initialised!"));
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    initialiseFirebase();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Candle in Dark',
