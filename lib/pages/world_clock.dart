@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:analog_clock/analog_clock.dart';
 import 'package:concentric_transition/concentric_transition.dart';
@@ -63,9 +64,9 @@ class WorldClockState extends State<WorldClock> {
     // Map data = jsonDecode(response.body);
     setTimeZone(
       timeZone: data["timezone"],
-      dateTime: DateTime.parse(data["datetime"]),
-      offSet: data["utc_offset"],
+      dateTime: DateTime.parse(data["utc_datetime"]),
       offsetSeconds: data["raw_offset"],
+      dst: data["dst_offset"],
     );
     // printDetails();
   }
@@ -73,18 +74,13 @@ class WorldClockState extends State<WorldClock> {
   void setTimeZone({
     required String timeZone,
     required DateTime dateTime,
-    required String offSet,
     required int offsetSeconds,
+    required int dst,
   }) {
     setState(() {
       chosenTimezone = timeZone;
       chosenTime = dateTime;
-      offset = offSet;
-      if (offset[0] == '+') {
-        chosenTime = chosenTime.add(Duration(seconds: offsetSeconds));
-      } else if (offset[0] == '-') {
-        chosenTime = chosenTime.subtract(Duration(seconds: offsetSeconds));
-      }
+      chosenTime = chosenTime.add(Duration(seconds: offsetSeconds + dst));
     });
   }
 
@@ -103,9 +99,9 @@ class WorldClockState extends State<WorldClock> {
     if (!mounted) return;
     setTimeZone(
       timeZone: data["timezone"],
-      dateTime: DateTime.parse(data["datetime"]),
-      offSet: data["utc_offset"],
+      dateTime: DateTime.parse(data["utc_datetime"]),
       offsetSeconds: data["raw_offset"],
+      dst: data["dst_offset"],
     );
     // printDetails();
   }
@@ -114,15 +110,15 @@ class WorldClockState extends State<WorldClock> {
     var searchController = TextEditingController();
     currentList = availableTimezones;
     return showBarModalBottomSheet(
-      backgroundColor: themeBgColor(),
+      // backgroundColor: themeBgColor(),
       context: context,
       builder: (c) => ListView.builder(
         itemCount: currentList.length + 1,
         itemBuilder: (context, index) => index == 0
             ? Container(
                 color: themeBgColor(),
-                margin: const EdgeInsets.all(8.0),
                 child: TextField(
+                  inputFormatters: [FilteringTextInputFormatter.deny(' ')],
                   cursorColor: themeTxtColor(),
                   controller: searchController,
                   style: TextStyle(
@@ -167,25 +163,23 @@ class WorldClockState extends State<WorldClock> {
                   showCursor: true,
                 ),
               )
-            : Card(
-                color: themeBgColor(),
-                child: ListTile(
-                  title: Text(
-                    currentList[index - 1],
-                    style: TextStyle(
-                      color: invertedThemeTxtColor(),
-                      fontWeight: chosenTimezone == currentList[index - 1]
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                    ),
+            : ListTile(
+                title: Text(
+                  currentList[index - 1],
+                  style: TextStyle(
+                    color: invertedThemeTxtColor(),
+                    fontWeight: chosenTimezone == currentList[index - 1]
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                   ),
-                  onTap: () {
-                    // print("User chose ${availableTimezones[index]}");
-                    timeCalcByLocation(currentList[index - 1]);
-                    Navigator.pop(context);
-                    // (context as Element).reassemble();
-                  },
                 ),
+                tileColor: themeBgColor(),
+                onTap: () {
+                  // print("User chose ${availableTimezones[index]}");
+                  timeCalcByLocation(currentList[index - 1]);
+                  Navigator.pop(context);
+                  // (context as Element).reassemble();
+                },
               ),
       ),
       enableDrag: true,
