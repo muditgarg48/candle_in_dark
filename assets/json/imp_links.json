@@ -71,11 +71,13 @@
         "name":"Thapar Institute IEP Program",
         "link_names": [
             "IEP Official Website",
-            "Thapar Programs"
+            "Thapar Programs",
+            "Student Portal"
         ],
         "links":[
             "https://iep.thapar.edu/",
-            "https://www.thapar.edu/programmes"
+            "https://www.thapar.edu/programmes",
+            "https://webkiosk.thapar.edu/index.jsp"
         ],
         "photo_link":"https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/large_jpg/-_Featured_Image.jpg?1542688591"
     }
