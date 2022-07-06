@@ -7,6 +7,7 @@
             "Previous Years' Exam papers",
             "School of Computer Science and Statistics",
             "Student Guide",
+            "Trinity Study",
             "Arrival",
             "Talk to students",
             "IT Services",    
@@ -22,6 +23,7 @@
             "https://student-learning.tcd.ie/learning-resources/exams/exam-papers/",
             "https://teaching.scss.tcd.ie/",
             "https://www.tcd.ie/students/",
+            "https://www.tcd.ie/study/",
             "https://www.tcd.ie/students/your-arrival-sept-2021/",
             "https://www.tcd.ie/global/talktostudents/",
             "https://www.tcd.ie/itservices",
@@ -71,13 +73,13 @@
         "name":"Thapar Institute IEP Program",
         "link_names": [
             "IEP Official Website",
-            "Thapar Programs",
-            "Student Portal"
+            "Student Portal",
+            "Thapar Programs"
         ],
         "links":[
             "https://iep.thapar.edu/",
-            "https://www.thapar.edu/programmes",
-            "https://webkiosk.thapar.edu/index.jsp"
+            "https://webkiosk.thapar.edu/index.jsp",
+            "https://www.thapar.edu/programmes"
         ],
         "photo_link":"https://images.adsttc.com/media/images/5bf3/8f5f/08a5/e509/1100/01ce/large_jpg/-_Featured_Image.jpg?1542688591"
     }
