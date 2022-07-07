@@ -68,7 +68,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   Widget copySectionData(String sectionHead, List links, List linkNames) {
     return myButton(
       content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Icon(Icons.assignment),
           SizedBox(width: 5),

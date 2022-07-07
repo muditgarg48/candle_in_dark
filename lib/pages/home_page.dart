@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "../global_values.dart";
+import 'dummy_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  int currentPageIndex = 0;
+  // int currentPageIndex = 0;
 
   // void displayTheme() {
   //   print(themeMode);
@@ -17,20 +17,16 @@ class MyHomePageState extends State<MyHomePage> {
   //   print(themeIcon);
   // }
 
-  void setPageIndex(int index) {
-    setState(() => currentPageIndex = index);
-  }
+  // void setPageIndex(int index) {
+  //   setState(() => currentPageIndex = index);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      // body: pages[currentPageIndex]["class"],
-      body: IndexedStack(
-        index: currentPageIndex,
-        children: <Widget>[...pages.map((page) => page["class"]).toList()],
-      ),
+      body: DummyPage(),
     );
   }
 }
