@@ -11,21 +11,23 @@ class SyncSettings extends StatefulWidget {
 }
 
 class SyncSettingsState extends State<SyncSettings> {
-  
   void getPreviousSessionTheme(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     //Alternate for prefs.getBool("theme") == null?false
-    bool retrievedIsDark = prefs.getBool("theme") ?? false;
     // retrievedIsDark ??= false; => Alternate for if(retrievedIsDark == null) retrievedIsDark = false;
-    isDark = retrievedIsDark;
-    if (retrievedIsDark) {
+    systemBasedTheme = prefs.getBool("system_based_theme") ?? false;
+    isDark = prefs.getBool("theme") ?? false;
+    if (isDark) {
       themeMode = ThemeMode.dark;
       themeIcon = Icons.dark_mode;
     } else {
       themeMode = ThemeMode.light;
       themeIcon = Icons.sunny;
     }
-    print("Theme setting from previous session recieved ----> isDark = $isDark");
+    print(
+        "Theme setting from previous session recieved ----> isDark = $isDark");
+    print(
+        "Theme setting from previous session recieved ----> systemBasedTheme = $systemBasedTheme");
     (context as Element).reassemble();
   }
 
@@ -34,6 +36,13 @@ class SyncSettingsState extends State<SyncSettings> {
     prefs.setBool("theme", isDark);
     print(
         "Session theme stored into cache .i.e.isDark = ${prefs.getBool("theme")}");
+  }
+
+  void setSystemBasedThemePreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("system_based_theme", systemBasedTheme);
+    print(
+        "Session system based theme preference stored into cache .i.e.systemBasedTheme = ${prefs.getBool("system_based_theme")}");
   }
 
   void getPreviousSessionSettings(BuildContext context) {

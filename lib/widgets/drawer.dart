@@ -51,7 +51,7 @@ class _MyDrawerState extends State<MyDrawer> {
       margin: const EdgeInsets.only(left: 40, right: 40),
       child: ElevatedButton(
         onPressed: () {
-          switchThemeMode("theme_change");
+          switchThemeMode();
           Navigator.pop(context);
           Navigator.popAndPushNamed(context, widget.currentPage["route_name"]);
         },

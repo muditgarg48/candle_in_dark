@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../tools/sync_settings.dart';
 import '../tools/theme.dart';
 
 import '../widgets/button.dart';
@@ -12,10 +13,10 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  State<SettingsPage> createState() => SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class SettingsPageState extends State<SettingsPage> {
   SnackBar decisionDisplay(String txt) {
     return SnackBar(
       content: Text(
@@ -144,6 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         decisionDisplay("App based theme modes implemented");
                   }
                   ScaffoldMessenger.of(context).showSnackBar(decision);
+                  SyncSettingsState().setSystemBasedThemePreference();
                 },
               ),
               value: systemBasedTheme,

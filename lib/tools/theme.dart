@@ -33,15 +33,15 @@ List<Color> themeShades() {
       : [kToLight.shade50, kToLight.shade900];
 }
 
-void switchThemeMode(String choice) {
-  if (themeMode == ThemeMode.light) {
-    themeMode = ThemeMode.dark;
-    themeIcon = Icons.sunny;
-    isDark = true;
-  } else if (themeMode == ThemeMode.dark) {
+void switchThemeMode() {
+  if (isDark) {
     themeMode = ThemeMode.light;
     themeIcon = Icons.dark_mode;
     isDark = false;
+  } else {
+    themeMode = ThemeMode.dark;
+    themeIcon = Icons.sunny;
+    isDark = true;
   }
   SyncSettingsState().setSessionTheme();
   // displayTheme();
