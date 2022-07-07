@@ -2,7 +2,6 @@
 
 import 'dart:ui';
 
-import 'package:candle_in_dark/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:expand_widget/expand_widget.dart';
@@ -16,6 +15,7 @@ import '../tools/cache.dart';
 import '../tools/launch_url.dart';
 import '../tools/theme.dart';
 
+import '../widgets/loading.dart';
 import '../widgets/toasts.dart';
 import '../widgets/appBar.dart';
 import '../widgets/button.dart';
@@ -32,12 +32,6 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   List impLinksJSON = [];
 
   String singleSectionLinks = '';
-
-  @override
-  void initState() {
-    initialiseFirebase();
-    super.initState();
-  }
 
   // void getJSON_Local() async {
   //   var retrievedData = await fetchFromJSON_Local("assets/json/imp_links.json");

@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:firebase_core/firebase_core.dart';
-import '../firebase/firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import '../firebase/firebase_options.dart';
 
 void initialiseFirebase() async {
   await Firebase.initializeApp(

@@ -60,7 +60,10 @@ class LoadingPageState extends State<LoadingPage> {
             Center(
                 child: Text(
               widget.display,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: invertedThemeTxtColor(),
+              ),
             )),
           ],
         ),

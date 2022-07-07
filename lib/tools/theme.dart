@@ -1,3 +1,4 @@
+import 'package:candle_in_dark/tools/sync_settings.dart';
 import 'package:flutter/material.dart';
 
 import '../global_values.dart';
@@ -42,5 +43,6 @@ void switchThemeMode(String choice) {
     themeIcon = Icons.dark_mode;
     isDark = false;
   }
+  SyncSettingsState().setSessionTheme();
   // displayTheme();
 }

@@ -1,9 +1,9 @@
-import '../../pages/home_page.dart';
-import '../../tools/theme.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 
+import '../../tools/theme.dart';
 import '../../global_values.dart';
 
 class MyDrawer extends StatefulWidget {

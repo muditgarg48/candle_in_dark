@@ -1,3 +1,5 @@
+import 'package:candle_in_dark/firebase/firebase_access.dart';
+import 'package:candle_in_dark/tools/sync_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,8 +21,16 @@ class _MyAppState extends State<MyApp> {
       ]);
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     setDeviceOrientation();
+    //sending the current page (home page context) to change it according to the settings recieved from previous session
+    SyncSettingsState().getPreviousSessionSettings(context);
+    initialiseFirebase();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Candle in Dark',

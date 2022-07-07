@@ -7,8 +7,8 @@ import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
 import './pages/about.dart';
 import './pages/imp_links.dart';
-import 'pages/home_page.dart';
-import 'pages/settings.dart';
+import './pages/home_page.dart';
+import './pages/settings.dart';
 
 String versionNumber = "1.0.0";
 

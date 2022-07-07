@@ -9,17 +9,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  // int currentPageIndex = 0;
-
-  // void displayTheme() {
-  //   print(themeMode);
-  //   print(isDark);
-  //   print(themeIcon);
-  // }
-
-  // void setPageIndex(int index) {
-  //   setState(() => currentPageIndex = index);
-  // }
 
   @override
   Widget build(BuildContext context) {
