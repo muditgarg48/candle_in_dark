@@ -146,30 +146,30 @@ class _MyDrawerState extends State<MyDrawer> {
     if ((MediaQuery.of(context).size.width / 1.1) > 500) {
       drawerWidth = 500;
     }
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(40),
-        bottomRight: Radius.circular(40),
-      ),
-      child: Drawer(
-        backgroundColor: themeBgColor(),
-        elevation: 20,
-        width: drawerWidth,
-        child: ListView(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            picture(),
-            sectionBuilder(section: pages, name: "Pages"),
-            sectionBuilder(section: features, name: "Features"),
-            sectionDivider(),
-            options(),
-            systemBasedTheme ? const SizedBox.shrink() : themeButton(),
-            sectionDivider(),
-            sectionText(
-              txt: "Made by Mudit Garg",
-              link: 'https://muditgarg48.github.io',
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(40)),
+        child: Drawer(
+          backgroundColor: themeBgColor(),
+          elevation: 20,
+          width: drawerWidth,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              picture(),
+              sectionBuilder(section: pages, name: "Pages"),
+              sectionBuilder(section: features, name: "Features"),
+              sectionDivider(),
+              options(),
+              systemBasedTheme ? const SizedBox.shrink() : themeButton(),
+              sectionDivider(),
+              sectionText(
+                txt: "Made by Mudit Garg",
+                link: 'https://muditgarg48.github.io',
+              ),
+            ],
+          ),
         ),
       ),
     );
