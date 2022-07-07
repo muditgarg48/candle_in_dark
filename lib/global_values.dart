@@ -12,8 +12,6 @@ import 'pages/settings.dart';
 
 String versionNumber = "1.0.0";
 
-bool systemBasedTheme = false;
-
 //Pages and their Classes
 var pages = <Map<String, dynamic>>[
   {
@@ -116,6 +114,7 @@ var appRoutes = <String, Widget Function(BuildContext)>{
 ThemeMode themeMode = ThemeMode.light;
 IconData themeIcon = Icons.sunny;
 bool isDark = false;
+bool systemBasedTheme = false;
 
 MaterialColor kToLight = const MaterialColor(
   0xff009ffd, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
