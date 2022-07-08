@@ -12,6 +12,16 @@ dynamic cacheImage(String imageLink) {
         size: MediaQuery.of(context).size.height / 10,
       ),
     ),
+    errorWidget: (context, link, _) {
+      print("Failed to fetch image from $link");
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.error_outlined),
+          Text("Failed to fetch your image"),
+        ],
+      );
+    },
     imageUrl: imageLink,
     fit: BoxFit.cover,
   );
