@@ -239,7 +239,8 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   Widget differentSections() {
     setJSON_FireBase();
     return impLinksJSON.isEmpty
-        ? const LoadingPage(display: "Loading ...")
+        ? const LoadingPage(
+            display: "Please wait while we fetch your data ... ")
         : BannerCarousel.fullScreen(
             animation: true,
             activeColor: themeBgColor(),
