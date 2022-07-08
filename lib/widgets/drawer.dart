@@ -87,7 +87,7 @@ class _MyDrawerState extends State<MyDrawer> {
     return ClipRRect(
       borderRadius: const BorderRadius.only(topRight: Radius.circular(40)),
       child: Image.asset(
-        "assets/imgs/trinity.jpg",
+        "assets/imgs/trinity_drawer.jpg",
         fit: BoxFit.cover,
       ),
     );

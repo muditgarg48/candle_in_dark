@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,8 +15,6 @@ class SyncSettings extends StatefulWidget {
 class SyncSettingsState extends State<SyncSettings> {
   void getPreviousSessionTheme(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    //Alternate for prefs.getBool("theme") == null?false
-    // retrievedIsDark ??= false; => Alternate for if(retrievedIsDark == null) retrievedIsDark = false;
     systemBasedTheme = prefs.getBool("system_based_theme") ?? false;
     isDark = prefs.getBool("theme") ?? false;
     if (isDark) {
@@ -28,6 +28,7 @@ class SyncSettingsState extends State<SyncSettings> {
         "Theme setting from previous session recieved ----> isDark = $isDark");
     print(
         "Theme setting from previous session recieved ----> systemBasedTheme = $systemBasedTheme");
+    // ignore: invalid_use_of_protected_member
     (context as Element).reassemble();
   }
 

@@ -6,9 +6,11 @@ import 'theme.dart';
 
 dynamic cacheImage(String imageLink) {
   return CachedNetworkImage(
-    placeholder: (context, url) => LoadingAnimationWidget.inkDrop(
-      color: themeTxtColor(),
-      size: MediaQuery.of(context).size.height / 10,
+    placeholder: (context, url) => Center(
+      child: LoadingAnimationWidget.inkDrop(
+        color: themeTxtColor(),
+        size: MediaQuery.of(context).size.height / 10,
+      ),
     ),
     imageUrl: imageLink,
     fit: BoxFit.cover,

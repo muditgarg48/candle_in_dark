@@ -16,16 +16,27 @@ String versionNumber = "1.0.0";
 var pages = <Map<String, dynamic>>[
   {
     //0
-    'route_name': 'about',
-    'route': (context) => const AboutPage(),
-    'class': const AboutPage(),
-    'labelName': "About Page",
-    'active_icon': Icons.info,
-    'icon': Icons.info_outlined,
-    'appBarTitle': "ABOUT",
-    'appBarBG':
-        "https://images.unsplash.com/photo-1565246075196-94d3995a0b37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+    'route_name': 'index',
+    'route': (context) => const MyHomePage(),
+    'class': const MyHomePage(),
+    'labelName': "Home Page",
+    'active_icon': Icons.home,
+    'icon': Icons.home_outlined,
+    'appBarTitle': "WELCOME",
+    'appBarBG': "",
   },
+  // {
+  //   //0
+  //   'route_name': 'about',
+  //   'route': (context) => const AboutPage(),
+  //   'class': const AboutPage(),
+  //   'labelName': "About Page",
+  //   'active_icon': Icons.info,
+  //   'icon': Icons.info_outlined,
+  //   'appBarTitle': "ABOUT",
+  //   'appBarBG':
+  //       "https://images.unsplash.com/photo-1565246075196-94d3995a0b37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+  // },
   {
     //1
     'route_name': 'dummy',
@@ -104,11 +115,10 @@ var settings = <String, dynamic>{
 };
 
 var appRoutes = <String, Widget Function(BuildContext)>{
-    'index': (context) => const MyHomePage(),
-    for (var page in pages) page['route_name']: page['route'],
-    for (var feature in features) feature['route_name']: feature['route'],
-    settings["route_name"]: settings['route'],
-  };
+  for (var page in pages) page['route_name']: page['route'],
+  for (var feature in features) feature['route_name']: feature['route'],
+  settings["route_name"]: settings['route'],
+};
 
 //Theme Variables
 ThemeMode themeMode = ThemeMode.light;
