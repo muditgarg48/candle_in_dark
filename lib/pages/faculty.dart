@@ -1,5 +1,3 @@
-import 'package:candle_in_dark/tools/fetch_json.dart';
-import 'package:candle_in_dark/tools/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../global_values.dart';
@@ -7,6 +5,10 @@ import '../global_values.dart';
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
+
+import '../tools/theme.dart';
+
+import '../firebase/firebase_access.dart';
 
 class TheFacultyPage extends StatefulWidget {
   const TheFacultyPage({Key? key}) : super(key: key);
@@ -25,11 +27,11 @@ class TheFacultyPageState extends State<TheFacultyPage> {
   }
 
   void getFacultyJSON() async {
-    var fileData = await fetchFromJSON_Local("assets/json/faculty.json");
-    // print(fileData);
-    setState(() {
-      data = fileData;
-    });
+    //for offline access
+    // var fileData = await fetchFromJSON_Local("assets/json/faculty.json");
+    //for firebase access
+    var fileData = await getJSON(linkFromRoot: "json/faculty.json");
+    setState(() => data = fileData);
   }
 
   Widget singleFacultyMember(var faculty) {
@@ -119,7 +121,11 @@ class TheFacultyPageState extends State<TheFacultyPage> {
               appBarBG: pages[3]["appBarBG"],
             ),
           ],
-          body: data.isEmpty ? const SizedBox.shrink() : page(),
+          body: data.isEmpty
+              ? const LoadingPage(
+                  display: "Please wait while we fetch your data ... ",
+                )
+              : page(),
         ),
       ),
     );
