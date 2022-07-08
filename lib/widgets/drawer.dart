@@ -48,8 +48,9 @@ class _MyDrawerState extends State<MyDrawer> {
 
   Widget themeButton() {
     return Container(
-      margin: const EdgeInsets.only(left: 40, right: 40),
+      margin: const EdgeInsets.only(left: 50, right: 50),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
         onPressed: () {
           switchThemeMode();
           Navigator.pop(context);
@@ -117,6 +118,7 @@ class _MyDrawerState extends State<MyDrawer> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: MediaQuery.of(context).size.height / 30),
           sectionDivider(),
           sectionText(txt: name, link: "", size: 17),
           for (var sectionItem in section)
@@ -143,13 +145,16 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     double drawerWidth = MediaQuery.of(context).size.width / 1.1;
-    if ((MediaQuery.of(context).size.width / 1.1) > 500) {
-      drawerWidth = 500;
+    if ((MediaQuery.of(context).size.width / 1.1) > 450) {
+      drawerWidth = 450;
     }
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(40)),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
         child: Drawer(
           backgroundColor: themeBgColor(),
           elevation: 20,
@@ -160,9 +165,12 @@ class _MyDrawerState extends State<MyDrawer> {
               picture(),
               sectionBuilder(section: pages, name: "Pages"),
               sectionBuilder(section: features, name: "Features"),
+              SizedBox(height: MediaQuery.of(context).size.height / 30),
               sectionDivider(),
               options(),
+              SizedBox(height: MediaQuery.of(context).size.height / 30),
               systemBasedTheme ? const SizedBox.shrink() : themeButton(),
+              SizedBox(height: MediaQuery.of(context).size.height / 30),
               sectionDivider(),
               sectionText(
                 txt: "Made by Mudit Garg",

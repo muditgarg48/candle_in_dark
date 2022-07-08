@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import "package:flutter/material.dart";
 
 import '../global_values.dart';
@@ -14,16 +15,27 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Widget title(String txt) {
+    return AnimatedTextKit(
+      animatedTexts: [
+        TypewriterAnimatedText(
+          txt,
+          speed: const Duration(milliseconds: 100),
+          cursor: " _",
+          textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: MediaQuery.of(context).size.height / 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget homePage() {
     return Center(
-        child: Text(
-      "WELCOME",
-      style: TextStyle(
-        color: themeTxtColor(),
-        fontSize: MediaQuery.of(context).size.height / 20,
-        fontWeight: FontWeight.bold,
-      ),
-    ));
+      child: title("WELCOME"),
+    );
   }
 
   @override
