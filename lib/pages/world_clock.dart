@@ -431,7 +431,7 @@ class WorldClockState extends State<WorldClock> {
           body: clockFormatSwitcher(),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: IconButton(
         onPressed: resetTimeZone,
         tooltip: "Reset Timezone",

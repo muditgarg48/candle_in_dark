@@ -138,7 +138,10 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
             child: ListTile(
               iconColor: themeTxtColor(),
               enabled: url == '' ? false : true,
-              title: Text(name),
+              title: Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               leading: const Icon(Icons.link),
               textColor: themeTxtColor(),
               trailing: url != ''
@@ -171,7 +174,10 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        isDark ? const SizedBox.shrink() : cacheImage(imageURL),
+        isDark
+            ? cacheImage(
+                "https://images.unsplash.com/photo-1578509341524-be72cae3705d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80")
+            : cacheImage(imageURL),
         ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -185,7 +191,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 100,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: themeBgColor().withOpacity(0.3),
                     spreadRadius: 5,
                     blurStyle: BlurStyle.normal,
                   ),
@@ -194,29 +200,24 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
               ),
               child: ListView(
                 children: [
+                  SizedBox(height: MediaQuery.of(context).size.height / 30),
                   Text(
                     sectionHead,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      // decoration: TextDecoration.underline,
                       color: themeTxtColor(),
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  Divider(
+                    color: themeTxtColor(),
+                    endIndent: MediaQuery.of(context).size.width / 15,
+                    indent: MediaQuery.of(context).size.width / 15,
+                  ),
                   for (int i = 0; i < linkNames.length; i++)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Divider(
-                          color: themeTxtColor(),
-                          endIndent: MediaQuery.of(context).size.width / 15,
-                          indent: MediaQuery.of(context).size.width / 15,
-                        ),
-                        singleLink(linkNames[i], links[i]),
-                      ],
-                    ),
+                    singleLink(linkNames[i], links[i]),
                   Padding(
                     padding: EdgeInsets.only(
                       top: 20,
