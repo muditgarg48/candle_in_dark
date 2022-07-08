@@ -18,7 +18,6 @@ class DummyPage extends StatelessWidget {
         currentPage: pages[1],
       ),
       body: Container(
-        // padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
