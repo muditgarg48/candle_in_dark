@@ -15,26 +15,39 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Widget title(String txt) {
+  Widget title(List<String> txtList, double size) {
     return AnimatedTextKit(
       animatedTexts: [
-        TypewriterAnimatedText(
-          txt,
-          speed: const Duration(milliseconds: 100),
-          cursor: " _",
-          textStyle: TextStyle(
-            color: Colors.white,
-            fontSize: MediaQuery.of(context).size.height / 10,
-            fontWeight: FontWeight.bold,
+        for (var txt in txtList)
+          TypewriterAnimatedText(
+            txt,
+            speed: const Duration(milliseconds: 100),
+            cursor: " _",
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
       ],
     );
   }
 
   Widget homePage() {
     return Center(
-      child: title("WELCOME"),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          title(
+            [
+              "WELCOME",
+              "to",
+              "Candle in Dark",
+            ],
+            MediaQuery.of(context).size.height / 15,
+          ),
+        ],
+      ),
     );
   }
 

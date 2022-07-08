@@ -9,6 +9,7 @@ import './pages/about.dart';
 import './pages/imp_links.dart';
 import './pages/home_page.dart';
 import './pages/settings.dart';
+import 'pages/faculty.dart';
 
 String versionNumber = "1.0.0";
 
@@ -62,15 +63,15 @@ var pages = <Map<String, dynamic>>[
   },
   {
     //3
-    'route_name': 'dummy',
-    'route': (context) => const DummyPage(),
-    'class': const DummyPage(),
-    'labelName': "Dummy Page",
-    'active_icon': Icons.texture_sharp,
-    'icon': Icons.texture_outlined,
-    'appBarTitle': "PLACEHOLDER PAGE",
+    'route_name': 'faculty',
+    'route': (context) => const TheFacultyPage(),
+    'class': const TheFacultyPage(),
+    'labelName': "Know your Faculty",
+    'active_icon': Icons.people_alt_outlined,
+    'icon': Icons.people_outline_outlined,
+    'appBarTitle': "KNOW YOUR FACULTY",
     'appBarBG':
-        "https://miro.medium.com/max/1400/1*WmSNhK1BGctLUuXFVnV8pw.jpeg",
+        "https://images.unsplash.com/photo-1505663912202-ac22d4cb3707?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
 ];
 
