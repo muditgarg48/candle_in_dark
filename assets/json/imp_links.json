@@ -3,6 +3,7 @@
         "name":"Trinity College Dublin",
         "link_names": [
             "Trinity College Dublin Student Portal",
+            "Main Website",
             "Academic Year Calender Structure",
             "Previous Years' Exam papers",
             "School of Computer Science and Statistics",
@@ -19,6 +20,7 @@
         ],
         "links":[
             "https://my.tcd.ie",
+            "https://tcd.ie",
             "https://www.tcd.ie/calendar/academic-year-structure/",
             "https://student-learning.tcd.ie/learning-resources/exams/exam-papers/",
             "https://teaching.scss.tcd.ie/",
@@ -73,11 +75,13 @@
         "name":"Thapar Institute IEP Program",
         "link_names": [
             "IEP Official Website",
+            "Main Website",
             "Thapar Institute Student Portal",
             "Thapar Programs"
         ],
         "links":[
             "https://iep.thapar.edu/",
+            "https://thapar.edu",
             "https://webkiosk.thapar.edu/index.jsp",
             "https://www.thapar.edu/programmes"
         ],
