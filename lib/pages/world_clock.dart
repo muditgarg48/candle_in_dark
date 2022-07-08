@@ -112,77 +112,78 @@ class WorldClockState extends State<WorldClock> {
     return showBarModalBottomSheet(
       // backgroundColor: themeBgColor(),
       context: context,
-      builder: (c) => ListView.builder(
-        itemCount: currentList.length + 1,
-        itemBuilder: (context, index) => index == 0
-            ? Container(
-                color: themeBgColor(),
-                child: TextField(
-                  inputFormatters: [FilteringTextInputFormatter.deny(' ')],
-                  cursorColor: themeTxtColor(),
-                  controller: searchController,
-                  style: TextStyle(
+      enableDrag: true,
+      builder: (c) => ListView(
+        children: [
+          Container(
+            color: themeBgColor(),
+            child: TextField(
+              inputFormatters: [FilteringTextInputFormatter.deny(' ')],
+              cursorColor: themeTxtColor(),
+              controller: searchController,
+              style: TextStyle(
+                color: themeTxtColor(),
+              ),
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                labelText: "Search",
+                labelStyle: TextStyle(
+                  color: themeTxtColor(),
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: themeTxtColor(),
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.clear,
                     color: themeTxtColor(),
                   ),
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    labelText: "Search",
-                    labelStyle: TextStyle(
-                      color: themeTxtColor(),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: themeTxtColor(),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        Icons.clear,
-                        color: themeTxtColor(),
-                      ),
-                      onPressed: () {
-                        if (searchController.text == '') {
-                          Navigator.pop(context);
-                        } else {
-                          searchController.text = '';
-                          currentList = availableTimezones;
-                        }
-                      },
-                    ),
-                  ),
-                  onChanged: (input) {
-                    if (input == '') {
-                      setState(() {
-                        currentList = availableTimezones;
-                      });
+                  onPressed: () {
+                    if (searchController.text == '') {
+                      Navigator.pop(context);
+                    } else {
+                      searchController.text = '';
+                      currentList = availableTimezones;
                     }
-                    setState(() =>
-                        currentList = filterList(availableTimezones, input));
-                    // ignore: invalid_use_of_protected_member
-                    (context as Element).reassemble();
                   },
-                  showCursor: true,
                 ),
-              )
-            : ListTile(
-                title: Text(
-                  currentList[index - 1],
-                  style: TextStyle(
-                    color: invertedThemeTxtColor(),
-                    fontWeight: chosenTimezone == currentList[index - 1]
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                  ),
-                ),
-                tileColor: themeBgColor(),
-                onTap: () {
-                  // print("User chose ${availableTimezones[index]}");
-                  timeCalcByLocation(currentList[index - 1]);
-                  Navigator.pop(context);
-                  // (context as Element).reassemble();
-                },
               ),
+              onChanged: (input) {
+                if (input == '') {
+                  setState(() {
+                    currentList = availableTimezones;
+                  });
+                }
+                setState(
+                    () => currentList = filterList(availableTimezones, input));
+                // ignore: invalid_use_of_protected_member
+                (c as Element).reassemble();
+              },
+              showCursor: true,
+            ),
+          ),
+          for (int index = 0; index < currentList.length; index++)
+            ListTile(
+              title: Text(
+                currentList[index],
+                style: TextStyle(
+                  color: invertedThemeTxtColor(),
+                  fontWeight: chosenTimezone == currentList[index]
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                ),
+              ),
+              tileColor: themeBgColor(),
+              onTap: () {
+                // print("User chose ${availableTimezones[index]}");
+                timeCalcByLocation(currentList[index]);
+                Navigator.pop(context);
+                // (context as Element).reassemble();
+              },
+            ),
+        ],
       ),
-      enableDrag: true,
     );
   }
 
