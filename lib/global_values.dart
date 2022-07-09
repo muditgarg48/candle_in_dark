@@ -6,7 +6,7 @@ import "package:flutter/material.dart";
 import './pages/currency_convert_page.dart';
 import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
-import './pages/about.dart';
+// import './pages/about.dart';
 import './pages/imp_links.dart';
 import './pages/home_page.dart';
 import './pages/settings.dart';
