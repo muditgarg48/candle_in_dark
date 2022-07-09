@@ -7,6 +7,7 @@ import 'package:analog_clock/analog_clock.dart';
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import '../widgets/loading.dart';
 import '../widgets/toasts.dart';
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
@@ -116,9 +117,9 @@ class WorldClockState extends State<WorldClock> {
       builder: (c) => ListView(
         children: [
           Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             color: themeBgColor(),
             child: TextField(
-              autofocus: true,
               maxLines: 1,
               inputFormatters: [FilteringTextInputFormatter.deny(' ')],
               cursorColor: themeTxtColor(),
@@ -129,9 +130,7 @@ class WorldClockState extends State<WorldClock> {
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 labelText: "Search",
-                labelStyle: TextStyle(
-                  color: themeTxtColor(),
-                ),
+                labelStyle: TextStyle(color: themeTxtColor()),
                 prefixIcon: Icon(
                   Icons.search,
                   color: themeTxtColor(),
@@ -165,27 +164,39 @@ class WorldClockState extends State<WorldClock> {
               showCursor: true,
             ),
           ),
-          for (int index = 0; index < currentList.length; index++)
-            ListTile(
-              title: Text(
-                currentList[index],
-                style: TextStyle(
-                  color: chosenTimezone == currentList[index]
-                      ? themeTxtColor()
-                      : invertedThemeTxtColor(),
-                  fontWeight: chosenTimezone == currentList[index]
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                ),
-              ),
-              tileColor: themeBgColor(),
-              onTap: () {
-                // print("User chose ${availableTimezones[index]}");
-                timeCalcByLocation(currentList[index]);
-                Navigator.pop(context);
-                // (context as Element).reassemble();
-              },
-            ),
+          currentList.isEmpty
+              ? const LoadingPage(
+                  display: "Loading the available timezones ...",
+                )
+              : SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView(
+                    children: [
+                      for (int index = 0; index < currentList.length; index++)
+                        ListTile(
+                          title: Text(
+                            currentList[index],
+                            style: TextStyle(
+                              color: chosenTimezone == currentList[index]
+                                  ? themeTxtColor()
+                                  : invertedThemeTxtColor(),
+                              fontWeight: chosenTimezone == currentList[index]
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                          ),
+                          tileColor: themeBgColor(),
+                          onTap: () {
+                            // print("User chose ${availableTimezones[index]}");
+                            timeCalcByLocation(currentList[index]);
+                            Navigator.pop(context);
+                            // (context as Element).reassemble();
+                          },
+                        ),
+                    ],
+                  ),
+                )
         ],
       ),
     );
@@ -436,7 +447,13 @@ class WorldClockState extends State<WorldClock> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: IconButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          "Take me back",
+          style: TextStyle(color: themeTxtColor()),
+        ),
+        elevation: 20,
+        backgroundColor: themeBgColor(),
         onPressed: resetTimeZone,
         tooltip: "Reset Timezone",
         icon: Icon(
