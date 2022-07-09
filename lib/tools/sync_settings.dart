@@ -25,9 +25,9 @@ class SyncSettingsState extends State<SyncSettings> {
       themeIcon = Icons.sunny;
     }
     print(
-        "Theme setting from previous session recieved ----> isDark = $isDark");
+        "Theme setting from previous session recieved .i.e. isDark = $isDark");
     print(
-        "Theme setting from previous session recieved ----> systemBasedTheme = $systemBasedTheme");
+        "Theme setting from previous session recieved .i.e. systemBasedTheme = $systemBasedTheme");
     // ignore: invalid_use_of_protected_member
     (context as Element).reassemble();
   }
@@ -43,7 +43,7 @@ class SyncSettingsState extends State<SyncSettings> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("system_based_theme", systemBasedTheme);
     print(
-        "Session system based theme preference stored into cache .i.e.systemBasedTheme = ${prefs.getBool("system_based_theme")}");
+        "Session system based theme preference stored into cache .i.e. systemBasedTheme = ${prefs.getBool("system_based_theme")}");
   }
 
   void getPreviousSessionSettings(BuildContext context) {
