@@ -12,7 +12,7 @@ void initialiseFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
     // ignore: avoid_print
-  ).whenComplete(() => print("FireBase Initialised!"));
+  ).whenComplete(() => print("Firebase Initialised!"));
 }
 
 //get JSON data from firebase
@@ -23,13 +23,12 @@ Future<dynamic> getJSON_FromFirebase({required String linkFromRoot}) async {
   return jsonData;
 }
 
-Future<Uint8List?> getPDF_FromFirebase({required String linkFromRoot}) async {
-
+Future<Uint8List?> getPDF_FromFirebase({required String link}) async {
   Reference ref =
       FirebaseStorage.instanceFor(bucket: "candle-in-dark.appspot.com")
-          .refFromURL("gs://candle-in-dark.appspot.com/$linkFromRoot");
+          .refFromURL(link);
   // Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
   Uint8List? pdfAsBytes;
-  await ref.getData(104857600).then((value) => pdfAsBytes = value);
+  await ref.getData().then((value) => pdfAsBytes = value);
   return pdfAsBytes;
 }
