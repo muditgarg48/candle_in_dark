@@ -30,7 +30,7 @@ class TheFacultyPageState extends State<TheFacultyPage> {
     //for offline access
     // var fileData = await fetchFromJSON_Local("assets/json/faculty.json");
     //for firebase access
-    var fileData = await getJSON(linkFromRoot: "json/faculty.json");
+    var fileData = await getJSON_FromFirebase(linkFromRoot: "json/faculty.json");
     setState(() => data = fileData);
   }
 
