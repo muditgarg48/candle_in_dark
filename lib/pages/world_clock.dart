@@ -88,7 +88,7 @@ class WorldClockState extends State<WorldClock> {
     initCurrentTimezone();
     toast(
       context: context,
-      msg: "Back to $chosenTimezone",
+      msg: "Back to your default timezone!",
       startI: Icons.location_on,
     );
   }
@@ -118,6 +118,8 @@ class WorldClockState extends State<WorldClock> {
           Container(
             color: themeBgColor(),
             child: TextField(
+              autofocus: true,
+              maxLines: 1,
               inputFormatters: [FilteringTextInputFormatter.deny(' ')],
               cursorColor: themeTxtColor(),
               controller: searchController,
@@ -168,7 +170,9 @@ class WorldClockState extends State<WorldClock> {
               title: Text(
                 currentList[index],
                 style: TextStyle(
-                  color: invertedThemeTxtColor(),
+                  color: chosenTimezone == currentList[index]
+                      ? themeTxtColor()
+                      : invertedThemeTxtColor(),
                   fontWeight: chosenTimezone == currentList[index]
                       ? FontWeight.bold
                       : FontWeight.normal,
@@ -435,9 +439,9 @@ class WorldClockState extends State<WorldClock> {
       floatingActionButton: IconButton(
         onPressed: resetTimeZone,
         tooltip: "Reset Timezone",
-        icon: const Icon(
+        icon: Icon(
           Icons.my_location,
-          color: Colors.white,
+          color: themeTxtColor(),
         ),
       ),
     );
