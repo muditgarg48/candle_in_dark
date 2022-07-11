@@ -31,7 +31,7 @@ class TheFacultyPageState extends State<TheFacultyPage> {
     // var fileData = await fetchFromJSON_Local("assets/json/faculty.json");
     //for firebase access
     var fileData =
-        await getJSON_FromFirebase(linkFromRoot: "json/faculty.json");
+        await getFromFirebase_JSON(linkFromRoot: "json/faculty.json");
     setState(() => data = fileData);
   }
 

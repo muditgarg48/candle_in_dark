@@ -39,7 +39,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   // }
 
   void setJSON_FireBase() async {
-    var temp = await getJSON_FromFirebase(linkFromRoot: "json/imp_links.json");
+    var temp = await getFromFirebase_JSON(linkFromRoot: "json/imp_links.json");
     setState(() => impLinksJSON = temp);
   }
 

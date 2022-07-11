@@ -16,19 +16,23 @@ void initialiseFirebase() async {
 }
 
 //get JSON data from firebase
-Future<dynamic> getJSON_FromFirebase({required String linkFromRoot}) async {
+Future<dynamic> getFromFirebase_JSON({required String linkFromRoot}) async {
   Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
   Uint8List? downloadedData = await ref.getData();
   var jsonData = json.decode(utf8.decode(downloadedData!));
   return jsonData;
 }
 
-Future<Uint8List?> getPDF_FromFirebase({required String link}) async {
-  Reference ref =
-      FirebaseStorage.instanceFor(bucket: "candle-in-dark.appspot.com")
-          .refFromURL(link);
-  // Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
+Future<Uint8List?> getFromFirebase_PDF({required String linkFromRoot}) async {  
+  Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
   Uint8List? pdfAsBytes;
   await ref.getData().then((value) => pdfAsBytes = value);
   return pdfAsBytes;
+}
+
+Future<Uint8List?> getFromFirebase_Image({required String linkFromRoot}) async {
+  Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
+  Uint8List? imgBytes;
+  await ref.getData(10000000).then((data) => imgBytes = data);
+  return imgBytes;
 }
