@@ -161,6 +161,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
   Widget sectionBuilder({required dynamic section, required String name}) {
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height / 30),
@@ -208,7 +209,7 @@ class _MyDrawerState extends State<MyDrawer> {
           elevation: 20,
           width: drawerWidth,
           child: ListView(
-            // mainAxisAlignment: MainAxisAlignment.center,
+            physics: const BouncingScrollPhysics(),
             children: [
               picture(),
               sectionSpacing,
