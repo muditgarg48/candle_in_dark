@@ -123,6 +123,14 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
       action: () {
         pick.showCurrencyPicker(
           physics: const BouncingScrollPhysics(),
+          theme: pick.CurrencyPickerThemeData(
+            backgroundColor: themeBgColor(),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+            ),
+            titleTextStyle: TextStyle(color: themeTxtColor()),
+            subtitleTextStyle: TextStyle(color: themeTxtColor()),
+          ),
           context: context,
           showFlag: true,
           showSearchField: true,
