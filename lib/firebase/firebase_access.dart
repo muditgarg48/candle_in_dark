@@ -23,16 +23,14 @@ Future<dynamic> getFromFirebase_JSON({required String linkFromRoot}) async {
   return jsonData;
 }
 
-Future<Uint8List?> getFromFirebase_PDF({required String linkFromRoot}) async {  
+Future<String> getFromFirebase_FileURL({required String linkFromRoot}) {
   Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
-  Uint8List? pdfAsBytes;
-  await ref.getData().then((value) => pdfAsBytes = value);
-  return pdfAsBytes;
+  return ref.getDownloadURL();
 }
 
-Future<Uint8List?> getFromFirebase_Image({required String linkFromRoot}) async {
+Future<Uint8List?> getFromFirebase_File({required String linkFromRoot}) async {
   Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
-  Uint8List? imgBytes;
-  await ref.getData(10000000).then((data) => imgBytes = data);
-  return imgBytes;
+  Uint8List? fileBytes;
+  await ref.getData().then((data) => fileBytes = data);
+  return fileBytes;
 }
