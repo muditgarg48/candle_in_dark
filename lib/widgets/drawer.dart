@@ -19,29 +19,35 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  Widget options() {
+  Widget options(List<String> whichOptions, MainAxisAlignment axisArrangement) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: axisArrangement,
       children: [
-        IconButton(
-          onPressed: () {
-            Navigator.popUntil(context, (route) => false);
-            Navigator.pushNamed(context, 'index');
-          },
-          icon: Icon(Icons.home, color: themeTxtColor()),
-        ),
-        IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-            if (widget.currentPage["route_name"] == "settings") return;
-            Navigator.pushNamed(context, 'settings');
-          },
-          icon: Icon(Icons.settings, color: themeTxtColor()),
-        ),
-        IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.clear, color: themeTxtColor()),
-        ),
+        whichOptions.contains("home")
+            ? IconButton(
+                onPressed: () {
+                  Navigator.popUntil(context, (route) => false);
+                  Navigator.pushNamed(context, 'index');
+                },
+                icon: Icon(Icons.home, color: themeTxtColor()),
+              )
+            : const SizedBox.shrink(),
+        whichOptions.contains("settings")
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (widget.currentPage["route_name"] == "settings") return;
+                  Navigator.pushNamed(context, 'settings');
+                },
+                icon: Icon(Icons.settings, color: themeTxtColor()),
+              )
+            : const SizedBox.shrink(),
+        whichOptions.contains("close_drawer")
+            ? IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(Icons.clear, color: themeTxtColor()),
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }
@@ -94,23 +100,32 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
-  Widget sectionText(
-      {required String txt, required String link, double size = 14}) {
-    return Center(
-      child: TextButton(
-        onPressed: () async {
-          if (link != '') {
-            await launchUrlString(link, mode: LaunchMode.externalApplication);
-          } else {
-            return;
-          }
-        },
-        child: Text(txt,
-            style: TextStyle(
-              color: themeTxtColor(),
-              fontSize: size,
-            )),
+  Widget sectionText({
+    required String txt,
+    required String link,
+    double size = 14,
+  }) {
+    var title = Text(
+      txt,
+      style: TextStyle(
+        color: themeTxtColor(),
+        fontSize: size,
       ),
+    );
+    return Center(
+      child: link == ''
+          ? title
+          : TextButton(
+              onPressed: () async {
+                if (link != '') {
+                  await launchUrlString(link,
+                      mode: LaunchMode.externalApplication);
+                } else {
+                  return;
+                }
+              },
+              child: title,
+            ),
     );
   }
 
@@ -148,6 +163,10 @@ class _MyDrawerState extends State<MyDrawer> {
     if ((MediaQuery.of(context).size.width / 1.1) > 450) {
       drawerWidth = 450;
     }
+
+    var sectionSpacing =
+        SizedBox(height: MediaQuery.of(context).size.height / 30);
+
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
@@ -163,14 +182,16 @@ class _MyDrawerState extends State<MyDrawer> {
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               picture(),
+              sectionSpacing,
+              options(["home", "close_drawer"], MainAxisAlignment.spaceEvenly),
               sectionBuilder(section: pages, name: "Pages"),
               sectionBuilder(section: features, name: "Features"),
-              SizedBox(height: MediaQuery.of(context).size.height / 30),
+              sectionSpacing,
               sectionDivider(),
-              options(),
-              SizedBox(height: MediaQuery.of(context).size.height / 30),
+              options(["settings"], MainAxisAlignment.center),
+              sectionSpacing,
               systemBasedTheme ? const SizedBox.shrink() : themeButton(),
-              SizedBox(height: MediaQuery.of(context).size.height / 30),
+              sectionSpacing,
               sectionDivider(),
               sectionText(
                 txt: "Made by Mudit Garg",
