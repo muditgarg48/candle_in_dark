@@ -30,7 +30,8 @@ class TheFacultyPageState extends State<TheFacultyPage> {
     //for offline access
     // var fileData = await fetchFromJSON_Local("assets/json/faculty.json");
     //for firebase access
-    var fileData = await getJSON_FromFirebase(linkFromRoot: "json/faculty.json");
+    var fileData =
+        await getJSON_FromFirebase(linkFromRoot: "json/faculty.json");
     setState(() => data = fileData);
   }
 
@@ -67,6 +68,7 @@ class TheFacultyPageState extends State<TheFacultyPage> {
 
   Widget colleges() {
     return ListView(
+      physics: const BouncingScrollPhysics(),
       children: [
         for (var college in data)
           Padding(

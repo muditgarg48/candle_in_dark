@@ -133,7 +133,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width / 1.1,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 15,
             child: ListTile(
               iconColor: themeTxtColor(),
@@ -199,6 +199,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height / 30),
                   Text(

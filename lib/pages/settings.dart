@@ -203,6 +203,7 @@ class SettingsPageState extends State<SettingsPage> {
         currentPage: settings,
       ),
       body: Container(
+        color: themeBgColor(),
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -217,6 +218,7 @@ class SettingsPageState extends State<SettingsPage> {
             width: MediaQuery.of(context).size.width,
             color: themeBgColor(),
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 userDataRelated(),
                 const SizedBox(height: 20),

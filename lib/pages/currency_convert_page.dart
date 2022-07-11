@@ -61,7 +61,6 @@ class CurrencyConvertorPage extends StatefulWidget {
 }
 
 class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
-
   //Variables
   pick.Currency fromCurrency = nullCurrency;
   pick.Currency toCurrency = nullCurrency;
@@ -123,6 +122,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
     return myButton(
       action: () {
         pick.showCurrencyPicker(
+          physics: const BouncingScrollPhysics(),
           context: context,
           showFlag: true,
           showSearchField: true,
@@ -414,6 +414,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
           left: 20,
         ),
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -541,6 +542,7 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
             ),
           ],
           body: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
               myCard(
                 contents: inputCardContents(),
