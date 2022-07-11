@@ -115,6 +115,7 @@ class WorldClockState extends State<WorldClock> {
       context: context,
       enableDrag: true,
       builder: (c) => ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
