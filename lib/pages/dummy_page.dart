@@ -1,6 +1,7 @@
 //Packages
 import 'package:flutter/material.dart';
 
+import '../tools/theme.dart';
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
@@ -18,6 +19,7 @@ class DummyPage extends StatelessWidget {
         currentPage: pages[1],
       ),
       body: Container(
+        color: themeBgColor(),
         decoration: appBarDecor,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
