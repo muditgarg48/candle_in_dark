@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -93,9 +95,37 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget picture() {
     return ClipRRect(
       borderRadius: const BorderRadius.only(topRight: Radius.circular(40)),
-      child: Image.asset(
-        "assets/imgs/trinity_drawer.jpg",
-        fit: BoxFit.cover,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            "assets/imgs/trinity_drawer.jpg",
+            fit: BoxFit.cover,
+          ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SizedBox(height: 20),
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: themeBgColor(),
+                    child: Icon(
+                      Icons.people_alt_rounded,
+                      color: themeTxtColor(),
+                    ),
+                  ),
+                  const Text(
+                    "Test Subject",
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -159,10 +189,9 @@ class _MyDrawerState extends State<MyDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    double drawerWidth = MediaQuery.of(context).size.width / 1.1;
-    if ((MediaQuery.of(context).size.width / 1.1) > 450) {
-      drawerWidth = 450;
-    }
+    double drawerWidth = (MediaQuery.of(context).size.width / 1.1) > 450
+        ? 450
+        : MediaQuery.of(context).size.width / 1.1;
 
     var sectionSpacing =
         SizedBox(height: MediaQuery.of(context).size.height / 30);
