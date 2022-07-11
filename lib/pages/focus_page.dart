@@ -4,7 +4,6 @@
 import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -57,12 +56,6 @@ class CalmPageState extends State<CalmPage> {
     // print("MY DATA: $fileData");
     setState(() => audioNames = fileData);
     mapAudios();
-    toast(
-      context: context,
-      msg:
-          "Please wait till all tunes have been fetched, there are ${audioNames.length} of them",
-      startI: Icons.audiotrack_rounded,
-    );
   }
 
   Future<Uint8List> getIcon(String name) async {
@@ -185,7 +178,7 @@ class CalmPageState extends State<CalmPage> {
                 Expanded(
                   flex: 7,
                   child: Text(
-                    "Loaded ${audios.length} soothing sounds to ",
+                    "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
                     style: TextStyle(
                       color: themeTxtColor().withOpacity(0.5),
                       fontSize: 30,
@@ -193,13 +186,13 @@ class CalmPageState extends State<CalmPage> {
                     textAlign: TextAlign.end,
                   ),
                 ),
-                const Expanded(flex: 1, child: SizedBox(width: 7)),
+                const Expanded(flex: 0, child: SizedBox(width: 7)),
                 Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: DefaultTextStyle(
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeTxtColor().withOpacity(0.7),
+                      color: themeTxtColor().withOpacity(0.8),
                       fontSize: 30,
                     ),
                     child: AnimatedTextKit(
