@@ -1,5 +1,4 @@
 //Packages
-import 'package:candle_in_dark/pages/imp_pdfs.dart';
 import "package:flutter/material.dart";
 
 //Pages
@@ -10,6 +9,7 @@ import './pages/dummy_page.dart';
 import './pages/imp_links.dart';
 import './pages/home_page.dart';
 import './pages/settings.dart';
+import 'pages/calm_page.dart';
 import 'pages/faculty.dart';
 
 String versionNumber = "1.0.0";
@@ -73,19 +73,19 @@ var pages = <Map<String, dynamic>>[
     'appBarTitle': "KNOW YOUR FACULTY",
     'appBarBG':
         "https://images.unsplash.com/photo-1505663912202-ac22d4cb3707?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-  },
-  {
-    //4
-    'route_name': 'imp_pdfs',
-    'route': (context) => const ImpPDFsPage(),
-    'class': const ImpPDFsPage(),
-    'labelName': "Important PDFs",
-    'active_icon': Icons.picture_as_pdf,
-    'icon': Icons.picture_as_pdf_outlined,
-    'appBarTitle': "IMPORTANT PDFs",
-    'appBarBG':
-        "https://images.unsplash.com/photo-1651936716527-c92d541cf630?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-  },
+  }
+  // {
+  //   //4
+  //   'route_name': 'imp_pdfs',
+  //   'route': (context) => const ImpPDFsPage(),
+  //   'class': const ImpPDFsPage(),
+  //   'labelName': "Important PDFs",
+  //   'active_icon': Icons.picture_as_pdf,
+  //   'icon': Icons.picture_as_pdf_outlined,
+  //   'appBarTitle': "IMPORTANT PDFs",
+  //   'appBarBG':
+  //       "https://images.unsplash.com/photo-1651936716527-c92d541cf630?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+  // },
 ];
 
 var features = <Map<String, dynamic>>[
@@ -112,6 +112,18 @@ var features = <Map<String, dynamic>>[
     'appBarTitle': "CURRENCY CONVERTOR",
     'appBarBG':
         "https://images.unsplash.com/photo-1599690925058-90e1a0b56154?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80",
+  },
+  {
+    //2
+    'route_name': 'calm',
+    'route': (context) => const CalmPage(),
+    'class': const CalmPage(),
+    'labelName': "Focus",
+    'active_icon': Icons.music_note_rounded,
+    'icon': Icons.music_note_outlined,
+    'appBarTitle': "",
+    'appBarBG':
+        "",
   },
 ];
 
