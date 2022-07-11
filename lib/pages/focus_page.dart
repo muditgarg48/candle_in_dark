@@ -1,4 +1,6 @@
 //Packages
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -40,6 +42,7 @@ class CalmPageState extends State<CalmPage> {
   void stopAll() {
     for (var audio in audios) {
       audio["controller"].stop();
+      (context as Element).reassemble();
     }
   }
 
@@ -101,7 +104,9 @@ class CalmPageState extends State<CalmPage> {
               behavior: HitTestBehavior.deferToChild,
               child: Image.memory(
                 audio["pic"],
-                color: themeTxtColor(),
+                color: audio["controller"].state == PlayerState.playing
+                    ? themeTxtColor()
+                    : themeBgColor(),
                 fit: BoxFit.fill,
                 height: 100,
                 width: 100,
@@ -112,16 +117,22 @@ class CalmPageState extends State<CalmPage> {
                     audio["controller"].state == PlayerState.stopped ||
                     audio["controller"].state == PlayerState.completed) {
                   await audio["controller"].resume();
+                  (context as Element).reassemble();
                 } else if (audio["controller"].state == PlayerState.playing) {
                   await audio["controller"].pause();
+                  (context as Element).reassemble();
                 }
                 print("Hello there! This is me: ${audio["name"]}");
                 print("Now my state is :${audio["controller"].state}");
               },
             ),
             Slider(
-              activeColor: invertedThemeTxtColor(),
-              thumbColor: invertedThemeTxtColor(),
+              activeColor: audio["controller"].state == PlayerState.playing
+                  ? invertedThemeTxtColor()
+                  : themeBgColor(),
+              thumbColor: audio["controller"].state == PlayerState.playing
+                  ? invertedThemeTxtColor()
+                  : themeBgColor(),
               min: 0,
               max: 100,
               value: audio["volume"],
@@ -146,13 +157,16 @@ class CalmPageState extends State<CalmPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20,
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: TextLiquidFill(
-                text: "Just Relax",
+                text: "JUST RELAX",
                 boxHeight: MediaQuery.of(context).size.height / 3,
                 boxWidth: MediaQuery.of(context).size.width / 3,
-                waveColor: themeTxtColor(),
+                waveColor: themeTxtColor().withOpacity(0.8),
                 boxBackgroundColor: themeCardColor(),
                 loadDuration: const Duration(seconds: 120),
                 textStyle: TextStyle(
@@ -162,6 +176,40 @@ class CalmPageState extends State<CalmPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Loaded ${audios.length} soothing sounds to ",
+                  style: TextStyle(
+                    color: themeTxtColor().withOpacity(0.5),
+                    fontSize: 30,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                const SizedBox(width: 4),
+                DefaultTextStyle(
+                  style: TextStyle(
+                    color: themeTxtColor().withOpacity(0.5),
+                    fontSize: 40,
+                  ),
+                  child: AnimatedTextKit(
+                    isRepeatingAnimation: true,
+                    repeatForever: true,
+                    pause: const Duration(milliseconds: 500),
+                    animatedTexts: [
+                      RotateAnimatedText('FOCUS'),
+                      RotateAnimatedText('STUDY'),
+                      RotateAnimatedText('MEDITATE'),
+                      RotateAnimatedText('BE PRODUCTIVE'),
+                    ],
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 20,

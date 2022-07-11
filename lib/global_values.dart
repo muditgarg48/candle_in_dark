@@ -9,7 +9,7 @@ import './pages/dummy_page.dart';
 import './pages/imp_links.dart';
 import './pages/home_page.dart';
 import './pages/settings.dart';
-import 'pages/calm_page.dart';
+import 'pages/focus_page.dart';
 import 'pages/faculty.dart';
 
 String versionNumber = "1.0.0";
