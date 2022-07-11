@@ -1,5 +1,6 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import "package:flutter/material.dart";
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../global_values.dart';
 import '../tools/theme.dart';
@@ -46,6 +47,11 @@ class MyHomePageState extends State<MyHomePage> {
             ],
             MediaQuery.of(context).size.height / 15,
           ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 10,
+          ),
+          IconButton(
+              onPressed: () {}, icon: const Icon(FontAwesomeIcons.google))
         ],
       ),
     );
