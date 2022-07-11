@@ -127,6 +127,7 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
     );
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
