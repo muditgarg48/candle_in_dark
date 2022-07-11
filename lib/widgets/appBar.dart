@@ -6,13 +6,6 @@ import '../tools/theme.dart';
 
 import '../global_values.dart';
 
-var appBarDecor = const BoxDecoration(
-  borderRadius: BorderRadius.only(
-    bottomLeft: Radius.circular(200),
-    bottomRight: Radius.circular(200),
-  ),
-);
-
 // ignore: camel_case_types
 class customSliver extends StatelessWidget {
   const customSliver(

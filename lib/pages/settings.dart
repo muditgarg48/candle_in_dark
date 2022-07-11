@@ -198,39 +198,36 @@ class SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor(),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: settings,
       ),
-      body: Container(
-        color: themeBgColor(),
-        decoration: appBarDecor,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            customSliver(
-              appBarTitle: settings["appBarTitle"],
-              appBarBG: settings["appBarBG"],
-            ),
-          ],
-          // body: const Center(child: Text("Hello!")),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: themeBgColor(),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                userDataRelated(),
-                const SizedBox(height: 20),
-                appRelated(),
-                const SizedBox(height: 20),
-                Text(
-                  "v$versionNumber",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: themeTxtColor()),
-                ),
-              ],
-            ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          customSliver(
+            appBarTitle: settings["appBarTitle"],
+            appBarBG: settings["appBarBG"],
+          ),
+        ],
+        // body: const Center(child: Text("Hello!")),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: themeBgColor(),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              userDataRelated(),
+              const SizedBox(height: 20),
+              appRelated(),
+              const SizedBox(height: 20),
+              Text(
+                "v$versionNumber",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: themeTxtColor()),
+              ),
+            ],
           ),
         ),
       ),

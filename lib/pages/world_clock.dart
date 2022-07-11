@@ -435,13 +435,13 @@ class WorldClockState extends State<WorldClock> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor(),
       key: ValueKey(themeBgColor()),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: features[0],
       ),
       body: Container(
-        color: themeBgColor(),
         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [

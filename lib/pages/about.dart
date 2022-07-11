@@ -1,3 +1,4 @@
+import 'package:candle_in_dark/tools/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/appBar.dart';
@@ -12,25 +13,22 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor(),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: pages[0],
       ),
-      body: Container(
-        // padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-        decoration: appBarDecor,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            customSliver(
-              appBarTitle: pages[0]["appBarTitle"],
-              appBarBG: pages[0]["appBarBG"],
-            ),
-          ],
-          body: SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 2,
-            child: const LoadingPage(display: "Coming Soon ..."),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          customSliver(
+            appBarTitle: pages[0]["appBarTitle"],
+            appBarBG: pages[0]["appBarBG"],
           ),
+        ],
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          width: MediaQuery.of(context).size.width / 2,
+          child: const LoadingPage(display: "Coming Soon ..."),
         ),
       ),
     );

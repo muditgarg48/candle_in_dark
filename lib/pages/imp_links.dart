@@ -268,25 +268,22 @@ class _ImpLinksPageState extends State<ImpLinksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor(),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: pages[2],
       ),
-      body: Container(
-        // decoration: appBarDecor,
-        color: themeBgColor(),
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            customSliver(
-              appBarTitle: pages[2]["appBarTitle"],
-              appBarBG: pages[2]["appBarBG"],
-            ),
-          ],
-          body: SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 2,
-            child: differentSections(),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          customSliver(
+            appBarTitle: pages[2]["appBarTitle"],
+            appBarBG: pages[2]["appBarBG"],
           ),
+        ],
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          width: MediaQuery.of(context).size.width / 2,
+          child: differentSections(),
         ),
       ),
     );

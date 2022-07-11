@@ -114,21 +114,18 @@ class TheFacultyPageState extends State<TheFacultyPage> {
       drawer: MyDrawer(
         currentPage: pages[3],
       ),
-      body: Container(
-        decoration: appBarDecor,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            customSliver(
-              appBarTitle: pages[3]["appBarTitle"],
-              appBarBG: pages[3]["appBarBG"],
-            ),
-          ],
-          body: data.isEmpty
-              ? const LoadingPage(
-                  display: "Please wait while we fetch your data ... ",
-                )
-              : page(),
-        ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          customSliver(
+            appBarTitle: pages[3]["appBarTitle"],
+            appBarBG: pages[3]["appBarBG"],
+          ),
+        ],
+        body: data.isEmpty
+            ? const LoadingPage(
+                display: "Please wait while we fetch your data ... ",
+              )
+            : page(),
       ),
     );
   }

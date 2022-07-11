@@ -36,15 +36,15 @@ Widget myCard({
   return Container(
     height: deviceHeight / 3,
     padding: const EdgeInsets.all(10),
-    margin: const EdgeInsets.all(7),
+    margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
     width: deviceWidth,
     decoration: BoxDecoration(
       color: themeCardColor(),
       boxShadow: [
         BoxShadow(
-          blurRadius: 100,
+          blurRadius: 10,
           color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
+          spreadRadius: 1,
           blurStyle: BlurStyle.normal,
         ),
       ],
@@ -535,13 +535,13 @@ class _CurrencyConvertorPageState extends State<CurrencyConvertorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeBgColor(),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: features[1],
       ),
-      body: Container(
-        color: themeBgColor(),
-        padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             customSliver(
