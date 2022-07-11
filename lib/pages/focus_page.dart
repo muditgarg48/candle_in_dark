@@ -54,8 +54,7 @@ class CalmPageState extends State<CalmPage> {
 
   void getAudioJSON() async {
     List fileData = await fetchFromJSON_Local("assets/json/calm_audios.json");
-    // ignore: avoid_print
-    print("MY DATA: $fileData");
+    // print("MY DATA: $fileData");
     setState(() => audioNames = fileData);
     mapAudios();
     toast(
@@ -112,7 +111,7 @@ class CalmPageState extends State<CalmPage> {
                 width: 100,
               ),
               onTap: () async {
-                print("My previous state is :${audio["controller"].state}");
+                // print("My previous state is :${audio["controller"].state}");
                 if (audio["controller"].state == PlayerState.paused ||
                     audio["controller"].state == PlayerState.stopped ||
                     audio["controller"].state == PlayerState.completed) {
@@ -122,8 +121,8 @@ class CalmPageState extends State<CalmPage> {
                   await audio["controller"].pause();
                   (context as Element).reassemble();
                 }
-                print("Hello there! This is me: ${audio["name"]}");
-                print("Now my state is :${audio["controller"].state}");
+                // print("Hello there! This is me: ${audio["name"]}");
+                // print("Now my state is :${audio["controller"].state}");
               },
             ),
             Slider(
@@ -137,12 +136,12 @@ class CalmPageState extends State<CalmPage> {
               max: 100,
               value: audio["volume"],
               onChanged: (value) async {
-                print("My previous volume was ${audio["volume"]}");
+                // print("My previous volume was ${audio["volume"]}");
                 setState(() {
                   audio["volume"] = value;
                 });
                 await audio["controller"].setVolume(value / 100);
-                print("Now my volume was ${audio["volume"]}");
+                // print("Now my volume was ${audio["volume"]}");
               },
             ),
           ],
@@ -155,7 +154,7 @@ class CalmPageState extends State<CalmPage> {
     return Center(
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height / 20,
@@ -181,32 +180,39 @@ class CalmPageState extends State<CalmPage> {
               height: MediaQuery.of(context).size.height / 20,
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Loaded ${audios.length} soothing sounds to ",
-                  style: TextStyle(
-                    color: themeTxtColor().withOpacity(0.5),
-                    fontSize: 30,
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    "Loaded ${audios.length} soothing sounds to ",
+                    style: TextStyle(
+                      color: themeTxtColor().withOpacity(0.5),
+                      fontSize: 30,
+                    ),
+                    textAlign: TextAlign.end,
                   ),
-                  textAlign: TextAlign.start,
                 ),
-                const SizedBox(width: 4),
-                DefaultTextStyle(
-                  style: TextStyle(
-                    color: themeTxtColor().withOpacity(0.5),
-                    fontSize: 40,
-                  ),
-                  child: AnimatedTextKit(
-                    isRepeatingAnimation: true,
-                    repeatForever: true,
-                    pause: const Duration(milliseconds: 500),
-                    animatedTexts: [
-                      RotateAnimatedText('FOCUS'),
-                      RotateAnimatedText('STUDY'),
-                      RotateAnimatedText('MEDITATE'),
-                      RotateAnimatedText('BE PRODUCTIVE'),
-                    ],
+                const Expanded(flex: 1, child: SizedBox(width: 7)),
+                Expanded(
+                  flex: 6,
+                  child: DefaultTextStyle(
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: themeTxtColor().withOpacity(0.7),
+                      fontSize: 30,
+                    ),
+                    child: AnimatedTextKit(
+                      isRepeatingAnimation: true,
+                      repeatForever: true,
+                      pause: const Duration(milliseconds: 500),
+                      animatedTexts: [
+                        FadeAnimatedText('FOCUS'),
+                        FadeAnimatedText('STUDY'),
+                        FadeAnimatedText('MEDITATE'),
+                        FadeAnimatedText('BE PRODUCTIVE'),
+                      ],
+                    ),
                   ),
                 ),
               ],
