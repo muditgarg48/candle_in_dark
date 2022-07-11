@@ -111,58 +111,63 @@ class WorldClockState extends State<WorldClock> {
     var searchController = TextEditingController();
     currentList = availableTimezones;
     return showBarModalBottomSheet(
-      // backgroundColor: themeBgColor(),
       context: context,
       enableDrag: true,
       builder: (c) => ListView(
-        physics: const BouncingScrollPhysics(),
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
             color: themeBgColor(),
-            child: TextField(
-              maxLines: 1,
-              inputFormatters: [FilteringTextInputFormatter.deny(' ')],
-              cursorColor: themeTxtColor(),
-              controller: searchController,
-              style: TextStyle(
-                color: themeTxtColor(),
-              ),
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                labelText: "Search",
-                labelStyle: TextStyle(color: themeTxtColor()),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: themeTxtColor(),
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.clear,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            height: MediaQuery.of(context).size.height / 15,
+            width: MediaQuery.of(context).size.width,
+            child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                TextField(
+                  maxLines: 1,
+                  inputFormatters: [FilteringTextInputFormatter.deny(' ')],
+                  cursorColor: themeTxtColor(),
+                  controller: searchController,
+                  style: TextStyle(
                     color: themeTxtColor(),
                   ),
-                  onPressed: () {
-                    if (searchController.text == '') {
-                      Navigator.pop(context);
-                    } else {
-                      searchController.text = '';
-                      currentList = availableTimezones;
+                  textInputAction: TextInputAction.search,
+                  decoration: InputDecoration(
+                    labelText: "Search",
+                    labelStyle: TextStyle(color: themeTxtColor()),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: themeTxtColor(),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.clear,
+                        color: themeTxtColor(),
+                      ),
+                      onPressed: () {
+                        if (searchController.text == '') {
+                          Navigator.pop(context);
+                        } else {
+                          searchController.text = '';
+                          currentList = availableTimezones;
+                        }
+                      },
+                    ),
+                  ),
+                  onChanged: (input) {
+                    if (input == '') {
+                      setState(() {
+                        currentList = availableTimezones;
+                      });
                     }
+                    setState(() =>
+                        currentList = filterList(availableTimezones, input));
+                    // ignore: invalid_use_of_protected_member
+                    (c as Element).reassemble();
                   },
+                  showCursor: true,
                 ),
-              ),
-              onChanged: (input) {
-                if (input == '') {
-                  setState(() {
-                    currentList = availableTimezones;
-                  });
-                }
-                setState(
-                    () => currentList = filterList(availableTimezones, input));
-                // ignore: invalid_use_of_protected_member
-                (c as Element).reassemble();
-              },
-              showCursor: true,
+              ],
             ),
           ),
           currentList.isEmpty
@@ -173,6 +178,7 @@ class WorldClockState extends State<WorldClock> {
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       for (int index = 0; index < currentList.length; index++)
                         ListTile(
