@@ -4,6 +4,7 @@
 import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:candle_in_dark/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -27,6 +28,7 @@ class CalmPageState extends State<CalmPage> {
 
   @override
   void initState() {
+    checkFirebaseInstance() ? null : initialiseFirebase();
     getAudioJSON();
     super.initState();
   }
@@ -41,8 +43,8 @@ class CalmPageState extends State<CalmPage> {
   void stopAll() {
     for (var audio in audios) {
       audio["controller"].stop();
-      (context as Element).reassemble();
     }
+    (context as Element).reassemble();
   }
 
   void disposeAllPlayers() {
@@ -71,6 +73,7 @@ class CalmPageState extends State<CalmPage> {
       var player = AudioPlayer(playerId: audioName);
       await player.setSourceUrl(audioLink);
       player.setPlayerMode(PlayerMode.lowLatency);
+      player.setVolume(0.2);
       var temp = {
         "name": audioName,
         "pic": pic,
@@ -83,7 +86,7 @@ class CalmPageState extends State<CalmPage> {
 
   Widget singleAudioCard(Map audio) {
     return SizedBox.square(
-      dimension: 210,
+      dimension: MediaQuery.of(context).size.width / 3 > 210 ? 210 : 150,
       child: Card(
         elevation: 20,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -100,8 +103,8 @@ class CalmPageState extends State<CalmPage> {
                     ? themeTxtColor()
                     : themeBgColor(),
                 fit: BoxFit.fill,
-                height: 100,
-                width: 100,
+                height: MediaQuery.of(context).size.width / 3 > 210 ? 100 : 50,
+                width: MediaQuery.of(context).size.width / 3 > 210 ? 100 : 50,
               ),
               onTap: () async {
                 // print("My previous state is :${audio["controller"].state}");
@@ -153,17 +156,17 @@ class CalmPageState extends State<CalmPage> {
               height: MediaQuery.of(context).size.height / 20,
             ),
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius:
+                  BorderRadius.circular(MediaQuery.of(context).size.width / 30),
               child: TextLiquidFill(
                 text: "JUST RELAX",
-                boxHeight: MediaQuery.of(context).size.height / 3,
-                boxWidth: MediaQuery.of(context).size.width / 3,
+                boxHeight: MediaQuery.of(context).size.height / 5,
+                boxWidth: MediaQuery.of(context).size.width / 2,
                 waveColor: themeTxtColor().withOpacity(0.8),
                 boxBackgroundColor: themeCardColor(),
                 loadDuration: const Duration(seconds: 120),
                 textStyle: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height / 7,
-                  color: invertedThemeTxtColor(),
+                  fontSize: MediaQuery.of(context).size.width / 13,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -181,7 +184,9 @@ class CalmPageState extends State<CalmPage> {
                     "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
                     style: TextStyle(
                       color: themeTxtColor().withOpacity(0.5),
-                      fontSize: 30,
+                      fontSize: MediaQuery.of(context).size.width / 10 > 150
+                          ? 40
+                          : 20,
                     ),
                     textAlign: TextAlign.end,
                   ),
@@ -193,7 +198,9 @@ class CalmPageState extends State<CalmPage> {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: themeTxtColor().withOpacity(0.8),
-                      fontSize: 30,
+                      fontSize: MediaQuery.of(context).size.width / 10 > 150
+                          ? 40
+                          : 20,
                     ),
                     child: AnimatedTextKit(
                       isRepeatingAnimation: true,
@@ -213,12 +220,18 @@ class CalmPageState extends State<CalmPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 20,
             ),
-            Wrap(
-              alignment: WrapAlignment.center,
-              children: [
-                for (var audio in audios) singleAudioCard(audio),
-              ],
-            ),
+            audios.isNotEmpty
+                ? Wrap(
+                    alignment: WrapAlignment.center,
+                    children: [
+                      for (var audio in audios) singleAudioCard(audio),
+                    ],
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child:
+                        const LoadingPage(display: "Let me get your sounds!")),
           ],
         ),
       ),
