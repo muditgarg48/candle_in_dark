@@ -40,6 +40,24 @@ class CalmPageState extends State<CalmPage> {
     super.dispose();
   }
 
+  void playPausedOnes() {
+    for (var audio in audios) {
+      if (audio["controller"].state == PlayerState.paused) {
+        audio["controller"].resume();
+      }
+    }
+    (context as Element).reassemble();
+  }
+
+  void pauseAll() {
+    for (var audio in audios) {
+      if (audio["controller"].state == PlayerState.playing) {
+        audio["controller"].pause();
+      }
+    }
+    (context as Element).reassemble();
+  }
+
   void stopAll() {
     for (var audio in audios) {
       audio["controller"].stop();
@@ -57,7 +75,7 @@ class CalmPageState extends State<CalmPage> {
     List fileData = await fetchFromJSON_Local("assets/json/calm_audios.json");
     // print("MY DATA: $fileData");
     setState(() => audioNames = fileData);
-    mapAudios();
+    await mapAudios();
   }
 
   Future<Uint8List> getIcon(String name) async {
@@ -65,7 +83,7 @@ class CalmPageState extends State<CalmPage> {
     return imgBytes;
   }
 
-  void mapAudios() async {
+  Future<void> mapAudios() async {
     for (var audioName in audioNames) {
       var pic = await getIcon("audios/icons/$audioName.png");
       var audioLink = await getFromFirebase_FileURL(
@@ -73,11 +91,11 @@ class CalmPageState extends State<CalmPage> {
       var player = AudioPlayer(playerId: audioName);
       await player.setSourceUrl(audioLink);
       player.setPlayerMode(PlayerMode.lowLatency);
-      player.setVolume(0.2);
+      player.setVolume(0.4);
       var temp = {
         "name": audioName,
         "pic": pic,
-        "volume": 20,
+        "volume": 40,
         "controller": player
       };
       setState(() => audios.add(temp));
@@ -85,8 +103,9 @@ class CalmPageState extends State<CalmPage> {
   }
 
   Widget singleAudioCard(Map audio) {
+    var width = MediaQuery.of(context).size.width;
     return SizedBox.square(
-      dimension: MediaQuery.of(context).size.width / 3 > 210 ? 210 : 150,
+      dimension: width / 3 > 210 ? 210 : 150,
       child: Card(
         elevation: 20,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -103,8 +122,8 @@ class CalmPageState extends State<CalmPage> {
                     ? themeTxtColor()
                     : themeBgColor(),
                 fit: BoxFit.fill,
-                height: MediaQuery.of(context).size.width / 3 > 210 ? 100 : 50,
-                width: MediaQuery.of(context).size.width / 3 > 210 ? 100 : 50,
+                height: width / 3 > 210 ? 100 : 50,
+                width: width / 3 > 210 ? 100 : 50,
               ),
               onTap: () async {
                 // print("My previous state is :${audio["controller"].state}");
@@ -147,33 +166,34 @@ class CalmPageState extends State<CalmPage> {
   }
 
   Widget mainPage() {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
+              height: height / 20,
             ),
             ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(MediaQuery.of(context).size.width / 30),
+              borderRadius: BorderRadius.circular(width / 30),
               child: TextLiquidFill(
                 text: "JUST RELAX",
-                boxHeight: MediaQuery.of(context).size.height / 5,
-                boxWidth: MediaQuery.of(context).size.width / 2,
+                boxHeight: height / 5,
+                boxWidth: width / 2,
                 waveColor: themeTxtColor().withOpacity(0.8),
                 boxBackgroundColor: themeCardColor(),
                 loadDuration: const Duration(seconds: 120),
                 textStyle: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width / 13,
+                  fontSize: width / 13,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
+              height: height / 20,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,9 +204,7 @@ class CalmPageState extends State<CalmPage> {
                     "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
                     style: TextStyle(
                       color: themeTxtColor().withOpacity(0.5),
-                      fontSize: MediaQuery.of(context).size.width / 10 > 150
-                          ? 40
-                          : 20,
+                      fontSize: width / 10 > 150 ? 40 : 20,
                     ),
                     textAlign: TextAlign.end,
                   ),
@@ -198,9 +216,7 @@ class CalmPageState extends State<CalmPage> {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: themeTxtColor().withOpacity(0.8),
-                      fontSize: MediaQuery.of(context).size.width / 10 > 150
-                          ? 40
-                          : 20,
+                      fontSize: width / 10 > 150 ? 40 : 20,
                     ),
                     child: AnimatedTextKit(
                       isRepeatingAnimation: true,
@@ -218,7 +234,7 @@ class CalmPageState extends State<CalmPage> {
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
+              height: height / 20,
             ),
             audios.isNotEmpty
                 ? Wrap(
@@ -228,13 +244,34 @@ class CalmPageState extends State<CalmPage> {
                     ],
                   )
                 : SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    width: MediaQuery.of(context).size.width / 2,
+                    height: height / 4,
+                    width: width / 4,
                     child:
-                        const LoadingPage(display: "Let me get your sounds!")),
+                        const LoadingPage(display: "Let me get your sounds!"),
+                  ),
           ],
         ),
       ),
+    );
+  }
+
+  dynamic globalActionButton(
+      String message, IconData icon, VoidCallback action) {
+    var width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: width / 40 > 20
+          ? FloatingActionButton.extended(
+              onPressed: action,
+              elevation: 20,
+              label: Text(message),
+              icon: Icon(icon),
+            )
+          : FloatingActionButton(
+              onPressed: action,
+              tooltip: message,
+              child: Icon(icon),
+            ),
     );
   }
 
@@ -250,13 +287,22 @@ class CalmPageState extends State<CalmPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: mainPage(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: stopAll,
-        elevation: 20,
-        label: const Text("Stop All"),
-        icon: const Icon(Icons.stop),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: mainPage(),
       ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          globalActionButton(
+              "Try our curated playlists", Icons.playlist_play_rounded, () {}),
+          globalActionButton(
+              "Play paused", Icons.play_arrow_rounded, playPausedOnes),
+          globalActionButton("Pause playing", Icons.pause_rounded, pauseAll),
+          globalActionButton("Stop All", Icons.stop_rounded, stopAll),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
