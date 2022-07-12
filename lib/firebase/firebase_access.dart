@@ -15,6 +15,15 @@ void initialiseFirebase() async {
   ).whenComplete(() => print("Firebase Initialised!"));
 }
 
+bool checkFirebaseInstance() {
+  try {
+    Firebase.app();
+    return true;
+  } catch (exception) {
+    return false;
+  }
+}
+
 //get JSON data from firebase
 Future<dynamic> getFromFirebase_JSON({required String linkFromRoot}) async {
   Reference ref = FirebaseStorage.instance.ref().child(linkFromRoot);
