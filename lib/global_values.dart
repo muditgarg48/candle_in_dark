@@ -56,7 +56,7 @@ var pages = <Map<String, dynamic>>[
     'route_name': 'imp_links',
     'route': (context) => const ImpLinksPage(),
     'class': const ImpLinksPage(),
-    'labelName': "Important Links",
+    'labelName': "Quick Links",
     'active_icon': Icons.alternate_email,
     'icon': Icons.alternate_email_sharp,
     'appBarTitle': "IMPORTANT LINKS",
