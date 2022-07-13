@@ -15,7 +15,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   void setDeviceOrientation() => SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
@@ -24,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     setDeviceOrientation();
-    //sending the current page (home page context) to change it according to the settings recieved from previous session
+    //sending the current page (home page context) to change it according to the settings received from previous session
     SyncSettingsState().getPreviousSessionSettings(context);
     initialiseFirebase();
     super.initState();
