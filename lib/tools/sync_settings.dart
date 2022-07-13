@@ -13,6 +13,9 @@ class SyncSettings extends StatefulWidget {
 }
 
 class SyncSettingsState extends State<SyncSettings> {
+  // =================================================================
+  //      THEME BASED FUNCTIONS
+  // =================================================================
   void getPreviousSessionTheme(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     systemBasedTheme = prefs.getBool("system_based_theme") ?? false;
@@ -45,6 +48,10 @@ class SyncSettingsState extends State<SyncSettings> {
     print(
         "Session system based theme preference stored into cache .i.e. systemBasedTheme = ${prefs.getBool("system_based_theme")}");
   }
+
+  // =================================================================
+  //      LIST BASED FUNCTIONS
+  // =================================================================
 
   void getPreviousSessionSettings(BuildContext context) {
     getPreviousSessionTheme(context);

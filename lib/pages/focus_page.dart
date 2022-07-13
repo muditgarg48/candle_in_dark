@@ -72,7 +72,9 @@ class CalmPageState extends State<CalmPage> {
   }
 
   void getAudioJSON() async {
-    List fileData = await fetchFromJSON_Local("assets/json/calm_audios.json");
+    // List fileData = await fetchFromJSON_Local("assets/json/calm_audios.json");
+    List fileData =
+        await getFromFirebase_JSON(linkFromRoot: "json/calm_audios.json");
     // print("MY DATA: $fileData");
     setState(() => audioNames = fileData);
     await mapAudios();
@@ -168,6 +170,22 @@ class CalmPageState extends State<CalmPage> {
   Widget mainPage() {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var titleCard = ClipRRect(
+      borderRadius: BorderRadius.circular(width / 30),
+      child: TextLiquidFill(
+        text: "JUST RELAX",
+        boxHeight: height / 5,
+        boxWidth: width / 2,
+        waveColor: themeTxtColor().withOpacity(0.8),
+        boxBackgroundColor: themeCardColor(),
+        loadDuration: const Duration(seconds: 120),
+        textStyle: TextStyle(
+          fontSize: width / 14,
+          fontWeight: FontWeight.bold,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
     return Center(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -177,22 +195,7 @@ class CalmPageState extends State<CalmPage> {
             SizedBox(
               height: height / 20,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(width / 30),
-              child: TextLiquidFill(
-                text: "JUST RELAX",
-                boxHeight: height / 5,
-                boxWidth: width / 2,
-                waveColor: themeTxtColor().withOpacity(0.8),
-                boxBackgroundColor: themeCardColor(),
-                loadDuration: const Duration(seconds: 120),
-                textStyle: TextStyle(
-                  fontSize: width / 14,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            titleCard,
             SizedBox(
               height: height / 20,
             ),
@@ -201,14 +204,23 @@ class CalmPageState extends State<CalmPage> {
               children: [
                 Expanded(
                   flex: 7,
-                  child: Text(
-                    "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
-                    style: TextStyle(
-                      color: themeTxtColor().withOpacity(0.5),
-                      fontSize: width / 10 > 150 ? 40 : 20,
-                    ),
-                    textAlign: TextAlign.end,
-                  ),
+                  child: audioNames.isEmpty
+                      ? Text(
+                          "Loading our list of soothing sounds for you to ",
+                          style: TextStyle(
+                            color: themeTxtColor().withOpacity(0.5),
+                            fontSize: width / 10 > 150 ? 40 : 20,
+                          ),
+                          textAlign: TextAlign.end,
+                        )
+                      : Text(
+                          "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
+                          style: TextStyle(
+                            color: themeTxtColor().withOpacity(0.5),
+                            fontSize: width / 10 > 150 ? 40 : 20,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
                 ),
                 const Expanded(flex: 0, child: SizedBox(width: 7)),
                 Expanded(
@@ -246,12 +258,7 @@ class CalmPageState extends State<CalmPage> {
                       for (var audio in audios) singleAudioCard(audio),
                     ],
                   )
-                : SizedBox(
-                    height: height / 4,
-                    width: width / 2,
-                    child:
-                        const LoadingPage(display: "Let me get your sounds!"),
-                  ),
+                : titleCard,
           ],
         ),
       ),
