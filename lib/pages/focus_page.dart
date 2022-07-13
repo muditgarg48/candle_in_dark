@@ -4,16 +4,13 @@
 import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:candle_in_dark/widgets/loading.dart';
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 
-import '../tools/fetch_json.dart';
+import '../firebase/firebase_access.dart';
+import '../global_values.dart';
 import '../tools/theme.dart';
 import '../widgets/drawer.dart';
-import '../firebase/firebase_access.dart';
-
-import '../global_values.dart';
 
 class CalmPage extends StatefulWidget {
   const CalmPage({Key? key}) : super(key: key);
@@ -167,17 +164,17 @@ class CalmPageState extends State<CalmPage> {
     );
   }
 
-  Widget mainPage() {
+  Widget titleCard(String txt, Color bg) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    var titleCard = ClipRRect(
+    return ClipRRect(
       borderRadius: BorderRadius.circular(width / 30),
       child: TextLiquidFill(
-        text: "JUST RELAX",
+        text: txt,
         boxHeight: height / 5,
         boxWidth: width / 2,
         waveColor: themeTxtColor().withOpacity(0.8),
-        boxBackgroundColor: themeCardColor(),
+        boxBackgroundColor: bg,
         loadDuration: const Duration(seconds: 120),
         textStyle: TextStyle(
           fontSize: width / 14,
@@ -186,6 +183,11 @@ class CalmPageState extends State<CalmPage> {
         textAlign: TextAlign.center,
       ),
     );
+  }
+
+  Widget mainPage() {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Center(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -195,7 +197,7 @@ class CalmPageState extends State<CalmPage> {
             SizedBox(
               height: height / 20,
             ),
-            titleCard,
+            titleCard("FOCUS", themeCardColor()),
             SizedBox(
               height: height / 20,
             ),
@@ -213,14 +215,23 @@ class CalmPageState extends State<CalmPage> {
                           ),
                           textAlign: TextAlign.end,
                         )
-                      : Text(
-                          "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
-                          style: TextStyle(
-                            color: themeTxtColor().withOpacity(0.5),
-                            fontSize: width / 10 > 150 ? 40 : 20,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
+                      : audios.length == audioNames.length
+                          ? Text(
+                              "Try to",
+                              style: TextStyle(
+                                color: themeTxtColor().withOpacity(0.5),
+                                fontSize: width / 10 > 150 ? 40 : 20,
+                              ),
+                              textAlign: TextAlign.end,
+                            )
+                          : Text(
+                              "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
+                              style: TextStyle(
+                                color: themeTxtColor().withOpacity(0.5),
+                                fontSize: width / 10 > 150 ? 40 : 20,
+                              ),
+                              textAlign: TextAlign.end,
+                            ),
                 ),
                 const Expanded(flex: 0, child: SizedBox(width: 7)),
                 Expanded(
@@ -234,9 +245,8 @@ class CalmPageState extends State<CalmPage> {
                     child: AnimatedTextKit(
                       isRepeatingAnimation: true,
                       repeatForever: true,
-                      pause: const Duration(milliseconds: 500),
+                      pause: const Duration(seconds: 1),
                       animatedTexts: [
-                        FadeAnimatedText('FOCUS'),
                         FadeAnimatedText('STUDY'),
                         FadeAnimatedText('MEDITATE'),
                         FadeAnimatedText('RELAX'),
@@ -258,7 +268,7 @@ class CalmPageState extends State<CalmPage> {
                       for (var audio in audios) singleAudioCard(audio),
                     ],
                   )
-                : titleCard,
+                : const SizedBox.shrink(),
           ],
         ),
       ),
@@ -275,8 +285,11 @@ class CalmPageState extends State<CalmPage> {
               onPressed: action,
               elevation: 20,
               backgroundColor: themeBgColor(),
-              label: Text(message),
-              icon: Icon(icon),
+              label: Text(
+                message,
+                style: TextStyle(color: themeTxtColor()),
+              ),
+              icon: Icon(icon, color: themeTxtColor()),
             )
           : FloatingActionButton(
               onPressed: action,
