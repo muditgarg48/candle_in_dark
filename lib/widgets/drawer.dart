@@ -2,10 +2,13 @@
 
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../tools/account_handle.dart';
+import '../tools/cache.dart';
 import '../tools/theme.dart';
 
 import '../global_values.dart';
@@ -93,6 +96,14 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
   Widget picture() {
+    var userName = "Anonymous User";
+    var userPicURL = "";
+    var user = FirebaseAuth.instance.currentUser;
+    if (GoogleServices().isUserSignedIn()) {
+      userName = user!.displayName!;
+      userPicURL = user.photoURL!;
+    }
+
     return ClipRRect(
       borderRadius: const BorderRadius.only(topRight: Radius.circular(40)),
       child: Stack(
@@ -112,14 +123,19 @@ class _MyDrawerState extends State<MyDrawer> {
                   CircleAvatar(
                     radius: 50,
                     backgroundColor: themeBgColor(),
-                    child: Icon(
-                      Icons.people_alt_rounded,
-                      color: themeTxtColor(),
-                    ),
+                    child: user == null
+                        ? Icon(
+                            Icons.people_alt_rounded,
+                            color: themeTxtColor(),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: cacheImage(userPicURL),
+                          ),
                   ),
-                  const Text(
-                    "Test Subject",
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    userName,
+                    style: const TextStyle(color: Colors.white),
                   )
                 ],
               ),

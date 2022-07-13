@@ -2,10 +2,11 @@ import "package:flutter/material.dart";
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../global_values.dart';
+import '../tools/account_handle.dart';
 import '../tools/theme.dart';
 import '../widgets/drawer.dart';
-// import 'dummy_page.dart';
+
+import '../global_values.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buttons(String txt, VoidCallback action, IconData icon) {
-    return MediaQuery.of(context).size.width > 700
+    return MediaQuery.of(context).size.width > 100
         ? FloatingActionButton.extended(
             onPressed: action,
             backgroundColor: themeBgColor(),
@@ -101,11 +102,17 @@ class MyHomePageState extends State<MyHomePage> {
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              buttons(
-                "Sign In to Google",
-                () {},
-                FontAwesomeIcons.google,
-              ),
+              GoogleServices().isUserSignedIn()
+                  ? buttons(
+                      "Sign Out",
+                      () => GoogleServices().googleSignOut(context),
+                      FontAwesomeIcons.google,
+                    )
+                  : buttons(
+                      "Sign In to Google",
+                      () => GoogleServices().signInWithGoogle(context),
+                      FontAwesomeIcons.google,
+                    ),
               const SizedBox(height: 30),
               buttons(
                 "Lets start",
