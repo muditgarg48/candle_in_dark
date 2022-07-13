@@ -23,7 +23,7 @@ class MyHomePageState extends State<MyHomePage> {
           TypewriterAnimatedText(
             txt,
             speed: const Duration(milliseconds: 100),
-            cursor: " _",
+            cursor: "|",
             textStyle: TextStyle(
               color: Colors.white,
               fontSize: size,
@@ -45,7 +45,7 @@ class MyHomePageState extends State<MyHomePage> {
               "to",
               "Candle in Dark",
             ],
-            MediaQuery.of(context).size.height / 15,
+            MediaQuery.of(context).size.height / 17,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 10,

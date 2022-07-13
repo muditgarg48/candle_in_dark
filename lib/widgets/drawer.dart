@@ -161,7 +161,6 @@ class _MyDrawerState extends State<MyDrawer> {
 
   Widget sectionBuilder({required dynamic section, required String name}) {
     return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height / 30),

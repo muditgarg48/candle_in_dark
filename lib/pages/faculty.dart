@@ -38,7 +38,7 @@ class TheFacultyPageState extends State<TheFacultyPage> {
   Widget singleFacultyMember(var faculty) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      margin: const EdgeInsets.all(30),
+      margin: const EdgeInsets.all(20),
       elevation: 20,
       surfaceTintColor: themeBgColor(),
       child: Container(
@@ -86,6 +86,7 @@ class TheFacultyPageState extends State<TheFacultyPage> {
                   ),
                 ),
                 Wrap(
+                  alignment: WrapAlignment.center,
                   children: [
                     for (var faculty in college["faculty"])
                       singleFacultyMember(faculty),

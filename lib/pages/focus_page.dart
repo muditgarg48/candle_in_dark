@@ -95,7 +95,7 @@ class CalmPageState extends State<CalmPage> {
       var temp = {
         "name": audioName,
         "pic": pic,
-        "volume": 40,
+        "volume": 0.4,
         "controller": player
       };
       setState(() => audios.add(temp));
@@ -149,11 +149,11 @@ class CalmPageState extends State<CalmPage> {
                   : themeBgColor(),
               min: 0,
               max: 100,
-              value: audio["volume"],
+              value: audio["volume"] * 100,
               onChanged: (value) async {
                 // print("My previous volume was ${audio["volume"]}");
                 setState(() {
-                  audio["volume"] = value;
+                  audio["volume"] = value / 100;
                 });
                 await audio["controller"].setVolume(value / 100);
                 // print("Now my volume was ${audio["volume"]}");
@@ -170,6 +170,7 @@ class CalmPageState extends State<CalmPage> {
     var height = MediaQuery.of(context).size.height;
     return Center(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -186,7 +187,7 @@ class CalmPageState extends State<CalmPage> {
                 boxBackgroundColor: themeCardColor(),
                 loadDuration: const Duration(seconds: 120),
                 textStyle: TextStyle(
-                  fontSize: width / 13,
+                  fontSize: width / 14,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -226,6 +227,8 @@ class CalmPageState extends State<CalmPage> {
                         FadeAnimatedText('FOCUS'),
                         FadeAnimatedText('STUDY'),
                         FadeAnimatedText('MEDITATE'),
+                        FadeAnimatedText('RELAX'),
+                        FadeAnimatedText('SLEEP PEACEFULLY'),
                         FadeAnimatedText('BE PRODUCTIVE'),
                       ],
                     ),
@@ -245,7 +248,7 @@ class CalmPageState extends State<CalmPage> {
                   )
                 : SizedBox(
                     height: height / 4,
-                    width: width / 4,
+                    width: width / 2,
                     child:
                         const LoadingPage(display: "Let me get your sounds!"),
                   ),
@@ -264,12 +267,14 @@ class CalmPageState extends State<CalmPage> {
           ? FloatingActionButton.extended(
               onPressed: action,
               elevation: 20,
+              backgroundColor: themeBgColor(),
               label: Text(message),
               icon: Icon(icon),
             )
           : FloatingActionButton(
               onPressed: action,
               tooltip: message,
+              backgroundColor: themeBgColor(),
               child: Icon(icon),
             ),
     );
