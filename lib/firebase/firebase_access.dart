@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -8,19 +8,20 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../firebase/firebase_options.dart';
 
-void initialiseFirebase() async {
+Future<void> initialiseFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-    // ignore: avoid_print
   ).whenComplete(() => print("Firebase Initialised!"));
 }
 
-bool checkFirebaseInstance() {
+void checkFirebaseInstance() async {
   try {
     Firebase.app();
-    return true;
+    print("Firebase is already initialised !");
   } catch (exception) {
-    return false;
+    print("You again forgot to initialise Firebase !");
+    await initialiseFirebase();
+    print("Initialised Firebase for you, you're welcome !");
   }
 }
 

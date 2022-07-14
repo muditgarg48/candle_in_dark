@@ -25,7 +25,7 @@ class CalmPageState extends State<CalmPage> {
 
   @override
   void initState() {
-    checkFirebaseInstance() ? null : initialiseFirebase();
+    checkFirebaseInstance();
     getAudioJSON();
     super.initState();
   }

@@ -2,8 +2,11 @@ import "package:flutter/material.dart";
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../firebase/firebase_access.dart';
+
 import '../tools/account_handle.dart';
 import '../tools/theme.dart';
+
 import '../widgets/drawer.dart';
 
 import '../global_values.dart';
@@ -16,6 +19,12 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    checkFirebaseInstance();
+    super.initState();
+  }
 
   Widget title(List<String> txtList, double size) {
     return AnimatedTextKit(

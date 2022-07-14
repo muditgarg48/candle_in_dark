@@ -32,10 +32,9 @@
   <title>Candle in Dark</title>
   <link rel="manifest" href="manifest.json">
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
   <script>
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
     const firebaseConfig = {
       apiKey: "AIzaSyA4a0WJNZkPBSwD0wH4li5nluoRWaW0jSE",
       authDomain: "candle-in-dark.firebaseapp.com",
@@ -45,6 +44,8 @@
       appId: "1:735354648960:web:d6b70bef2ebff2b751a965",
       measurementId: "G-8Y86VKM447"
     };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
   </script>
   <script>
     // The value below is injected by flutter build, do not touch.

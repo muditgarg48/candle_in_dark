@@ -1,11 +1,11 @@
-import 'package:candle_in_dark/firebase/firebase_access.dart';
-import 'package:candle_in_dark/tools/sync_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../tools/sync_settings.dart';
+import '../firebase/firebase_access.dart';
 import './global_values.dart';
 
-void main() => runApp(const MyApp());
+void main() => initialiseFirebase().then((_) => runApp(const MyApp()));
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -23,9 +23,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     setDeviceOrientation();
+    checkFirebaseInstance();
     //sending the current page (home page context) to change it according to the settings received from previous session
     SyncSettingsState().getPreviousSessionSettings(context);
-    initialiseFirebase();
     super.initState();
   }
 
