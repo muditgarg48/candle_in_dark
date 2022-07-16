@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../firebase/firebase_access.dart';
 import '../global_values.dart';
+import '../tools/cache.dart';
 import '../tools/theme.dart';
 import '../widgets/drawer.dart';
 
@@ -169,18 +170,20 @@ class CalmPageState extends State<CalmPage> {
     var height = MediaQuery.of(context).size.height;
     return ClipRRect(
       borderRadius: BorderRadius.circular(width / 30),
-      child: TextLiquidFill(
-        text: txt,
-        boxHeight: height / 5,
-        boxWidth: width / 2,
-        waveColor: themeTxtColor().withOpacity(0.8),
-        boxBackgroundColor: bg,
-        loadDuration: const Duration(seconds: 120),
-        textStyle: TextStyle(
-          fontSize: width / 14,
-          fontWeight: FontWeight.bold,
+      child: Container(
+        alignment: Alignment.center,
+        color: themeCardColor(),
+        height: height / 5,
+        width: width / 2,
+        child: Text(
+          txt,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: themeTxtColor(),
+            fontSize: width / 14,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        textAlign: TextAlign.center,
       ),
     );
   }
@@ -205,7 +208,7 @@ class CalmPageState extends State<CalmPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 7,
+                  flex: audios.length == audioNames.length ? 5 : 7,
                   child: audioNames.isEmpty
                       ? Text(
                           "Loading our list of soothing sounds for you to ",
@@ -300,10 +303,8 @@ class CalmPageState extends State<CalmPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget scaffold() {
     return Scaffold(
-      backgroundColor: themeBgColor(),
       extendBodyBehindAppBar: true,
       drawer: MyDrawer(
         currentPage: features[2],
@@ -316,6 +317,7 @@ class CalmPageState extends State<CalmPage> {
         padding: const EdgeInsets.all(8.0),
         child: mainPage(),
       ),
+      backgroundColor: kToDark.shade600.withOpacity(0.5),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -329,5 +331,17 @@ class CalmPageState extends State<CalmPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      SizedBox.expand(
+        child: cacheImage(
+          isDark ? "assets/imgs/focus_dark.jpg" : "assets/imgs/focus_light.jpg",
+        ),
+      ),
+      scaffold(),
+    ]);
   }
 }
