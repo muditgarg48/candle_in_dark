@@ -109,7 +109,7 @@ class CalmPageState extends State<CalmPage> {
       child: Card(
         elevation: 20,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: themeCardColor(),
+        color: themeCardColor().withOpacity(0.5),
         margin: const EdgeInsets.all(15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -172,13 +172,14 @@ class CalmPageState extends State<CalmPage> {
       borderRadius: BorderRadius.circular(width / 30),
       child: Container(
         alignment: Alignment.center,
-        color: themeCardColor(),
+        color: bg,
         height: height / 5,
         width: width / 2,
         child: Text(
           txt,
           textAlign: TextAlign.center,
           style: TextStyle(
+            decoration: TextDecoration.underline,
             color: themeTxtColor(),
             fontSize: width / 14,
             fontWeight: FontWeight.bold,
@@ -200,7 +201,7 @@ class CalmPageState extends State<CalmPage> {
             SizedBox(
               height: height / 20,
             ),
-            titleCard("FOCUS", themeCardColor()),
+            titleCard("FOCUS", Colors.transparent),
             SizedBox(
               height: height / 20,
             ),
@@ -287,7 +288,7 @@ class CalmPageState extends State<CalmPage> {
           ? FloatingActionButton.extended(
               onPressed: action,
               elevation: 20,
-              backgroundColor: themeBgColor(),
+              backgroundColor: themeBgColor().withOpacity(0.4),
               label: Text(
                 message,
                 style: TextStyle(color: themeTxtColor()),
@@ -333,15 +334,21 @@ class CalmPageState extends State<CalmPage> {
     );
   }
 
+  Widget background() {
+    return SizedBox.expand(
+      child: cacheImage(
+        isDark ? "assets/imgs/focus_dark.jpg" : "assets/imgs/focus_light.jpg",
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox.expand(
-        child: cacheImage(
-          isDark ? "assets/imgs/focus_dark.jpg" : "assets/imgs/focus_light.jpg",
-        ),
-      ),
-      scaffold(),
-    ]);
+    return Stack(
+      children: [
+        background(),
+        scaffold(),
+      ],
+    );
   }
 }
