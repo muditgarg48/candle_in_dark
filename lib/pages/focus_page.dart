@@ -59,6 +59,7 @@ class CalmPageState extends State<CalmPage> {
   void stopAll() {
     for (var audio in audios) {
       audio["controller"].stop();
+      audio["volume"] = 0.4;
     }
     (context as Element).reassemble();
   }
@@ -119,8 +120,8 @@ class CalmPageState extends State<CalmPage> {
               child: Image.memory(
                 audio["pic"],
                 color: audio["controller"].state == PlayerState.playing
-                    ? themeTxtColor()
-                    : themeBgColor(),
+                    ? themeTxtColor().withOpacity(0.7)
+                    : themeBgColor().withOpacity(0.5),
                 fit: BoxFit.fill,
                 height: width / 3 > 210 ? 100 : 50,
                 width: width / 3 > 210 ? 100 : 50,
@@ -209,7 +210,7 @@ class CalmPageState extends State<CalmPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: audios.length == audioNames.length ? 5 : 7,
+                  flex: audios.length == audioNames.length ? 4 : 7,
                   child: audioNames.isEmpty
                       ? Text(
                           "Loading our list of soothing sounds for you to ",
