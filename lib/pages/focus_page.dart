@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import '../firebase/firebase_access.dart';
 import '../global_values.dart';
-import '../tools/cache.dart';
 import '../tools/theme.dart';
 import '../widgets/drawer.dart';
 
@@ -337,7 +336,7 @@ class CalmPageState extends State<CalmPage> {
 
   Widget background() {
     return SizedBox.expand(
-      child: cacheImage(
+      child: Image.asset(
         isDark ? "assets/imgs/focus_dark.jpg" : "assets/imgs/focus_light.jpg",
       ),
     );
