@@ -338,6 +338,7 @@ class CalmPageState extends State<CalmPage> {
     return SizedBox.expand(
       child: Image.asset(
         isDark ? "assets/imgs/focus_dark.jpg" : "assets/imgs/focus_light.jpg",
+        fit: BoxFit.cover,
       ),
     );
   }
