@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../tools/theme.dart';
+import 'font_styles.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key, required this.display}) : super(key: key);
@@ -58,13 +59,16 @@ class LoadingPageState extends State<LoadingPage> {
               ),
             ),
             Center(
-                child: Text(
-              widget.display,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: invertedThemeTxtColor(),
+              child: Text(
+                widget.display,
+                style: appFont(
+                  fontDesign: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: invertedThemeTxtColor(),
+                  ),
+                ),
               ),
-            )),
+            ),
           ],
         ),
       ),

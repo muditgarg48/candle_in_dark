@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/font_styles.dart';
 import '../tools/theme.dart';
 
 import './toasts.dart';
@@ -22,17 +23,19 @@ class WarningDialogue extends StatelessWidget {
 
   Widget titleHead = Text(
     "Warning!",
-    style: TextStyle(
+    style: appFont(
+        fontDesign: TextStyle(
       color: themeTxtColor(),
-    ),
+    )),
   );
 
   Widget confirmation(String msg) {
     return Text(
       msg,
-      style: TextStyle(
+      style: appFont(
+          fontDesign: TextStyle(
         color: themeTxtColor(),
-      ),
+      )),
     );
   }
 

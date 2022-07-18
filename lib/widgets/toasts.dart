@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 
 import '../tools/theme.dart';
+import 'font_styles.dart';
 
 Future<dynamic> toast({
   required BuildContext context,
@@ -15,9 +16,10 @@ Future<dynamic> toast({
       context,
       content: Text(
         msg,
-        style: TextStyle(
+        style: appFont(
+            fontDesign: TextStyle(
           color: themeTxtColor(),
-        ),
+        )),
       ),
       toastTime: QudsToastTime.VeryShort,
       leadingActions: [

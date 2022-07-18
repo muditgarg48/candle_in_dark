@@ -5,10 +5,6 @@ TextStyle mainHeadingFont({TextStyle? fontDesign}) {
   return GoogleFonts.montserrat(textStyle: fontDesign);
 }
 
-TextStyle signButtonFont({TextStyle? fontDesign}) {
-  return GoogleFonts.openSans(textStyle: fontDesign);
-}
-
-TextStyle elevatedButtonFont({TextStyle? fontDesign}) {
-  return GoogleFonts.nunito(textStyle: fontDesign);
+TextStyle appFont({TextStyle? fontDesign}) {
+  return GoogleFonts.poppins(textStyle: fontDesign);
 }

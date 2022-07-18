@@ -61,7 +61,7 @@ class MyHomePageState extends State<MyHomePage> {
     }
     return TextSpan(
       text: ch,
-      style: signButtonFont(
+      style: appFont(
         fontDesign: TextStyle(
           color: txtColor,
           fontWeight: FontWeight.bold,
@@ -91,7 +91,7 @@ class MyHomePageState extends State<MyHomePage> {
                   ))
                 : Text(
                     txt,
-                    style: signButtonFont(
+                    style: appFont(
                       fontDesign: TextStyle(
                         color: themeTxtColor(),
                       ),
@@ -115,7 +115,7 @@ class MyHomePageState extends State<MyHomePage> {
             icon: Icon(icon, color: themeTxtColor()),
             label: Text(
               txt,
-              style: elevatedButtonFont(
+              style: appFont(
                 fontDesign: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: themeTxtColor(),

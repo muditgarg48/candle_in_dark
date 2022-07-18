@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../widgets/font_styles.dart';
 import '../tools/account_handle.dart';
 import '../tools/cache.dart';
 import '../tools/theme.dart';
@@ -153,9 +154,11 @@ class _MyDrawerState extends State<MyDrawer> {
   }) {
     var title = Text(
       txt,
-      style: TextStyle(
-        color: themeTxtColor(),
-        fontSize: size,
+      style: appFont(
+        fontDesign: TextStyle(
+          color: themeTxtColor(),
+          fontSize: size,
+        ),
       ),
     );
     return Center(
@@ -192,7 +195,17 @@ class _MyDrawerState extends State<MyDrawer> {
               iconColor: themeTxtColor(),
               textColor: themeTxtColor(),
               leading: Icon(sectionItem["icon"]),
-              title: Text(sectionItem["labelName"]),
+              title: Text(
+                sectionItem["labelName"],
+                style: appFont(
+                  fontDesign: TextStyle(
+                    fontWeight: sectionItem["labelName"] ==
+                            widget.currentPage["labelName"]
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
+                ),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.popAndPushNamed(context, sectionItem["route_name"]);
