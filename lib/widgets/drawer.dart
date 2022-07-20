@@ -242,8 +242,17 @@ class _MyDrawerState extends State<MyDrawer> {
               picture(),
               sectionSpacing,
               options(["home", "close_drawer"], MainAxisAlignment.spaceEvenly),
-              sectionBuilder(section: pages, name: "Pages"),
-              sectionBuilder(section: features, name: "Features"),
+              GoogleServices().isUserSignedIn()
+                  ? sectionBuilder(section: pages, name: "Pages")
+                  : Column(children: [sectionDivider(), sectionSpacing]),
+              GoogleServices().isUserSignedIn()
+                  ? sectionBuilder(section: features, name: "Features")
+                  : Center(
+                      child: Text(
+                        "Sign In to use the app and its features!",
+                        style: appFont(),
+                      ),
+                    ),
               sectionSpacing,
               sectionDivider(),
               options(["settings"], MainAxisAlignment.center),
