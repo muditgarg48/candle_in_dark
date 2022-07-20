@@ -5,7 +5,10 @@ import '../tools/sync_settings.dart';
 import '../firebase/firebase_access.dart';
 import './global_values.dart';
 
-void main() => initialiseFirebase().then((_) => runApp(const MyApp()));
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  initialiseFirebase().then((_) => runApp(const MyApp()));
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -22,8 +25,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    setDeviceOrientation();
+    WidgetsFlutterBinding.ensureInitialized();
     checkFirebaseInstance();
+    setDeviceOrientation();
     //sending the current page (home page context) to change it according to the settings received from previous session
     SyncSettingsState().getPreviousSessionSettings(context);
     super.initState();
