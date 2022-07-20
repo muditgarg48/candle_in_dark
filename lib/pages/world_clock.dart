@@ -464,7 +464,7 @@ class WorldClockState extends State<WorldClock> {
         onPressed: resetTimeZone,
         tooltip: "Reset Timezone",
         icon: Icon(
-          Icons.my_location,
+          Icons.navigation_rounded,
           color: themeTxtColor(),
         ),
       ),

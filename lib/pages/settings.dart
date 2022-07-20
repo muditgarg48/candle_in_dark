@@ -65,12 +65,12 @@ class SettingsPageState extends State<SettingsPage> {
         boxShadow: [
           BoxShadow(
             blurRadius: 100,
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 15,
             blurStyle: BlurStyle.normal,
           ),
         ],
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: ListView(
         children: [
@@ -107,12 +107,12 @@ class SettingsPageState extends State<SettingsPage> {
         boxShadow: [
           BoxShadow(
             blurRadius: 100,
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 15,
             blurStyle: BlurStyle.normal,
           ),
         ],
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: ListView(
         children: [

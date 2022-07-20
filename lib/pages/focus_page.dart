@@ -8,9 +8,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 import '../firebase/firebase_access.dart';
-import '../global_values.dart';
 import '../tools/theme.dart';
+
+import '../widgets/font_styles.dart';
 import '../widgets/drawer.dart';
+
+import '../global_values.dart';
 
 class CalmPage extends StatefulWidget {
   const CalmPage({Key? key}) : super(key: key);
@@ -178,11 +181,12 @@ class CalmPageState extends State<CalmPage> {
         child: Text(
           txt,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            decoration: TextDecoration.underline,
-            color: themeTxtColor(),
-            fontSize: width / 14,
-            fontWeight: FontWeight.bold,
+          style: appFont(
+            fontDesign: TextStyle(
+              color: themeTxtColor(),
+              fontSize: width / 12,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -209,7 +213,7 @@ class CalmPageState extends State<CalmPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: audios.length == audioNames.length ? 4 : 7,
+                  flex: 5,
                   child: audioNames.isEmpty
                       ? Text(
                           "Loading our list of soothing sounds for you to ",
@@ -219,23 +223,15 @@ class CalmPageState extends State<CalmPage> {
                           ),
                           textAlign: TextAlign.end,
                         )
-                      : audios.length == audioNames.length
-                          ? Text(
-                              "Try to",
-                              style: TextStyle(
-                                color: themeTxtColor().withOpacity(0.5),
-                                fontSize: width / 10 > 150 ? 40 : 20,
-                              ),
-                              textAlign: TextAlign.end,
-                            )
-                          : Text(
-                              "Loaded ${audios.length}/${audioNames.length} soothing sounds for you to ",
-                              style: TextStyle(
-                                color: themeTxtColor().withOpacity(0.5),
-                                fontSize: width / 10 > 150 ? 40 : 20,
-                              ),
-                              textAlign: TextAlign.end,
-                            ),
+                      : Text(
+                          "Try to",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: themeTxtColor().withOpacity(0.5),
+                            fontSize: width / 10 > 150 ? 40 : 20,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
                 ),
                 const Expanded(flex: 0, child: SizedBox(width: 7)),
                 Expanded(
@@ -243,6 +239,7 @@ class CalmPageState extends State<CalmPage> {
                   child: DefaultTextStyle(
                     textAlign: TextAlign.start,
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: themeTxtColor().withOpacity(0.8),
                       fontSize: width / 10 > 150 ? 40 : 20,
                     ),
@@ -254,8 +251,8 @@ class CalmPageState extends State<CalmPage> {
                         FadeAnimatedText('STUDY'),
                         FadeAnimatedText('MEDITATE'),
                         FadeAnimatedText('RELAX'),
-                        FadeAnimatedText('SLEEP PEACEFULLY'),
-                        FadeAnimatedText('BE PRODUCTIVE'),
+                        FadeAnimatedText('SLEEP'),
+                        FadeAnimatedText('FOCUS'),
                       ],
                     ),
                   ),
@@ -271,6 +268,18 @@ class CalmPageState extends State<CalmPage> {
                     children: [
                       for (var audio in audios) singleAudioCard(audio),
                     ],
+                  )
+                : const SizedBox.shrink(),
+            audios.length != audioNames.length
+                ? Text(
+                    "Loaded ${audios.length}/${audioNames.length} soothing sounds",
+                    style: TextStyle(
+                      backgroundColor: themeBgColor().withOpacity(0.5),
+                      fontWeight: FontWeight.bold,
+                      color: themeTxtColor().withOpacity(0.5),
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.end,
                   )
                 : const SizedBox.shrink(),
           ],

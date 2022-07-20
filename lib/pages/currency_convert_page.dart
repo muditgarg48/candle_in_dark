@@ -42,13 +42,13 @@ Widget myCard({
       color: themeCardColor(),
       boxShadow: [
         BoxShadow(
-          blurRadius: 10,
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 1,
+          blurRadius: 20,
+          color: Colors.grey.withOpacity(0.1),
+          spreadRadius: 0,
           blurStyle: BlurStyle.normal,
         ),
       ],
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(50),
     ),
     child: contents,
   );

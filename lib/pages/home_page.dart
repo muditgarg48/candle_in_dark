@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../firebase/firebase_access.dart';
 
@@ -182,13 +181,13 @@ class MyHomePageState extends State<MyHomePage> {
                   ? signInbuttons(
                       "Sign Out",
                       () => GoogleServices().googleSignOut(context),
-                      FontAwesomeIcons.google,
+                      Icons.login,
                       "Google",
                     )
                   : signInbuttons(
                       "Sign In to Google",
                       () => GoogleServices().signInWithGoogle(context),
-                      FontAwesomeIcons.google,
+                      Icons.login,
                       "Google",
                     ),
               const SizedBox(height: 30),

@@ -250,7 +250,9 @@ class _MyDrawerState extends State<MyDrawer> {
                   : Center(
                       child: Text(
                         "Sign In to use the app and its features!",
-                        style: appFont(),
+                        style: appFont(
+                          fontDesign: TextStyle(color: themeTxtColor()),
+                        ),
                       ),
                     ),
               sectionSpacing,
