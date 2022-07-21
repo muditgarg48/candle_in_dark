@@ -1,4 +1,6 @@
 //Packages
+// ignore_for_file: non_constant_identifier_names
+
 import "package:flutter/material.dart";
 
 //Pages
@@ -11,6 +13,8 @@ import './pages/home_page.dart';
 import './pages/settings.dart';
 import 'pages/focus_page.dart';
 import 'pages/faculty.dart';
+import 'pages/network_page.dart';
+import 'widgets/admin.dart';
 
 String versionNumber = "1.0.0";
 
@@ -122,13 +126,23 @@ var features = <Map<String, dynamic>>[
     'active_icon': Icons.music_note_rounded,
     'icon': Icons.music_note_outlined,
     'appBarTitle': "",
+    'appBarBG': "",
+  },
+  {
+    //3
+    'route_name': 'network',
+    'route': (context) => const NetworkPage(),
+    'class': const NetworkPage(),
+    'labelName': "Network with people",
+    'active_icon': Icons.messenger_rounded,
+    'icon': Icons.messenger_outline_rounded,
+    'appBarTitle': "Network with people",
     'appBarBG':
-        "",
+        "https://images.unsplash.com/photo-1530811761207-8d9d22f0a141?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
 ];
 
 var settings = <String, dynamic>{
-  //4
   'route_name': 'settings',
   'route': (context) => const SettingsPage(),
   'class': const SettingsPage(),
@@ -140,10 +154,23 @@ var settings = <String, dynamic>{
       "https://clipart.world/wp-content/uploads/2020/08/gears-setting-icon-png-transparent.png",
 };
 
+var admin_console = <String, dynamic>{
+  'route_name': 'admin',
+  'route': (context) => const AdminsPage(),
+  'class': const AdminsPage(),
+  'labelName': "Admin Console",
+  'active_icon': Icons.admin_panel_settings_rounded,
+  'icon': Icons.admin_panel_settings_outlined,
+  'appBarTitle': "",
+  'appBarBG':
+      "",
+};
+
 var appRoutes = <String, Widget Function(BuildContext)>{
   for (var page in pages) page['route_name']: page['route'],
   for (var feature in features) feature['route_name']: feature['route'],
   settings["route_name"]: settings['route'],
+  admin_console["route_name"]: admin_console['route'],
 };
 
 //Theme Variables
@@ -183,3 +210,5 @@ MaterialColor kToDark = const MaterialColor(
     900: Color(0xff000000), //100%
   },
 );
+
+bool isAdmin = false;

@@ -2,7 +2,9 @@
 
 import 'dart:ui';
 
+import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -54,6 +56,19 @@ class _MyDrawerState extends State<MyDrawer> {
                 icon: Icon(Icons.clear, color: themeTxtColor()),
               )
             : const SizedBox.shrink(),
+        whichOptions.contains("admin")
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (widget.currentPage["route_name"] == "admin") return;
+                  Navigator.pushNamed(context, 'admin');
+                },
+                icon: Icon(
+                  Icons.admin_panel_settings_sharp,
+                  color: themeTxtColor(),
+                ),
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }
@@ -100,9 +115,16 @@ class _MyDrawerState extends State<MyDrawer> {
     var userName = "Anonymous User";
     var userPicURL = "";
     var user = FirebaseAuth.instance.currentUser;
-    if (GoogleServices().isUserSignedIn()) {
-      userName = user!.displayName!;
-      userPicURL = user.photoURL!;
+    if (AccountServices().isUserSignedIn()) {
+      if (isAdmin == true && !GoogleServices().isGoogleSignedIn()) {
+        userName = "SuperUser";
+        userPicURL = "https://cdn-icons-png.flaticon.com/512/4668/4668814.png";
+      } else {
+        print(user!.displayName);
+        print(isAdmin);
+        userName = user.displayName!;
+        userPicURL = user.photoURL!;
+      }
     }
 
     return ClipRRect(
@@ -173,6 +195,27 @@ class _MyDrawerState extends State<MyDrawer> {
                   return;
                 }
               },
+              onLongPress: () async {
+                if (isAdmin) {
+                  AdminServices().logoutAdmin();
+                  setState(() => isAdmin = false);
+                  (context as Element).reassemble();
+                  Navigator.pop(context);
+                  return;
+                }
+                if (AccountServices().isUserSignedIn()) {
+                  Navigator.pop(context);
+                  toast(
+                    context: context,
+                    msg: "Are you an admin",
+                    startI: Icons.question_mark,
+                  );
+                  var adminStatus = await AdminServices().checkAdmin();
+                  setState(() => isAdmin = adminStatus);
+                } else {
+                  adminConsoleLogin();
+                }
+              },
               child: title,
             ),
     );
@@ -216,6 +259,85 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
+  void adminConsoleLogin() {
+    showQudsModalBottomSheet(
+      context,
+      titleText: "Enter Admin Console Credentials",
+      contentPadding: const EdgeInsets.all(8.0),
+      ((context) {
+        TextEditingController email = TextEditingController();
+        TextEditingController password = TextEditingController();
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                autocorrect: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  labelText: "Admin Email",
+                  suffixIcon: IconButton(
+                    onPressed: () => email.clear(),
+                    icon: const Icon(Icons.clear),
+                  ),
+                ),
+                controller: email,
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                autocorrect: false,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  labelText: "Admin Password",
+                  suffixIcon: IconButton(
+                    onPressed: () => password.clear(),
+                    icon: const Icon(Icons.clear),
+                  ),
+                ),
+                controller: password,
+                keyboardType: TextInputType.visiblePassword,
+                onEditingComplete: () async {
+                  var adminStatus = await AdminServices().checkAdmin(
+                    email: email.text,
+                    password: password.text,
+                  );
+                  setState(() => isAdmin = adminStatus);
+                  Navigator.pop(context);
+                  (context as Element).reassemble();
+                },
+              ),
+            ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+              onPressed: () async {
+                var adminStatus = await AdminServices().checkAdmin(
+                  email: email.text,
+                  password: password.text,
+                );
+                setState(() => isAdmin = adminStatus);
+                Navigator.pop(context);
+                (context as Element).reassemble();
+              },
+              icon: const Icon(Icons.check),
+              label: const Text("Login"),
+            ),
+            Padding(
+              padding: MediaQuery.of(context).viewInsets,
+            ),
+          ],
+        );
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double drawerWidth = (MediaQuery.of(context).size.width / 1.1) > 450
@@ -241,11 +363,14 @@ class _MyDrawerState extends State<MyDrawer> {
             children: [
               picture(),
               sectionSpacing,
-              options(["home", "close_drawer"], MainAxisAlignment.spaceEvenly),
-              GoogleServices().isUserSignedIn()
+              options(
+                ["home", "close_drawer"],
+                MainAxisAlignment.center,
+              ),
+              AccountServices().isUserSignedIn()
                   ? sectionBuilder(section: pages, name: "Pages")
                   : Column(children: [sectionDivider(), sectionSpacing]),
-              GoogleServices().isUserSignedIn()
+              AccountServices().isUserSignedIn()
                   ? sectionBuilder(section: features, name: "Features")
                   : Center(
                       child: Text(
@@ -257,7 +382,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
               sectionSpacing,
               sectionDivider(),
-              options(["settings"], MainAxisAlignment.center),
+              options(
+                ["settings", isAdmin ? "admin" : ""],
+                MainAxisAlignment.center,
+              ),
               sectionSpacing,
               systemBasedTheme ? const SizedBox.shrink() : themeButton(),
               sectionSpacing,

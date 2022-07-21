@@ -177,21 +177,27 @@ class MyHomePageState extends State<MyHomePage> {
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              GoogleServices().isUserSignedIn()
+              GoogleServices().isGoogleSignedIn()
                   ? signInbuttons(
                       "Sign Out",
-                      () => GoogleServices().googleSignOut(context),
+                      () {
+                        setState(() => isAdmin = false);
+                        GoogleServices().googleSignOut(context);
+                      },
                       Icons.login,
                       "Google",
                     )
                   : signInbuttons(
                       "Sign In to Google",
-                      () => GoogleServices().signInWithGoogle(context),
+                      () {
+                        AdminServices().checkAdmin();
+                        GoogleServices().signInWithGoogle(context);
+                      },
                       Icons.login,
                       "Google",
                     ),
               const SizedBox(height: 30),
-              GoogleServices().isUserSignedIn()
+              AccountServices().isUserSignedIn()
                   ? buttons(
                       "Lets start",
                       () => scaffoldKey.currentState?.openDrawer(),

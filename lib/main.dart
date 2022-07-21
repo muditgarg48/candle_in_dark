@@ -1,3 +1,4 @@
+import 'package:candle_in_dark/tools/account_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -31,6 +32,12 @@ class _MyAppState extends State<MyApp> {
     //sending the current page (home page context) to change it according to the settings received from previous session
     SyncSettingsState().getPreviousSessionSettings(context);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (isAdmin) AdminServices().logoutAdmin();
+    super.dispose();
   }
 
   @override

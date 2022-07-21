@@ -49,10 +49,6 @@ class SyncSettingsState extends State<SyncSettings> {
         "Session system based theme preference stored into cache .i.e. systemBasedTheme = ${prefs.getBool("system_based_theme")}");
   }
 
-  // =================================================================
-  //      LIST BASED FUNCTIONS
-  // =================================================================
-
   void getPreviousSessionSettings(BuildContext context) {
     getPreviousSessionTheme(context);
   }
