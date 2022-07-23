@@ -7,12 +7,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-import '../firebase/firebase_access.dart';
+import '../firebase/firebase_storage_access.dart';
 import '../tools/theme.dart';
-
 import '../widgets/font_styles.dart';
 import '../widgets/drawer.dart';
-
 import '../global_values.dart';
 
 class CalmPage extends StatefulWidget {

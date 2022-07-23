@@ -1,10 +1,12 @@
 // ignore_for_file: avoid_print, invalid_use_of_protected_member
 
-import 'package:candle_in_dark/global_values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../firebase/cloud_firestore_access.dart';
 import '../widgets/toasts.dart';
+import '../global_values.dart';
 
 class GoogleServices {
   final _auth = FirebaseAuth.instance;
@@ -24,10 +26,16 @@ class GoogleServices {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
-        // print(googleSignInAccount);
-        // print(googleSignInAccount.displayName);
-        // print(googleSignInAccount.email);
-        // print(googleSignInAccount.serverAuthCode);
+        FirestoreServices().addUserToDatabase(
+          uid: googleSignInAccount.id,
+          name: googleSignInAccount.displayName,
+          email: googleSignInAccount.email,
+          photoURL: googleSignInAccount.photoUrl,
+        );
+        print(googleSignInAccount);
+        print(googleSignInAccount.id);
+        print(googleSignInAccount.displayName);
+        print(googleSignInAccount.email);
         toast(
           context: context,
           msg: "Welcome ${googleSignInAccount.displayName} !",
@@ -116,5 +124,6 @@ class AdminServices {
 
   void logoutAdmin() {
     FirebaseAuth.instance.signOut();
+    isAdmin = false;
   }
 }

@@ -1,14 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-import '../firebase/firebase_access.dart';
-
+import '../firebase/firebase_storage_access.dart';
 import '../tools/account_handle.dart';
 import '../tools/theme.dart';
-
 import '../widgets/font_styles.dart';
 import '../widgets/drawer.dart';
-
 import '../global_values.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -197,13 +194,11 @@ class MyHomePageState extends State<MyHomePage> {
                       "Google",
                     ),
               const SizedBox(height: 30),
-              AccountServices().isUserSignedIn()
-                  ? buttons(
-                      "Lets start",
-                      () => scaffoldKey.currentState?.openDrawer(),
-                      Icons.play_arrow_rounded,
-                    )
-                  : const SizedBox.shrink(),
+              buttons(
+                "Lets start",
+                () => scaffoldKey.currentState?.openDrawer(),
+                Icons.play_arrow_rounded,
+              )
             ],
           ),
         ),

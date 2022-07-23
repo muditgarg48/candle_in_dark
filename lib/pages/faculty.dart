@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../global_values.dart';
-
 import '../widgets/appBar.dart';
 import '../widgets/drawer.dart';
 import '../widgets/loading.dart';
-
 import '../tools/theme.dart';
-
-import '../firebase/firebase_access.dart';
+import '../firebase/firebase_storage_access.dart';
+import '../global_values.dart';
 
 class TheFacultyPage extends StatefulWidget {
   const TheFacultyPage({Key? key}) : super(key: key);

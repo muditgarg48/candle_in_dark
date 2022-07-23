@@ -1,9 +1,9 @@
-import 'package:candle_in_dark/tools/account_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../tools/sync_settings.dart';
-import '../firebase/firebase_access.dart';
+import './firebase/firebase_storage_access.dart';
+import './tools/account_handle.dart';
+import './tools/sync_settings.dart';
 import './global_values.dart';
 
 void main() {
