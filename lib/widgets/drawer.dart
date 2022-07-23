@@ -1,19 +1,17 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, invalid_use_of_protected_member, use_build_context_synchronously
 
 import 'dart:ui';
 
-import 'package:candle_in_dark/widgets/toasts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../widgets/toasts.dart';
 import '../widgets/font_styles.dart';
 import '../tools/account_handle.dart';
 import '../tools/cache.dart';
 import '../tools/theme.dart';
-
 import '../global_values.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -120,9 +118,7 @@ class _MyDrawerState extends State<MyDrawer> {
         userName = "SuperUser";
         userPicURL = "https://cdn-icons-png.flaticon.com/512/4668/4668814.png";
       } else {
-        print(user!.displayName);
-        print(isAdmin);
-        userName = user.displayName!;
+        userName = user!.displayName!;
         userPicURL = user.photoURL!;
       }
     }
@@ -262,13 +258,16 @@ class _MyDrawerState extends State<MyDrawer> {
   void adminConsoleLogin() {
     showQudsModalBottomSheet(
       context,
-      titleText: "Enter Admin Console Credentials",
       contentPadding: const EdgeInsets.all(8.0),
       ((context) {
         TextEditingController email = TextEditingController();
         TextEditingController password = TextEditingController();
         return Column(
           children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Admin Console Login"),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
