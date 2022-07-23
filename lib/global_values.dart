@@ -7,14 +7,13 @@ import "package:flutter/material.dart";
 import './pages/currency_convert_page.dart';
 import './pages/world_clock.dart';
 import './pages/dummy_page.dart';
-// import './pages/about.dart';
 import './pages/imp_links.dart';
 import './pages/home_page.dart';
 import './pages/settings.dart';
-import 'pages/focus_page.dart';
-import 'pages/faculty.dart';
-import 'pages/network_page.dart';
-import 'widgets/admin.dart';
+import './pages/focus_page.dart';
+import './pages/faculty.dart';
+import './pages/network_page.dart';
+import './pages/admin_page.dart';
 
 String versionNumber = "1.0.0";
 
@@ -31,18 +30,6 @@ var pages = <Map<String, dynamic>>[
     'appBarTitle': "WELCOME",
     'appBarBG': "",
   },
-  // {
-  //   //0
-  //   'route_name': 'about',
-  //   'route': (context) => const AboutPage(),
-  //   'class': const AboutPage(),
-  //   'labelName': "About Page",
-  //   'active_icon': Icons.info,
-  //   'icon': Icons.info_outlined,
-  //   'appBarTitle': "ABOUT",
-  //   'appBarBG':
-  //       "https://images.unsplash.com/photo-1565246075196-94d3995a0b37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
-  // },
   {
     //1
     'route_name': 'dummy',
