@@ -196,7 +196,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   AdminServices().logoutAdmin();
                   setState(() => isAdmin = false);
                   (context as Element).reassemble();
-                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, "index");
                   return;
                 }
                 if (AccountServices().isUserSignedIn()) {
