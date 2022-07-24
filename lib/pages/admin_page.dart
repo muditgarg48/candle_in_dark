@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../firebase/cloud_firestore_access.dart';
 import '../tools/account_handle.dart';
+import '../tools/cache.dart';
 import '../tools/theme.dart';
 import '../widgets/drawer.dart';
 import '../global_values.dart';
@@ -19,6 +20,149 @@ class _AdminsPageState extends State<AdminsPage> {
       color: themeTxtColor(),
       endIndent: MediaQuery.of(context).size.width / 10,
       indent: MediaQuery.of(context).size.width / 10,
+    );
+  }
+
+  void singleUserSheet(var user) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(15),
+          color: themeBgColor(),
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: themeBgColor(),
+                radius: 50,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: cacheImage(user["photoURL"]),
+                ),
+              ),
+              Text(
+                user["name"],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      user["uid"] == "admin" ? Colors.amber : themeTxtColor(),
+                ),
+              ),
+              divider(),
+              Text(
+                "ID: ${user["uid"]}",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 10,
+                  color:
+                      user["uid"] == "admin" ? Colors.amber : themeTxtColor(),
+                ),
+              ),
+              Text(
+                "Mail: ${user["email"]}",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 10,
+                  color:
+                      user["uid"] == "admin" ? Colors.amber : themeTxtColor(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void userActionSheet(var user) {
+    if (user["uid"] == "admin") return;
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          color: themeBgColor(),
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text(
+                user["name"],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: themeTxtColor(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              divider(),
+              ListTile(
+                leading: const CircleAvatar(
+                  child: Icon(
+                    Icons.info_outline_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+                title: Text(
+                  "Show his account metadata",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                subtitle: Text(
+                  "Show Profile Card",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                onTap: () => singleUserSheet(user),
+              ),
+              ListTile(
+                leading: const CircleAvatar(
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+                title: Text(
+                  "Delete his account",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                subtitle: Text(
+                  "Note: This operation is irreversible",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const CircleAvatar(
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.blue,
+                  ),
+                ),
+                title: Text(
+                  "Add a detail to his account?",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                subtitle: Text(
+                  "",
+                  style: TextStyle(
+                    color: themeTxtColor(),
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -42,36 +186,45 @@ class _AdminsPageState extends State<AdminsPage> {
                   color: themeTxtColor(),
                 ),
               ),
+              const SizedBox(height: 10),
               Text(
                 "Total number of users: $userbaseSize",
                 style: TextStyle(
                   color: themeTxtColor(),
                 ),
               ),
+              const SizedBox(height: 10),
               for (var user in userList)
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     divider(),
-                    Text(
-                      user["name"],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: themeTxtColor(),
+                    ListTile(
+                      horizontalTitleGap:
+                          MediaQuery.of(context).size.width / 20,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      "ID: ${user["uid"]}",
-                      style: TextStyle(
-                        color: themeTxtColor(),
+                      tileColor: themeCardColor().withOpacity(0.8),
+                      textColor: user["uid"] == "admin"
+                          ? Colors.amber
+                          : themeTxtColor(),
+                      leading: CircleAvatar(
+                        backgroundColor: themeBgColor(),
+                        child: Icon(
+                          Icons.person_outline_rounded,
+                          color: themeTxtColor(),
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Email ID: ${user["email"]}",
-                      style: TextStyle(
-                        color: themeTxtColor(),
+                      title: Text(
+                        user["name"],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                      subtitle: Text(user["email"]),
+                      onTap: () => singleUserSheet(user),
+                      onLongPress: () => userActionSheet(user),
                     ),
                   ],
                 )
