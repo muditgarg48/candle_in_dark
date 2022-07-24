@@ -32,20 +32,6 @@ class AdminFirestoreServices {
     return userListJSON;
   }
 
-  void createNewUser({
-    String? uid,
-    String? name,
-    required String email,
-    String? photoURL,
-  }) {
-    FirestoreServices().addUserToDatabase(
-      uid: uid,
-      name: name,
-      email: email,
-      photoURL: photoURL,
-    );
-  }
-
   Future<Map> getSingleUserDetails(String uid) async {
     var user =
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
