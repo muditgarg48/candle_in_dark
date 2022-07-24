@@ -26,7 +26,10 @@ class AdminFirestoreServices {
   }
 
   Future<List> listAllUsers() async {
-    var userList = await FirebaseFirestore.instance.collection("users").orderBy("uid").get();
+    var userList = await FirebaseFirestore.instance
+        .collection("users")
+        .orderBy("uid")
+        .get();
     var userListJSON =
         userList.docs.map((userSnapshot) => userSnapshot.data()).toList();
     return userListJSON;
@@ -37,5 +40,25 @@ class AdminFirestoreServices {
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
     var userData = user.data() as Map;
     return userData;
+  }
+
+  Future<List> listAllImpLinkSections() async {
+    var linkSections =
+        await FirebaseFirestore.instance.collection("imp_links").get();
+    var linkSectionListJSON =
+        linkSections.docs.map((userSnapshot) => userSnapshot.data()).toList();
+    return linkSectionListJSON;
+  }
+
+  Future addLink(String name, String link, String id) async {
+    var section = FirebaseFirestore.instance.collection("imp_links").doc(id);
+    var linkSection = (await section.get()).data();
+    var currentLink = {
+      'name': name,
+      'link': link,
+    };
+    List linksArray = linkSection!["links"];
+    linksArray.add(currentLink);
+    section.update({"links": linksArray});
   }
 }
