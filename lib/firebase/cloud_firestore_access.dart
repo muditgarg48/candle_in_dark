@@ -26,7 +26,7 @@ class AdminFirestoreServices {
   }
 
   Future<List> listAllUsers() async {
-    var userList = await FirebaseFirestore.instance.collection("users").get();
+    var userList = await FirebaseFirestore.instance.collection("users").orderBy("uid").get();
     var userListJSON =
         userList.docs.map((userSnapshot) => userSnapshot.data()).toList();
     return userListJSON;
